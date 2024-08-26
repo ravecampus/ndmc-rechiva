@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('document_files', function (Blueprint $table) {
             $table->id();
-            $table->longText('documnet_file')->nullable();
-            $table->integer('documnet_id')->nullable();
+            $table->longText('document_file')->nullable();
+            $table->integer('document_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->timestamps();
         });

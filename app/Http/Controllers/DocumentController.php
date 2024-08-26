@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Document;
+use App\Models\DocumentFile;
 
 class DocumentController extends Controller
 {
@@ -31,14 +32,26 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title'=>'required',
-            'description'=>'required',
         ]);
+
         $doc = Document::create([
             'title' => $request->title,
-            'description' => $request->description
         ]);
+
+        foreach($request->file('files') as $file) {
+            $image = base64_encode(file_get_contents($file));
+            $docfile = DocumentFile::create([
+                'document_file' => $image,
+                'document_id' =>$doc->id
+
+            ]);
+            
+        }
+        
+     
 
         return response()->json($request, 200);
     }

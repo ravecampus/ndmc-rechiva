@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentFile extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'document_file',
+        'document_id'
+    ];
 }
