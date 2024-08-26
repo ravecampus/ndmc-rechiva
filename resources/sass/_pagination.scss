@@ -1,0 +1,199 @@
+$color-primary: #26884b;
+.custom-card{
+    border-radius: 0.2rem !important;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.navbar-nav{
+    @include media-breakpoint-up(lg) {
+        margin-right: 3em !important;
+    }
+}
+
+.custom-page{
+    padding: 0rem !important;
+    .page-item{
+        // margin-bottom: 0rem !important;
+        .page-link{
+            color: $color-primary !important;
+            text-decoration: none !important;
+            outline: none !important;
+            // padding: .5rem .5rem .5rem !important;
+            // margin: 0px !important;
+            min-width: 0.2em !important;
+            &.active{
+                color:#fff !important;
+                background: $color-primary !important;
+                box-shadow: none;
+                border-color: $color-primary !important;
+            }
+        }
+    }
+}
+.nav-cus{
+    margin-top: .5em !important;
+    padding-right: 3.5em !important;
+    font-size: 1.1em;
+    font-weight: bold;
+    @include media-breakpoint-down(sm) {
+        padding-right: 0em !important;
+    }
+    @include media-breakpoint-down(md) {
+        padding-right: 0em !important;
+    }
+}
+
+.img-user{
+    width: 3rem !important;
+    margin: 0px !important;
+    margin-right: 6px !important;
+    padding: 0px !important;;
+}
+
+.custom-nav{
+    padding: 8px !important;
+}
+
+.main-brand{
+    margin-left: 2.8em;
+    @include media-breakpoint-down(sm) {
+        margin-left: 0em !important;
+    }
+    @include media-breakpoint-down(md) {
+        margin-left: 0em !important;
+    }
+    .brand-name{
+        margin-right: 1em;
+        
+        .logo-main{
+            width: 3rem !important;
+            border-right: #26884b solid 1px;
+            padding-right: 2px !important;
+            // @include media-breakpoint-down(sm) {
+            //     width: 2.4rem !important;
+            // }
+        }
+    
+        .sub-logo{
+            width: 3rem !important;
+            padding-left: 2px !important;
+            // @include media-breakpoint-down(sm) {
+            //     width: 2.4rem !important;
+            // }
+        }
+    }
+   
+    .logo-text{
+        font-size: 24px;
+        color: #fff;
+        margin-right: 7px !important;
+        .school-name{
+            font-size: 11px !important;
+        }
+        // @include media-breakpoint-down(sm) {
+        //     font-size: 18px !important;
+        // }
+    }
+    .logo-app{
+        width: 3rem !important;
+        padding: 0px !important;
+    }
+}
+
+.dropdown:hover .dropdown-menu-end {
+    display: block;
+    left: auto;
+    --bs-position: end;
+    right: 0;
+    // margin-top: 0; /* remove the gap so it doesn't close */
+}
+
+.btn-signout{
+    font-weight: bold !important;
+    &:focus{
+        border: none !important;
+        
+    }
+}
+
+.user-menu{
+    border: none !important;
+    border-radius: 0.1rem !important;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3) !important;
+    .user-li{
+        &:hover{
+            background: none !important;
+        }
+        .info-user{
+            color: $bg-header;
+            font-weight: bold;
+            border-bottom: #26884b solid 2px !important;
+            padding-top: 1em;
+            margin-bottom: 1em;
+            &:hover{
+                color:$color-primary;
+            }
+        }
+    }
+    .dropdown-item{
+        // font-weight: bold;
+        &:hover{
+            // background: none !important;
+            background-color: #048335;
+            // font-weight: bold;
+            color: #fff !important;
+        }
+    }
+    
+}
+
+.notify{
+    font-size: 1.5em !important;
+    // margin: 0px !important;
+    .notify-badge{
+        font-size: .75em !important;
+        padding: .3em !important;
+        font-weight: bold;
+        font: $font-primary;
+        border: none !important;
+        background-color: #ffc107 !important;
+
+        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3) !important;
+    }
+}
+
+.admin-info{
+    margin-right: 1em !important;
+    // padding: 0px !important;
+    text-align:end !important;
+    font-weight: bold;
+    .description{
+        margin-top: -6px !important;
+        padding: 0 !important;
+        font-weight: normal !important;
+    }
+}
+
+.upload-file{
+    min-height: 10em;
+    border:#dfdfdf solid 1px;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    // &:hover{
+       
+    // }
+    // &:active{
+    //     cursor: grabbing;
+    //     cursor: -moz-grabbing;
+    //     cursor: -webkit-grabbing;
+    // }
+}
+.is_active{
+    background: #04833515;
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+    border: 2px dashed #048335 !important;
+}
