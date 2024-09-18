@@ -1,16 +1,18 @@
 import './bootstrap';
-import * as bootstrap from 'bootstrap';
+// import bootstrap from 'bootstrap';
 
 import {createApp } from 'vue'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
-import app from './components/App.vue'
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+import App from './components/App.vue'
 import router from './router'
 import axios from 'axios'
 
 import PSPDFKit from 'pspdfkit';
-
-// PSPDFKit.defaults.withCredentials = true;
-// PSPDFKit.defaults.baseURL = '/';
+import timeago from 'vue-timeago3'
 
 window.PSPDFKit = PSPDFKit
 
@@ -29,5 +31,7 @@ const toast = Swal.mixin({
 })
 
 window.toast = toast
-
-createApp(app).use(router).mount("#app")
+const app = createApp(App);
+app.use(timeago) 
+app.component('VueDatePicker', VueDatePicker)
+app.use(router).mount("#app")

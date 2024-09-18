@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
-class CategoryController extends Controller
+
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $data = Category::query();
-        if($request->search != ''){
-            $data = Category::where('description','like','%'.$request->search.'%');
-        }
-        $data = $data->latest()->paginate(10);
+        $data = Notification::with('sender')->where('receiver_id', 0)
+                ->where('status', 0)->latest()->get();
+
         return response()->json($data, 200);
     }
 
@@ -33,14 +33,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'description'=>'required',
-        ]);
-        $data = Category::create([
-            'description' => $request->description
-        ]);
-
-        return response()->json($data, 200);
+        //
     }
 
     /**
@@ -48,13 +41,13 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return response()->json(Category::find($id), 200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(string $id)
     {
         //
     }
@@ -64,12 +57,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'description' => 'required'
-        ]);
-        $data = Category::find($id);
-        $data->description = $request->description;
+        $data = Notification::find($id);
+        $data->status = $request->status;
         $data->save();
+
         return response()->json($data, 200);
     }
 
@@ -78,8 +69,15 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Category::find($id);
-        $data->delete();
+        //
+    }
+
+    public function facultyNote(){
+        $data = Notification::with('receiver')
+        ->where('sender_id', 0)
+        ->where('receiver_id', Auth::id())
+        ->where('role',1)->OrWhere('role', 2)
+        ->where('status', 0)->latest()->get();
 
         return response()->json($data, 200);
     }

@@ -19,8 +19,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         // 'name',
+        'role',
         'email',
         'password',
+        'first_name',
+        'last_name',
+        'middle_initial',
+        'department_id',
     ];
 
     /**
@@ -42,4 +47,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function department(){
+        return $this->hasOne(Department::class,'id', 'department_id');
+    }
+
 }

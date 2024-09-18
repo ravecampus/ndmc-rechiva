@@ -18,10 +18,15 @@
         "vue-router": "^4.4.2"
     },
     "dependencies": {
+        "@vuepic/vue-datepicker": "^9.0.3",
+        "bootstrap-icons": "^1.11.3",
+        "chart.js": "^4.4.4",
         "dayjs": "^1.11.13",
         "jquery": "^3.7.1",
         "pspdfkit": "^2024.5.0",
         "rollup-plugin-copy": "^3.5.0",
-        "sweetalert2": "^11.12.4"
+        "sweetalert2": "^11.6.13",
+        "vue-chartjs": "^5.3.1",
+        "vue-timeago3": "^2.3.2"
     }
 }

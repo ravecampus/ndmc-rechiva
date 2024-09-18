@@ -9,14 +9,14 @@
 
 	let links = ref([])
 
-	const fdata = () => ({description:"", id:null})
+	const fdata = () => ({description:"",abbreviation:"", id:null})
 	const form = reactive(fdata())
 	const resetform = () => Object.assign(form, fdata())
 	const editMode = ref(false)
 
 	const formatDate = (dateString)=>{
 		const date = dayjs(dateString)
-		return date.format('MMMM d, YYYY | hh:mm a')
+		return date.format('MMMM D, YYYY | hh:mm a')
 	}
 
 	onMounted(async()=>{
@@ -41,7 +41,7 @@
 
 	const addForm = ()=>{
 		btnsave.value = "saving..."
-		axios.post('/api/setting-category', form).then((res)=>{
+		axios.post('/api/setting-department', form).then((res)=>{
 			toast.fire({
 				icon:'success',
 				title:'Description Added Successfully!'
@@ -58,7 +58,7 @@
 
 	const updateForm = ()=>{
 		btnsave.value = "updating..."
-		axios.put(`/api/setting-category/${form.id}`, form).then((res)=>{
+		axios.put(`/api/setting-department/${form.id}`, form).then((res)=>{
 			getListData()
 			toast.fire({
 				icon:'success',
@@ -76,7 +76,7 @@
 
 
 	const getListData = async()=>{
-		let data = await axios.get('/api/setting-category?search='+searchData.value).then((res)=>{
+		let data = await axios.get('/api/setting-department?search='+searchData.value).then((res)=>{
 			listData.value = res.data.data
 			links.value = res.data.links
 		})
@@ -94,7 +94,7 @@
 		input.value.focus()
 		btnsave.value = "update"
 		editMode.value = true
-		axios.get(`/api/setting-category/${data.id}`).then((res)=>{
+		axios.get(`/api/setting-department/${data.id}`).then((res)=>{
 			form.description = res.data.description
 			form.id = res.data.id
 
@@ -123,7 +123,7 @@
             confirmButtonText: "Yes, delete it!"
             }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`/api/setting-category/${data.id}`).then((res)=>{
+                axios.delete(`/api/setting-department/${data.id}`).then((res)=>{
                     Swal.fire({
                         title: "Deleted!",
                         text: "Description has been deleted.",
@@ -135,18 +135,27 @@
                 
             }
         });
+	}
+	
+	 const noData = (data)=>{
+        return data == undefined ? true : (data.length > 0) ? true : false;
     }
 </script>
 
 <template>
     <div class="container text-start">
-        <h2><i class="fa fa-cogs"></i> Categories</h2>
+        <h2><i class="fa fa-cogs"></i> College Departments</h2>
         <div class="row">
             <div class="col-md-4 pt-4 mb-2">
                 <div class="form-group mb-3">
                     <label>Description</label>
                     <input type="text" ref="input" v-model="form.description" class="form-control form-control form-control-sm" placeholder="Enter Description">
                     <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
+                </div>
+				   <div class="form-group mb-3">
+                    <label>Abbreviation</label>
+                    <input type="text" ref="input" v-model="form.abbreviation" class="form-control form-control form-control-sm" placeholder="Enter Abbreviation">
+                    <span class="text-danger" v-if="errors.abbreviation">{{errors.abbreviation[0]}}</span>
                 </div>
 				<div class="btn-group btn-sm">
 					<button type="button" @click="submitData" class="btn btn-primary btn-sm">{{ btnsave }}</button>
@@ -170,6 +179,7 @@
 							<tr class="text-success">
 								<th>Description <i class="bx bx-up-arrow-alt ms-2"></i>
 								</th>
+								<th>Abbreviation</th>
 								<th>Last Modified</th>
 								<th>Action</th>
 							</tr>
@@ -181,6 +191,7 @@
 										<div class="font-weight-bold text-primary"><strong>{{ item.description }}</strong></div>
 									</div>
 								</td>
+								<td>{{ item.abbreviation }}</td>
 								<td>{{ formatDate(item.updated_at) }}</td>
 								<td>
 									<div class="input-group">
@@ -194,12 +205,17 @@
 								</td>
 								
 							</tr>
+							<tr>
+                                <td colspan="6" v-show="!noData(listData)">
+                                    No Result Found!
+                                </td>
+                            </tr>
 					
 						</tbody>
 					</table>
 				</div>
 
-				<nav class="mt-2" aria-label="...">
+				<nav class="mt-2" aria-label="..." v-if="noData(listData)">
 					<ul class="pagination pagination-sm custom-page">
 						<li class="page-item" aria-current="page" v-for="(link, index) in links" :key="index">
 							<a class="page-link text-sm"

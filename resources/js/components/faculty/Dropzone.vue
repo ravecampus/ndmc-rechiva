@@ -3,6 +3,7 @@
     import $ from "jquery"
 
     const active = ref(false)
+    const errs = ref(false)
 
     const fileList = defineProps(['ListFiles'])
     const toggleActive = ()=>{
@@ -19,15 +20,16 @@
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (e, b) => {
-            console.log(e, b)
             image.value ={"base64": e.target.result, "name": file.name};
         };
-        return image.result
+        return image.value
     }
 
     const filterFile = (file) =>{
         if(file.type === 'application/pdf'){
+
             return true;
+        
         }
 
         return false
@@ -47,8 +49,8 @@
             <!-- <div class="card-body"> -->
                 <label class="btn btn-primary mb-2" for="filename">Click here to select files</label>
                 <h3>Drag or Drop files here!</h3>
-                <p class="text-muted">PDF files and Images are accepted to upload!</p>
-                <input type="file" class="hidden fileupload" accept=".jpg, .png, .jpeg, .pdf" id="filename" multiple/>
+                <p class="text-muted">PDF files is accepted to upload!</p>
+                <input type="file" class="hidden fileupload" accept=".pdf" id="filename"/>
                 <div class="row">
                     <div class="col-md-12 d-flex flex-wrap justify-content-around mt-5 mb-0">
 
@@ -61,7 +63,7 @@
                                 <div class="card-content d-flex justify-content-center position-relative">
                                     <div class="position-absolute file-icon d-flex justify-content-center">
                                         <!-- <img class="img-icon position-absolute" :src="showImage(item).base64"/> -->
-                                        <img class="img-icon position-absolute" :src="filterFile(item) ? '/img/pdf.jpg': '/img/image.jpg' "/>
+                                        <img class="img-icon position-absolute" :src="'/img/pdf.jpg'"/>
                                     </div>
                                 </div>
 

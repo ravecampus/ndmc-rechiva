@@ -16,7 +16,7 @@ class AuthorController extends Controller
         if($request->search != ''){
             $data = Author::where('description','like','%'.$request->search.'%');
         }
-        $data = $data->latest()->paginate(10);
+        $data = $data->latest()->paginate(5);
         return response()->json($data, 200);
     }
 
@@ -34,7 +34,7 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'description'=>'required',
+            'description'=>'required|unique:authors,description',
         ]);
         $data = Author::create([
             'description' => $request->description
@@ -81,6 +81,15 @@ class AuthorController extends Controller
         $data = Author::find($id);
         $data->delete();
 
+        return response()->json($data, 200);
+    }
+
+    public function listAuthor(Request $request){
+        $data = Author::query();
+        if($request->search != ''){
+            $data = Author::where('description','like','%'.$request->search.'%');
+        }
+        $data = $data->latest()->get();
         return response()->json($data, 200);
     }
 }

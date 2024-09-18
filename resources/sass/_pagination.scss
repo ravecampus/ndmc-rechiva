@@ -32,7 +32,7 @@ $color-primary: #26884b;
 }
 .nav-cus{
     margin-top: .5em !important;
-    padding-right: 3.5em !important;
+    padding-right: .5em !important;
     font-size: 1.1em;
     font-weight: bold;
     @include media-breakpoint-down(sm) {
@@ -66,6 +66,10 @@ $color-primary: #26884b;
         margin-right: 1em;
         
         .logo-main{
+            // image-resolution: from-image;
+            image-resolution: 300dpi !important;
+            // image-resolution: from-image 300dpi;
+            // image-resolution: 300dpi snap;
             width: 3rem !important;
             border-right: #26884b solid 1px;
             padding-right: 2px !important;
@@ -150,14 +154,18 @@ $color-primary: #26884b;
 .notify{
     font-size: 1.5em !important;
     // margin: 0px !important;
+    padding: 0em !important;
     .notify-badge{
-        font-size: .75em !important;
-        padding: .3em !important;
-        font-weight: bold;
-        font: $font-primary;
+        font-size: .65em !important;
+        padding: 0em !important;
+        display: inline-block;
+        line-height: 25px;
+        width: 110%;
+        height: 25px;
+        border-radius: 50%;
+        // padding: 0;
         border: none !important;
         background-color: #ffc107 !important;
-
         box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.3) !important;
     }
 }
@@ -196,4 +204,22 @@ $color-primary: #26884b;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
     border: 2px dashed #048335 !important;
+}
+
+.is_error{
+    border: 2px dashed #e00000 !important;
+}
+
+.cus-pad{
+    padding-right: 8em !important;
+    @include media-breakpoint-down(sm) {
+    padding-right: 0em !important;
+    }
+    @include media-breakpoint-down(md) {
+        padding-right: 0em !important;
+    }
+}
+
+.mb-nav{
+    margin-bottom: .85rem !important;
 }

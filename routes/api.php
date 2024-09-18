@@ -4,10 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\AdminDocumentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\TypeOfPaperController;
+use App\Http\Controllers\PublicDocumentController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,12 +30,45 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/auth', [AuthController::class, 'register']);
 Route::post('/auth/in', [AuthController::class, 'login']);
+Route::get('/auth/out', [AuthController::class, 'signout']);
 
 Route::middleware('auth:sanctum')->group( function () {
     
-
+    Route::resource('/notification', NotificationController::class);
+    Route::get('/faculty-notification', [NotificationController::class,'facultyNote']);
+    Route::put('/faculty-notification/{id}', [NotificationController::class,'putfacultyNote']);
+    
 });
 Route::resource('/setting-type-of-paper',TypeOfPaperController::class);
+Route::get('/list-author',[AuthorController::class, 'listAuthor']);
 Route::resource('/setting-author',AuthorController::class);
-Route::resource('/setting-category',CategoryController::class);
+Route::resource('/setting-department',DepartmentController::class);
 Route::resource('/document', DocumentController::class);
+Route::resource('/admin-document', AdminDocumentController::class);
+Route::post('/admin-disapprove', [AdminDocumentController::class, 'disapprove']);
+Route::resource('/admin-feedback', FeedbackController::class);
+Route::get('/admin-document-published', [AdminDocumentController::class, 'publishDoc']);
+Route::get('/admin-document-archived', [AdminDocumentController::class, 'archiveDoc']);
+Route::get('/admin-document-canceled', [AdminDocumentController::class, 'cancelDoc']);
+Route::resource('/public-document', PublicDocumentController::class);
+Route::get('/document-published', [DocumentController::class, 'publishedAuth']);
+Route::get('/document-archived', [DocumentController::class, 'archivedAuth']);
+Route::get('/document-canceled', [DocumentController::class, 'canceledAuth']);
+Route::get('/list-topapers', [TypeOfPaperController::class,'listOfPaper']);
+Route::get('/list-departments', [DepartmentController::class,'listDepartment']);
+
+
+Route::post('/download', [StatisticController::class,'download']);
+Route::post('/visitor', [StatisticController::class,'visitor']);
+Route::get('/statistic', [StatisticController::class,'statistic']);
+Route::get('/department-stat', [StatisticController::class,'departmentstat']);
+Route::resource('/users', UserController::class);
+Route::put('/users-password/{id}', [UserController::class,'changePassword']);
+
+Route::get('/users-faculty/{id}', [UserController::class,'getFaculty']);
+
+
+Route::get('/recent-submission', [StatisticController::class,'recentSubmission']);
+
+
+

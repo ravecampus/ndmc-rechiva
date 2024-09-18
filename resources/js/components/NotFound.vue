@@ -1,5 +1,18 @@
 <template>
-    <div>
-        <h1>Page not found!</h1>
+    <div class="container page-notfound">
+        <h1 class="font-title">Page not found!</h1>
+        <p class="sub-font">Notre Dame of Midsayap College - Rechiva </p>
     </div>
 </template>
+<style lang="scss" scoped>
+    .page-notfound{
+        margin-top: 15em;
+    }
+
+    .font-title{
+        font-size: 3em;
+    }
+    .sub-font{
+        font-size: 1.2em !important;
+    }
+</style>

@@ -2,3 +2,33 @@
     background: $bg-header !important;
     color:#fff;
 }
+
+.form-select{
+
+    .option:hover{
+        background-color: #26884b !important;
+        color: #fff !important;
+       }
+       
+}
+
+.form-check-input{
+    border-color:$primary !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 253, 113, 0.25) !important;
+    &:checked{
+        background-color: #26884b !important;
+        color: #fff !important;
+       
+    }
+}
+
+.custom-w{
+    width: 95% !important;
+    @include media-breakpoint-down(sm) {
+        position: inherit !important;
+        width: auto !important;
+        display:block !important;
+        margin-top: 10px;
+    }
+}

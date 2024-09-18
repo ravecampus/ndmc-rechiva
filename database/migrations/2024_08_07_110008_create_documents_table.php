@@ -16,12 +16,16 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->integer('user_id')->nullable();
             $table->text('abstract')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('category_id')->nullable();
+            $table->text('doi')->nullable();
+            $table->integer('department_id')->nullable();
+            $table->integer('type_of_paper_id')->nullable();
             $table->date('publication_date')->nullable();
             $table->string('issue_numbers')->nullable();
             $table->year('year')->nullable();
-
+            $table->integer('status')->default(0);
+            $table->integer('admin_published')->nullable();
+            $table->integer('admin_archive')->nullable();
+            $table->integer('upload_type')->nullable();
             $table->timestamps();
         });
     }

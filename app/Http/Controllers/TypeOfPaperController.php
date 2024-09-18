@@ -14,11 +14,11 @@ class TypeOfPaperController extends Controller
     {
         $data = TypeOfPaper::query();
 
-        if($request->searchData != ''){
-            $data = TypeOfPaper::where('description','like','%'.$request->searchData.'%');
+        if($request->search != ''){
+            $data = TypeOfPaper::where('description','like','%'.$request->search.'%');
         }
 
-        $data = $data->latest()->paginate(10);
+        $data = $data->latest()->paginate(5);
 
         return response()->json($data, 200);
 
@@ -84,6 +84,18 @@ class TypeOfPaperController extends Controller
     {
         $data = TypeOfPaper::find($id);
         $data->delete();
+        return response()->json($data, 200);
+    }
+
+    public function listOfPaper(Request $request){
+        $data = TypeOfPaper::query();
+
+        if($request->search != ''){
+            $data = TypeOfPaper::where('description','like','%'.$request->search.'%');
+        }
+
+        $data = $data->latest()->get();
+
         return response()->json($data, 200);
     }
 }

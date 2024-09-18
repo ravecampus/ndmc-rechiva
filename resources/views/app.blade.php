@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ env('APP_NAME')}}</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('/css/font-awesome/css/font-awesome.min.css')}}">
     @vite(['resources/css/app.css','resources/sass/app.scss','resources/js/app.js'])
@@ -27,13 +28,10 @@
             @endphp
         @endif
 
-    <div id="app" class="container-body z-1">
+    <div id="app" class="app-body">
     
     </div>
-    <footer class="footer d-flex flex-wrap justify-content-between align-items-center border-top position-fixed z-3">
-        <p class="col-md-4 mb-0 text-white">UIM/\V7 - © 2024 Company, Inc</p>
-
-    </footer>
+    
     <!-- <script src="{{ asset('js/pspdfkit.js') }}"></script> -->
     <script>
   

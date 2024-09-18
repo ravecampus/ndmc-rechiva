@@ -1,0 +1,44 @@
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.avatar.sm {
+    // width: 2.25rem;
+    height: 2.25rem;
+    font-size: .818125rem;
+}
+.table-nowrap .table td, .table-nowrap .table th {
+    white-space: nowrap;
+}
+.table>:not(caption)>*>* {
+    padding: 0.2rem .5rem;
+    border-bottom-width: 1px;
+}
+table th {
+    font-weight: 600;
+    background-color: #eeecfd !important;
+}
+
+.table-img{
+    max-width: 2rem !important;
+}
+
+.img-uploaded{
+    .title{
+        padding-top:5px;
+        font-size: 11px !important;
+        color:#26884b;
+    }
+}
+
+.dd-bg{
+    .dd-item{
+        &:active{
+            background:#26884b !important;
+            color:#fff;
+        }
+    }  
+}
+.icon-file{
+    font-size: 30px !important;
+    color: #26884b !important;
+}

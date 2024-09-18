@@ -10,7 +10,10 @@ class DocumentFile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'document_file',
+        'base64',
+        'size',
+        'mime_type',
+        'original_name',
         'document_id'
     ];
 }

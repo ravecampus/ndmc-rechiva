@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('document_files', function (Blueprint $table) {
             $table->id();
-            $table->longText('document_file')->nullable();
+            $table->longText('base64')->nullable();
+            $table->string('mime_type')->nullable();
+            $table->string('size')->nullable();
+            $table->string('original_name')->nullable();
             $table->integer('document_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->timestamps();

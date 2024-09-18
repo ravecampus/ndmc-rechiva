@@ -8,7 +8,6 @@
 	let searchData = ref('')
 
 	let links = ref([])
-
 	const fdata = () => ({description:"", id:null})
 	const form = reactive(fdata())
 	const resetform = () => Object.assign(form, fdata())
@@ -16,7 +15,7 @@
 
 	const formatDate = (dateString)=>{
 		const date = dayjs(dateString)
-		return date.format('MMMM d, YYYY | hh:mm a')
+		return date.format('MMMM D, YYYY | hh:mm a')
 	}
 
 	onMounted(async()=>{
@@ -34,7 +33,7 @@
         }
         axios.get(link.url).then((res)=>{
             listData.value = res.data.data
-            links.value = res.data.links
+            links.value = res.data.linkslinks.value = res.data.links
         })
     }
 
@@ -135,6 +134,9 @@
                 
             }
         });
+	}
+	const noData = (data)=>{
+        return data == undefined ? true : (data.length > 0) ? true : false;
     }
 </script>
 
@@ -194,12 +196,17 @@
 								</td>
 								
 							</tr>
+							<tr>
+                                <td colspan="6" v-show="!noData(listData)">
+                                    No Result Found!
+                                </td>
+                            </tr>
 					
 						</tbody>
 					</table>
 				</div>
 
-				<nav class="mt-2" aria-label="...">
+				<nav class="mt-2" aria-label="..." v-if="noData(listData)">
 					<ul class="pagination pagination-sm custom-page">
 						<li class="page-item" aria-current="page" v-for="(link, index) in links" :key="index">
 							<a class="page-link text-sm"
