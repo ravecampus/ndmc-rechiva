@@ -67,6 +67,15 @@ const showNotification = (data)=>{
     })
 }
 
+  const activated = (data)=>{
+        let ret = false;
+        if(data.activate === 1){
+            ret = true
+        }
+
+        return ret;
+ }
+
 
 </script>
 
@@ -76,7 +85,7 @@ const showNotification = (data)=>{
      <nav class="navbar navbar-expand-lg bg-light mb-0 bg-header custom-nav">
         <div class="container-fluid">
             <div class="main-brand">
-                <router-link :to="{name:'publicpage'}" class="d-inline-flex p-0" >
+                <router-link :to="{name:'faculty.dashboard'}" class="d-inline-flex p-0" >
                     <div class="brand-name">
                         <img :src="'/img/ndmc.png'" class="logo-main">
                         <img :src="'/img/research.png'" class="sub-logo">
@@ -97,7 +106,7 @@ const showNotification = (data)=>{
                 
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                   
-                    <li class="nav-item dropdown nav-cus">
+                    <li class="nav-item dropdown nav-cus" v-if="activated(user)">
                         <a class="nav-link" href="#">
                             <i class="bi bi-upload" aria-hidden="true"></i> Upload Rechiva
                         </a>
@@ -135,7 +144,7 @@ const showNotification = (data)=>{
                         </ul>
 
                     </li>
-                    <li class="nav-item nav-cus cus-pad dropdown">
+                    <li class="nav-item nav-cus cus-pad dropdown" v-if="activated(user)">
                         <a class="nav-link" href="#">
                             <i class="bi bi-bell-fill position-relative notify"> 
                                 <span v-if="notifications.length > 0" class="position-absolute top-0 start-100 translate-middle notify-badge">
@@ -192,11 +201,13 @@ const showNotification = (data)=>{
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end user-menu">
                             <li class="dropdown-item user-li">
-                                <div class="info-user">
+                                <div class="info-user p-0">
                                     {{ user.first_name }} {{ user.last_name }}
                                 </div>
                             </li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><router-link class="dropdown-item" :to="{name:'faculty.myaccount'}">My Account</router-link></li>
+                               <li><router-link class="dropdown-item" :to="{name:'publicpage'}">Home page</router-link></li>
                             <!-- <li><a class="dropdown-item" href="#">Published documents</a></li> -->
                             <li><hr class="dropdown-divider"></li>
                             <li class="d-grid gap-2">

@@ -259,4 +259,10 @@ class DocumentController extends Controller
 
         return response()->json($docs, 200);
     }
+
+    public function recentfaculty(){
+        $data = Document::where('user_id', Auth::id())->latest()->limit(5)->get();
+
+        return response()->json($data, 200);
+    }
 }

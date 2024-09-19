@@ -14,6 +14,9 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminContactController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -69,6 +72,10 @@ Route::get('/users-faculty/{id}', [UserController::class,'getFaculty']);
 
 
 Route::get('/recent-submission', [StatisticController::class,'recentSubmission']);
+
+Route::resource('/admin-contact', AdminContactController::class);
+Route::get('/faculty-recent', [DocumentController::class, 'recentfaculty']);
+
 
 
 

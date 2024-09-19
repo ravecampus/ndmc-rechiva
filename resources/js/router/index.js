@@ -40,6 +40,7 @@ import ApprovedDoc from '../components/faculty/ApprovedDoc.vue'
 import FacultyPublished from '../components/faculty/Published.vue'
 import FacultyArchived from '../components/faculty/Archived.vue'
 import FacultyCanceled from '../components/faculty/Canceled.vue'
+import FacultyDashboard from '../components/faculty/Dashboard.vue'
 import MyAccount from '../components/faculty/Myaccount.vue'
 
 const routes = [
@@ -180,6 +181,11 @@ const routes = [
         component: Faculty,
         children:[
             {
+                path:'',
+                name:'faculty.dashboard',
+                component: FacultyDashboard,
+            },
+            {
                 path:'upload-publish',
                 name:'faculty.upload_p',
                 component: Upload,
@@ -297,12 +303,27 @@ const facultyRoutes = [
     'faculty.published',
     'faculty.canceled',
     'faculty.archived',
-    'faculty.myaccount'
+    'faculty.myaccount',
+    'faculty.dashboard'
+    
+];
+
+const facultyInctive = [
+    'about',
+    'rechiva',
+    'publicpage',
+    'signin',
+    'main.document',
+    'search',
+    'signup',
+    'notfound',
+    'faculty',
+    'faculty.dashboard',
+    'faculty.myaccount',
     
 ];
 
 router.beforeEach((to, from, next)=>{
-    console.log(window.winsdev.user)
     if(!window.winsdev.isLoggedin){
         if(openRoutes.includes(to.name)){
             return next();
@@ -313,8 +334,15 @@ router.beforeEach((to, from, next)=>{
         let user = window.winsdev.user;
         if(adminRoutes.includes(to.name) && user.role === 2){
             return next();
-        }else if(facultyRoutes.includes(to.name) && user.role === 1){
-            return next(); 
+        }else if(user.role === 1){
+            if(facultyRoutes.includes(to.name) && user.activate == 1){
+                return next(); 
+            }else if(facultyInctive.includes(to.name) && user.activate == 0){
+                return next(); 
+            }else{
+                return next({ name: 'notfound' })
+            }
+            
         }else{
             return next({ name: 'notfound' })
         }

@@ -8,6 +8,7 @@
     let links = ref([])
     let searchData = ref('')
     let filterData = ref('')
+    let filterDept = ref('')
     let errors = ref([])
 
     const typeofpapers = ref([])
@@ -30,11 +31,16 @@
     const modalEle = ref(null)
     let thisModalObj = null;
 
+    const inform = ref(null)
+    let modalinfo = null;
+
     onMounted(()=>{
         getData()
         getTypeOfPapers()
         ListofDepartment()
+        admicontact();
         thisModalObj = new Modal(modalEle.value);
+        modalinfo = new Modal(inform.value);
     })
 
     const formatDate = (dateString)=>{
@@ -43,7 +49,7 @@
 	}
 
     const getData = ()=>{
-        axios.get('/api/users?search='+searchData.value+'&filter='+filterData.value).then((res)=>{
+        axios.get('/api/users?search='+searchData.value+'&filter='+filterData.value+'&dept='+filterDept.value).then((res)=>{
             listData.value = res.data.data
             links.value = res.data.links
         })
@@ -171,6 +177,32 @@
             errors.value = err.response.data.errors
         })
     }
+    const info = reactive({
+        contact_number:'',
+        information:'',
+    })
+    const admicontact = ()=>{
+        axios.get('/api/admin-contact').then((res)=>{
+            const data = res.data;
+            info.contact_number = data.contact_number
+            info.information = data.information
+        })
+    }
+
+    const admicontactsave = ()=>{
+        axios.post('/api/admin-contact',info).then((res)=>{
+             toast.fire({
+				icon:'success',
+				title:'User added Successfully!'
+            })
+            modalinfo.hide()
+            admicontact()
+        })
+    }
+
+    const editInfo =()=>{
+        modalinfo.show();
+    }
 
 </script>
 
@@ -181,7 +213,26 @@
         <div class="col-md-12 text-start">
             <h4 class="m-0">Users</h4>
             <p>{{ formatDate(new Date()) }}</p>
-            <hr>
+            <hr class="m-0">
+        </div>
+        <div class="col-md-12 mb-3">
+            <div class="contact-information w-100">
+                <div class="d-flex">
+                    <label>Contact #:</label>
+                    <div class="fw-bold">&nbsp; {{ info.contact_number}} </div>
+                     <a href="#" @click="editInfo()" class="text-end ms-5">
+                        <i class="bi bi-pencil-square"></i>
+                        Edit
+                    </a>
+                </div>
+                <div class="d-flex">
+                    <label>Information:</label>
+                    <div class="fw-bold text-start text-truncate w-50">&nbsp;
+                        {{ info.information }} 
+                    </div>
+                </div>
+               
+            </div>
         </div>
         <div class="col-12 mb-3 mb-lg-5">
             <div class="overflow-hidden card table-nowrap table-card">
@@ -200,6 +251,13 @@
                         <button class="btn btn-primary" type="button" id="button-addon1">
                             <i class="fa fa-search"></i>
                         </button>
+                    </div>
+                     <div class="input-group input-group-sm p-2">
+                        <select class="form-select" id="inputGroupSelect02" v-model="filterDept" @change="actionFilter">
+                            <option :value="''">Choose...</option>
+                            <option v-for="(list, index) in departments" :key="index" :value="list.id">{{ list.description }}</option>
+                        </select>
+                        <label class="input-group-text bg-select"  for="inputGroupSelect02">Department</label>
                     </div>
                     <div class="input-group input-group-sm p-2">
                         <select class="form-select" id="inputGroupSelect02" v-model="filterData" @change="actionFilter">
@@ -285,7 +343,7 @@
         </div>
     </div>
         <!-- Modal -->
-        <div class="modal fade" id="userActivate" ref="modalEle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="userActivate" ref="modalEle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
             <div class="modal-header">
@@ -350,6 +408,34 @@
             </div>
             </div>
         </div>
+    </div>
+
+      <div class="modal fade" id="info" ref="inform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start mb-3 row">
+                <div class="form-group col-12">
+                    <label>Contact Number</label>
+                    <input type="text" ref="input" v-model="info.contact_number" class="form-control form-control form-control-sm" placeholder="Enter Contact Number">
+                    <span class="text-danger" v-if="errors.contact_number">{{errors.contact_number[0]}}</span>
+                </div>
+
+                <div class="form-group col-12">
+                    <label>Information</label>
+                    <textarea ref="input" v-model="info.information" class="form-control form-control form-control-sm" placeholder="Enter Information"></textarea>
+                    <span class="text-danger" v-if="errors.information">{{errors.information[0]}}</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" @click.prevent="admicontactsave()" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
         </div>
+    </div>
 </div>
 </template>

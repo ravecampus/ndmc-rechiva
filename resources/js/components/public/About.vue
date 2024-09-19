@@ -61,7 +61,7 @@
                         </p>
                          <div class="title">
                             Facebook: 
-                            <a href="https://facebook.com/rechiva">https://facebook.com/rechiva</a>
+                            <a  target="_blank" href="https://facebook.com/rechiva">https://facebook.com/rechiva</a>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
             font-weight: 700;
             padding:0 10px;
             border-radius: 4px;
-            background-color: #07ce82;
+            background-color: #068051;
             color:#fff;
             width: 25%;
             margin-bottom: 10px;

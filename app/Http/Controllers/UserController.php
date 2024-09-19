@@ -23,6 +23,10 @@ class UserController extends Controller
         if($request->filter != ''){
            $data = $data->where('role', $request->filter);
         }
+
+        if($request->dept != ''){
+            $data = $data->where('department_id', $request->dept);
+         }
        $data = $data->with('department')->latest()->paginate(5);
         
         return response()->json($data, 200);

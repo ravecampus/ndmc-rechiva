@@ -11,7 +11,7 @@
                <router-link class="nav-link nav-line-link" :to="{name:'faculty.archived'}">Archived</router-link>
             </li>
             <li class="nav-item">
-               <router-link class="nav-link nav-line-link" :to="{name:'faculty.canceled'}">Cancelled</router-link>
+               <router-link class="nav-link nav-line-link" :to="{name:'faculty.canceled'}">Canceled</router-link>
             </li>
         </ul>
             <div class="row mt-5">

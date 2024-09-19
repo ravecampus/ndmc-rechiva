@@ -82,10 +82,15 @@ const getRecentSub = ()=>{
             </div>
             <div class="col-md-6 mt-2">
                 <div class="row">
-                    <div class="col-md-12">
-
+                    <div class="col-md-12 p-0">
+                        <div class="link-fb">
+                            <a target="_blank" href="https://www.facebook.com/NDMCResearchandDevelopmentCenter"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook Page NDMC RDC">
+                                <img class="img-link" :src="'/img/school.png'"/>
+                            </a>
+                        </div>
                     </div>
-                     <div class="col-md-12 mt-5 d-flex justify-content-around">
+                     <div class="col-md-12 mt-5 d-flex justify-content-around mb-5">
                         <div class="round-info">
                             <div class="round-icon">
                                 <i class="bi bi-people"></i>
@@ -176,7 +181,7 @@ const getRecentSub = ()=>{
     }
     .rs-content{
         background-color: #63a369;
-        min-height: 38rem;
+        min-height: 60rem;
         position: relative;
         padding: 1rem;
         padding-top: 2rem;
@@ -219,5 +224,14 @@ const getRecentSub = ()=>{
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    .link-fb{
+        margin-top: 2.5rem;
+    }
+    .img-link{
+        border: #fff solid 3px;
+        border-radius: 10px;
+        width: 40rem;
     }
 </style>
