@@ -20,7 +20,7 @@ class DocumentController extends Controller
     {
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
         }
         if($request->filter != ''){
             $docs->where('upload_type', $request->filter);
@@ -218,7 +218,7 @@ class DocumentController extends Controller
     public function publishedAuth(Request $request){
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
         }
         $docs = $docs
         ->with('document_file')
@@ -233,7 +233,7 @@ class DocumentController extends Controller
     public function archivedAuth(Request $request){
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
         }
         $docs = $docs->with('document_file')
         ->where('status',1)
@@ -247,7 +247,7 @@ class DocumentController extends Controller
     public function canceledAuth(Request $request){
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
         }
         if($request->filter != ''){
             $docs->where('upload_type', $request->filter);
@@ -264,5 +264,15 @@ class DocumentController extends Controller
         $data = Document::where('user_id', Auth::id())->latest()->limit(5)->get();
 
         return response()->json($data, 200);
+    }
+
+    public function searchList(Request $request){
+        $docs = Document::query();
+        if($request->search != ''){
+            $docs = $docs->where('title','like','%'.$request->search.'%')
+            ->where('status', 1)->where('upload_type',0)->latest()->limit(5)->get();
+        }
+
+        return response()->json($docs, 200);
     }
 }

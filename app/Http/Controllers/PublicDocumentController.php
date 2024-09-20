@@ -32,7 +32,11 @@ class PublicDocumentController extends Controller
             'keywords.description',
             'keywords.document_id')
             ->join('keywords', 'keywords.document_id', '=', 'documents.id')
-            ->orWhere('keywords.description','like','%'.$request->search.'%')->distinct()->select('documents.*')->get();
+            ->where('documents.status', 1)
+            ->where('documents.upload_type', 0)
+            ->orWhere('keywords.description','like','%'.$request->search.'%')
+           
+            ->distinct()->select('documents.*')->get();
         }
 
         

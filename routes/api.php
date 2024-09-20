@@ -75,6 +75,7 @@ Route::get('/recent-submission', [StatisticController::class,'recentSubmission']
 
 Route::resource('/admin-contact', AdminContactController::class);
 Route::get('/faculty-recent', [DocumentController::class, 'recentfaculty']);
+Route::get('/search-list', [DocumentController::class, 'searchList']);
 
 
 

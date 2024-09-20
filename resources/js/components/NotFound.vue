@@ -1,7 +1,17 @@
+<script setup>
+    const reload =()=>{
+        window.location.reload();
+    }
+</script>
+
 <template>
     <div class="container page-notfound">
         <h1 class="font-title">Page not found!</h1>
         <p class="sub-font">Notre Dame of Midsayap College - Rechiva </p>
+          <button type="button" @click="reload()" class="btn btn-outline-success btn-sm">
+            <i class="bi bi-arrow-clockwise"></i>
+            Reload
+            </button>
     </div>
 </template>
 <style lang="scss" scoped>
