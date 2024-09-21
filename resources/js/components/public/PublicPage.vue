@@ -11,6 +11,10 @@
     }
     
     onMounted(()=>{
+        // let user = window.winsdev.user
+        // if(window.winsdev.isLoggedin && user.role === 2){
+        //     router.push("/admin")
+        // }
         getStatistic();
         getDeptStat()
         getRecentSub()

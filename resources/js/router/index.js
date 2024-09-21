@@ -267,6 +267,7 @@ const openRoutes = [
 
 const adminRoutes = [
     'rechiva',
+    'publicpage',
     'admin',
     'dashboard',
     'settings',
