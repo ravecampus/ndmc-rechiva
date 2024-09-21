@@ -135,7 +135,7 @@
                 if(form.search == ""){
                     vhis.value = true
                     let data = JSON.parse(localStorage.getItem("search_history"))
-                    if(data.length != null){
+                    if(data != null){
                         listsearch.value = data.reverse()
                     }
                    
