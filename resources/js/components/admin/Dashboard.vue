@@ -62,7 +62,7 @@ const notiCount = (data)=>{
 const showNotification = (data)=>{
     axios.put('/api/notification/'+data.id,{'status': 1}).then((res)=>{
         getNotification()
-        if(data.role == 0 && data.role == 1){
+        if(data.role == 0 || data.role == 1){
             router.push({name:'admin.requestdoc', params:{id:data.document_id}});
         }else if(data.role == 2){
             router.push({name:'admin.user', params:{id:data.sender_id}});
