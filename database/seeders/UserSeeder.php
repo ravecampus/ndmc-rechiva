@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         DB::table('admin_contact')->insert([
             'id' => 1,
             'contact_number' => '+639000000000',
-            'infomation' => 'Please contact us for activation or for newly please wait  for 3 business days to review your credentials. Thank you',
+            'information' => 'Please contact us for activation or for newly please wait  for 3 business days to review your credentials. Thank you',
         ]);
     }
 }
