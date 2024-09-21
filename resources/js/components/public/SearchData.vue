@@ -73,24 +73,24 @@
         }
        
     }
-    const local = ref([])
+    let local = []
     const storeLS = ()=>{
        
         let data = JSON.parse(localStorage.getItem("search_history"))
         console.log(data)
-        local.value  = data
+        local = data
         if(data != null){
             let chk = data.filter(e=>e.title == form.search);
             if(chk.length == 0){
-                if(local.value.length > 0 ){
-                    local.value.push({title:form.search})
-                    localStorage.setItem("search_history",JSON.stringify(local.value))
+                if(local.length > 0 ){
+                    local.push({title:form.search})
+                    localStorage.setItem("search_history",JSON.stringify(local))
                 }
             }
 
         }else{
-            local.value.push({title:form.search})
-            localStorage.setItem("search_history",JSON.stringify(local.value))
+            local.push({title:form.search})
+            localStorage.setItem("search_history",JSON.stringify(local))
         }
        
     }
