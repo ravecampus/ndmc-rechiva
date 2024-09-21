@@ -131,7 +131,11 @@
             axios.get('/api/search-list', {params:form}).then((res)=>{
                 if(form.search == ""){
                     vhis.value = true
-                    listsearch.value = JSON.parse(localStorage.getItem("search_history")).reverse()
+                    let data = JSON.parse(localStorage.getItem("search_history"))
+                    if(data.length > 0){
+                        listsearch.value = data.reverse()
+                    }
+                   
                     // .sort((a,b) => a.title.localeCompare(b.title))
                 }else{
                     listsearch.value = res.data
