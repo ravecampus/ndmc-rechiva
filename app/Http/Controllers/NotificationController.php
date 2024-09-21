@@ -76,8 +76,9 @@ class NotificationController extends Controller
         $data = Notification::with('receiver')
         ->where('sender_id', 0)
         ->where('receiver_id', Auth::id())
+        ->where('status', 0)
         ->where('role',1)->OrWhere('role', 2)
-        ->where('status', 0)->latest()->get();
+       ->latest()->get();
 
         return response()->json($data, 200);
     }
