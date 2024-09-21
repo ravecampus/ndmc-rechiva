@@ -77,6 +77,7 @@
     const storeLS = ()=>{
        
         let data = JSON.parse(localStorage.getItem("search_history"))
+        console.log(data)
         local.value  = data
         if(data != null){
             let chk = data.filter(e=>e.title == form.search);
