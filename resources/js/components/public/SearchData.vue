@@ -78,15 +78,18 @@
        
         let data = JSON.parse(localStorage.getItem("search_history"))
         local.value  = data
-        let chk = data.filter(e=>e.title == form.search);
-        if(chk.length == 0){
-                if(local.value.length > 0 ){
-                    local.value.push({title:form.search})
-                    localStorage.setItem("search_history",JSON.stringify(local.value))
-                }else{
-                    local.value.push({title:form.search})
-                    localStorage.setItem("search_history",JSON.stringify(local.value))
-                }
+        if(data != null){
+            let chk = data.filter(e=>e.title == form.search);
+            if(chk.length == 0){
+                    if(local.value.length > 0 ){
+                        local.value.push({title:form.search})
+                        localStorage.setItem("search_history",JSON.stringify(local.value))
+                    }else{
+                        local.value.push({title:form.search})
+                        localStorage.setItem("search_history",JSON.stringify(local.value))
+                    }
+            }
+
         }
        
     }
