@@ -2,6 +2,8 @@
 import { ref , onMounted } from "vue"
 import { useRouter } from "vue-router"
 
+import Footer from "../Footer.vue"
+
 const router = useRouter()
 
 const user = ref({})
@@ -103,9 +105,12 @@ const showNotification = (data)=>{
             </button>
             
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                  
+                    <li class="nav-item nav-cus mb-nav" v-if="user.id != null">
+                        <router-link class="nav-link" :to="{name:'publicpage'}">
+                             Home
+                        </router-link>
+                    </li>
                     <li class="nav-item dropdown nav-cus" v-if="activated(user)">
                         <a class="nav-link" href="#">
                             <i class="bi bi-upload" aria-hidden="true"></i> Upload Rechiva
@@ -223,17 +228,7 @@ const showNotification = (data)=>{
     <div class="content min-h">
         <router-view></router-view>
     </div>
-
-    <div class="footer">
-        <ul class="nav justify-content-center border-bottom bg-footer">
-            <li class="nav-item">
-                <router-link :to="{name:'publicpage'}" class="nav-link px-2 text-white"> Home</router-link> 
-            </li>
-            <li class="nav-item">
-                <router-link :to="{name:'about'}" class="nav-link px-2 text-white"> About</router-link> 
-            </li>
-        </ul>
-    </div>
+        <Footer></Footer>
     </div>
 </template>
 <style lang="scss" scoped>

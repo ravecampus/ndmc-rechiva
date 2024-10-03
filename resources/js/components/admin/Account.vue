@@ -73,8 +73,8 @@
                 <img class="rounded-circle mt-5" width="150px" :src="'/img/user.png'">
                 <span class="font-weight-bold">
                     {{ user.first_name }}
-                    {{ user.middle_initial }}.
-                    {{ user.last_name }}
+                    <!-- {{ user.middle_initial }}.
+                    {{ user.last_name }} -->
                 </span>
                 <span class="text-black-50">{{ user.email }}</span>
                 <span> </span></div>
@@ -84,7 +84,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <div class="row mt-2">
+                <!-- <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="labels">First name</label>
                         <input type="text" v-model="form.first_name" class="form-control" placeholder="Enter First name" value="">
@@ -100,7 +100,7 @@
                         <input type="text" v-model="form.last_name" class="form-control" value="" placeholder="Enter Last name">
                         <span class="text-danger" v-if="errors.last_name">{{errors.last_name[0]}}</span>                    
                     </div>
-                </div>
+                </div> -->
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Email</label>

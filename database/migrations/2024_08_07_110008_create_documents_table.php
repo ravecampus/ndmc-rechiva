@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('type_of_paper_id')->nullable();
             $table->date('publication_date')->nullable();
             $table->string('issue_numbers')->nullable();
+            $table->text('publisher')->nullable();
             $table->year('year')->nullable();
             $table->integer('status')->default(0);
             $table->integer('admin_published')->nullable();

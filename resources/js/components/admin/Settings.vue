@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-2">
         <div class="col-md-12 text-start">
-            <h4 class="m-0">Settings</h4>
+            <h4 class="m-0">Data Management</h4>
             <p>{{ formatDate(new Date()) }}</p>
             <hr>
         </div>

@@ -160,8 +160,8 @@ const showNotification = (data)=>{
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                        <div class="d-flex">
                             <div class="admin-info d-none d-lg-block d-xl-block">
-                             {{ user.first_name }} {{ user.last_name }}
-                                <div class="description">Admin</div>
+                             {{ user.first_name }}
+                                <!-- <div class="description">Admin</div> -->
                             </div>
                             <img class="img-user" :src="'/img/user.png'" alt="">
                        </div>
@@ -169,7 +169,7 @@ const showNotification = (data)=>{
                     <ul class="dropdown-menu dropdown-menu-end user-menu">
                         <li class="dropdown-item user-li d-inline-block d-lg-none">
                             <div class="info-user">
-                                {{ user.first_name }} {{ user.last_name }} (Admin)
+                                {{ user.first_name }}
                                 <!-- <div class="description">Admin</div> -->
                             </div>
                         </li>
@@ -221,7 +221,7 @@ const showNotification = (data)=>{
                     <router-link :to="{name:'admin.users'}"><span class="bi bi-people"></span> Users</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name:'setting.authors'}"><span class="bi bi-gear"></span> Settings</router-link>
+                    <router-link :to="{name:'setting.authors'}"><span class="bi bi-gear"></span> Data Mgmt.</router-link>
                 </li>
              
             </ul>

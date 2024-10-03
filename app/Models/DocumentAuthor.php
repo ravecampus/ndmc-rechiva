@@ -9,5 +9,10 @@ class DocumentAuthor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'author_id', 'document_id'];
+    protected $fillable = [
+        'first_name', 
+        'middle_name', 
+        'last_name', 
+        'author_id', 
+        'document_id'];
 }

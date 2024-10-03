@@ -177,7 +177,9 @@
                         <small>Authors</small>
                         <div class="author-tag">
                             <div class="badge rounded-pill text-white me-1 mt-1 tag sub-a-tag" v-for="(list,idx) in listDataD" :key="idx">
-                                 {{ list.description }}
+                                 {{ list.first_name }}
+                                 {{ list.middle_name }}
+                                 {{ list.last_name }}
                                   <i class="bi bi-x-circle close-tag" @click="removeAuthor(list)"></i>
                             </div>
                         </div>
@@ -186,7 +188,9 @@
                                 <div class="form-check">
                                     <input class="form-check-input" v-model="author[list.id]"  @change="checkAuthor(author, list)" type="checkbox" :value="list.id" :id="list.id">
                                     <label class="form-check-label" :for="list.id">
-                                        {{ list.description }}
+                                        {{ list.fist_name }}
+                                        {{ list.middle_name }}
+                                        {{ list.last_name }}
                                     </label>
                                 </div>
                             </li>

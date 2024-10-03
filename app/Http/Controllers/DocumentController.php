@@ -55,6 +55,7 @@ class DocumentController extends Controller
                 'type_of_paper'=>'required',
                 'issue_numbers'=>'required',
                 'doi'=>'required',
+                'publisher'=>'required',
                 'publication_date'=>'required',
                 'authors'=>'required|array',
                 'authors.*' =>'required|string',
@@ -73,6 +74,7 @@ class DocumentController extends Controller
                 'doi' => $request->doi,
                 'abstract' => $request->abstract,
                 'user_id' => $user->id,
+                'publisher' => $request->publisher,
             ]);
     
                 foreach (json_decode($request->keywords[0]) as $word) {
@@ -85,7 +87,9 @@ class DocumentController extends Controller
     
                 foreach (json_decode($request->authors[0]) as $author) {
                     $kyw = DocumentAuthor::create([
-                        'name'=>$author->description,
+                        'first_name'=>$author->first_name,
+                        'middle_name'=>$author->middle_name,
+                        'last_name'=>$author->last_name,
                         'author_id'=>$author->id,
                         'document_id'=>$doc->id
                     ]);
@@ -133,7 +137,9 @@ class DocumentController extends Controller
     
                 foreach (json_decode($request->authors[0]) as $author) {
                     $kyw = DocumentAuthor::create([
-                        'name'=>$author->description,
+                        'first_name'=>$author->first_name,
+                        'middle_name'=>$author->middle_name,
+                        'last_name'=>$author->last_name,
                         'author_id'=>$author->id,
                         'document_id'=>$doc->id
                     ]);

@@ -8,7 +8,12 @@
 	let searchData = ref('')
 
 	let links = ref([])
-	const fdata = () => ({description:"", id:null})
+	const fdata = () => ({
+		first_name:"", 
+		middle_name:"", 
+		last_name:"", 
+		id:null
+		})
 	const form = reactive(fdata())
 	const resetform = () => Object.assign(form, fdata())
 	const editMode = ref(false)
@@ -94,7 +99,9 @@
 		btnsave.value = "update"
 		editMode.value = true
 		axios.get(`/api/setting-author/${data.id}`).then((res)=>{
-			form.description = res.data.description
+			form.first_name = res.data.first_name
+			form.middle_name = res.data.middle_name
+			form.last_name = res.data.last_name
 			form.id = res.data.id
 
 		})
@@ -145,10 +152,20 @@
         <h2> <i class="fa fa-cogs"></i> Authors</h2>
         <div class="row">
             <div class="col-md-4 pt-4 mb-2">
-                <div class="form-group mb-3">
-                    <label>Description</label>
-                    <input type="text" ref="input" v-model="form.description" class="form-control form-control form-control-sm" placeholder="Enter Description">
-                    <span class="text-danger" v-if="errors.description">{{errors.description[0]}}</span>
+                <div class="form-group">
+                    <label>First name</label>
+                    <input type="text" ref="input" v-model="form.first_name" class="form-control form-control form-control-sm" placeholder="Enter First name">
+                    <span class="text-danger" v-if="errors.first_name">{{errors.first_name[0]}}</span>
+                </div>
+				<div class="form-group">
+                    <label>Middle name</label>
+                    <input type="text" v-model="form.middle_name" class="form-control form-control form-control-sm" placeholder="Enter Middle name">
+                    <span class="text-danger" v-if="errors.middle_name">{{errors.middle_name[0]}}</span>
+                </div>
+				<div class="form-group mb-3">
+                    <label>Last name</label>
+                    <input type="text" v-model="form.last_name" class="form-control form-control form-control-sm" placeholder="Enter Last name">
+                    <span class="text-danger" v-if="errors.last_name">{{errors.last_name[0]}}</span>
                 </div>
 				<div class="btn-group btn-sm">
 					<button type="button" @click="submitData" class="btn btn-primary btn-sm">{{ btnsave }}</button>
@@ -180,7 +197,11 @@
 							<tr v-for="(item, index) in listData" :key="index">
 								<td>
 									<div class="d-flex align-items-center">
-										<div class="font-weight-bold text-primary"><strong>{{ item.description }}</strong></div>
+										<div class="font-weight-bold text-primary">
+											<strong>
+											{{ item.first_name }} {{ item.middle_name }} {{ item.last_name }}
+											</strong>
+										</div>
 									</div>
 								</td>
 								<td>{{ formatDate(item.updated_at) }}</td>

@@ -209,7 +209,9 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-primary p-1" 
                                 v-for="(list, index) in docData.authors" :key="index">
-                                {{ list.name }}
+                                {{ list.first_name }}
+                                {{ list.middle_name }}
+                                {{ list.last_name }}
                                 </li>
                             
                             </ul>

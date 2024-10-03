@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('users')->insert([
             'id' => 1,
-            'first_name' => 'Admin',
-            'middle_initial' => '',
-            'last_name' => 'Administrator',
+            'first_name' => 'Administrator',
+            // 'middle_initial' => '',
+            // 'last_name' => 'Administrator',
             'email' => 'admin@gmail.com',
             'role' => 2,
             'activate' => 1,

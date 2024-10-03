@@ -73,7 +73,8 @@
         publication_date: "",
         issue_numbers:"",
         abstract:"",
-        doi:""
+        doi:"",
+        publisher:"",
         })
 	const form = reactive(fdata())
     const resetform = () => Object.assign(form, fdata())
@@ -147,6 +148,7 @@
         formData.append('issue_numbers',form.issue_numbers)
         formData.append('publication_date',form.publication_date =="" ? "" :  format(form.publication_date))
         formData.append('doi',form.doi)
+        formData.append('publisher',form.publisher)
         axios.post('/api/document', formData,
                 {
                      headers: {
@@ -274,6 +276,11 @@
                                 <!-- <input type="text" v-model="form.authors" class="form-control form-control-sm" placeholder="Enter Title"> -->
                                 <span class="text-danger" v-if="errors['keywords.0']">{{errors["keywords.0"][0].replace(".0", "")}}</span>
                                
+                            </div>
+                              <div class="form-group mb-3 col-12" v-if="uploadtype">
+                                <label>Publisher</label>
+                                <input type="text" v-model="form.publisher" class="form-control form-control-sm" placeholder="Enter Publisher">
+                                <span class="text-danger" v-if="errors.publisher">{{errors.publisher[0]}}</span>
                             </div>
             
                             <div class="btn-group btn-sm mt-3">

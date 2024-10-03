@@ -2,6 +2,8 @@
 import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 
+import Footer from "../Footer.vue"
+
 const user = ref({})
 const auth = ref(false)
 
@@ -83,7 +85,7 @@ onMounted(()=>{
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                     <li class="nav-item dropdown nav-cus mb-nav">
                         <button type="button" class="btn btn-outline-success" v-if="auth" @click="dashboard()">Dashboard</button>
-                        <a class="nav-link dropdown-toggle" href="#" v-if="!auth">
+                        <!-- <a class="nav-link dropdown-toggle" href="#" v-if="!auth">
                             Join us
                         </a>
 
@@ -102,7 +104,7 @@ onMounted(()=>{
                                 </router-link>
                             </li>
                             <li><hr class="dropdown-divider"></li>
-                        </ul>
+                        </ul> -->
 
                     </li>
                 </ul>
@@ -115,16 +117,7 @@ onMounted(()=>{
         </router-view>
     </div>
 
-    <div class="footer">
-        <ul class="nav justify-content-center border-bottom bg-footer">
-            <li class="nav-item">
-                <router-link :to="{name:'publicpage'}" class="nav-link px-2 text-white"> Home</router-link> 
-            </li>
-            <li class="nav-item">
-                <router-link :to="{name:'about'}" class="nav-link px-2 text-white"> About</router-link> 
-            </li>
-        </ul>
-    </div>
+    <Footer></Footer>
     </div>
 </template>
 <style lang="scss">

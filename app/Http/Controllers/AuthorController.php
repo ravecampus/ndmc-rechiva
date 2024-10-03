@@ -14,7 +14,9 @@ class AuthorController extends Controller
     {
         $data = Author::query();
         if($request->search != ''){
-            $data = Author::where('description','like','%'.$request->search.'%');
+            $data = Author::where('first_name','like','%'.$request->search.'%')
+            ->orWhere('middle_name','like','%'.$request->search.'%')
+            ->orWhere('last_name','like','%'.$request->search.'%');
         }
         $data = $data->latest()->paginate(5);
         return response()->json($data, 200);
@@ -34,10 +36,14 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'description'=>'required|unique:authors,description',
+            'first_name'=>'required|string',
+            'middle_name'=>'required|string',
+            'last_name'=>'required|string',
         ]);
         $data = Author::create([
-            'description' => $request->description
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name
         ]);
 
         return response()->json($data, 200);
@@ -65,10 +71,14 @@ class AuthorController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'description' => 'required'
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required'
         ]);
         $data = Author::find($id);
-        $data->description = $request->description;
+        $data->first_name = $request->first_name;
+        $data->middle_name = $request->middle_name;
+        $data->last_name = $request->last_name;
         $data->save();
         return response()->json($data, 200);
     }
@@ -87,7 +97,9 @@ class AuthorController extends Controller
     public function listAuthor(Request $request){
         $data = Author::query();
         if($request->search != ''){
-            $data = Author::where('description','like','%'.$request->search.'%');
+            $data = Author::where('first_name','like','%'.$request->search.'%')
+            ->orWhere('middle_name','like','%'.$request->search.'%')
+            ->orWhere('last_name','like','%'.$request->search.'%');
         }
         $data = $data->latest()->get();
         return response()->json($data, 200);

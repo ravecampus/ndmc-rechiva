@@ -11,7 +11,12 @@
     })
 
     const listdata = ref([])
-   	const fdata = () => ({description:"", id:null})
+   	const fdata = () => ({
+           first_name:"",
+           middle_name:"",
+           last_name:"",
+            id:null
+        })
 	const form = reactive(fdata())
 	const resetform = () =>{
          search.value = ""
@@ -34,7 +39,12 @@
     const addTag = (data)=>{
         const chk = tags.value.filter(e=>e.id == data.id);
         if(chk.length == 0){
-            tags.value.push({"id":data.id, "description":data.description})
+            tags.value.push({
+                "id":data.id, 
+                "first_name":data.first_name,
+                "middle_name":data.middle_name,
+                "last_name":data.last_name
+                })
             search.value = ""
             error.value = ""
             emit('loadFilter', tags.value)
@@ -69,8 +79,10 @@
         // search.value = ""
     }
     const loadList = ()=>{
-        
-         getDBList(props.urlString)
+        if(search.value != ""){
+            getDBList(props.urlString)
+        }
+      
     }
 
     const setText = ()=>{
@@ -84,7 +96,7 @@
         <div class="col-12">
             <div class="input-tag">
                 <div v-for="(item, index) in tags" :key="index" class="badge rounded-pill text-white me-1 mt-1 tag">
-                    {{ item.description }}
+                    {{ item.first_name }} {{ item.middle_name }} {{ item.last_name }}
                     <i class="bi bi-x-circle-fill close-tag" @click="removeItem(index)"></i>
                 </div>
                 <input type="text" class="text-tag p-0 m-0" @focus="loadList" @keyup="setText" v-model="search" placeholder="Enter Author name..."/>
@@ -94,8 +106,10 @@
                 <li>
                    <div class="item-data-none">
                         <div class="input-group input-group-sm">
-                            <span class="input-group-text bg-primary text-white" id="inputGroup-sizing-default">Add on DB: </span>
-                            <input type="text" v-model="form.description" class="form-control" placeholder="Enter Author's Name">
+                            <span class="input-group-text bg-primary text-white" id="inputGroup-sizing-default">Add Author: </span>
+                            <input type="text" v-model="form.first_name" class="form-control" placeholder="Enter First name">
+                            <input type="text" v-model="form.middle_name" class="form-control" placeholder="Enter Middle name">
+                            <input type="text" v-model="form.last_name" class="form-control" placeholder="Enter Last name">
                             <button class="btn btn-outline-secondary" data-bs-toggle="tooltip" @click.prevent="resetform()" data-bs-placement="top" title="clear" type="button">
                                 <i class="bi bi-x"></i>
                             </button>
@@ -106,12 +120,14 @@
                                 <i class="bi bi-x-octagon"></i>
                             </button>
                         </div>
-                        <span class="text-danger error-message" v-if="errors.description">{{ errors.description[0] }}</span>
+                        <span class="text-danger error-message" v-if="errors.first_name">{{ errors.first_name[0] }}</span>&nbsp;
+                        <span class="text-danger error-message" v-if="errors.middle_name">{{ errors.middle_name[0] }}</span>&nbsp;
+                        <span class="text-danger error-message" v-if="errors.last_name">{{ errors.last_name[0] }}</span>
                    </div>
                 </li>
                 <li><hr class="m-0"></li>
                 <li v-for="(item, index) in listdata" :key="index"  v-if="listdata.length != 0">
-                    <a class="item-data start-100" href="#" @click.prevent="addTag(item)"><i class="bi bi-plus-circle me-auto"></i> {{ item.description }} </a>
+                    <a class="item-data start-100" href="#" @click.prevent="addTag(item)"><i class="bi bi-plus-circle me-auto"></i> {{ item.first_name }} {{ item.middle_name }} {{ item.last_name}}</a>
                 </li>
                 <li>
                     <span class="item-data text-danger error-message">{{ error }}</span>
