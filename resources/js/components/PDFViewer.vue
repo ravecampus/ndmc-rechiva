@@ -31,11 +31,8 @@ const  loadPSPDFKit = async()=>{
         readOnly: true,
     });
 
-   
-
     return await PSPDFKit.load({
-        // licenseKey:'ATi46klU5_QpWWkkfceNCcIkMuN6chgNJ5QOkbLZ7QmbfS1V2qgdRWRHyH2f3gTDcvCjTTUQPa3GqgWzEPC6DKkjTvzbZv75wRbuYAniIHLRddCgA2zP7AHnNMCGms_7Pl9WOe9A5hcbEiF_EpgJQsDRpvEHm3VxcYz2uvWJFecL-wAWzlYAGpE6_sppFu4r66dxAfn4vgEEclJ4',
-
+        licenseKey:'6-3kWdKQjo06m1E_ZJaSbz9dWJm6SwIs0w-A_kKbNN3qRasmwHurJjEcglXs91t8XXBTH0A1Um1ixUXx2eHaDx3TcQqGaXs7svxxvmcEbbprr_rHcXDtnToGrkGQq5GZcqswRS8TMaReiIZXwrFBi35nvwCNTsEU4uRTWJe7YJ11v78ypX0kDw4mSGm0kvEuVdJTHbo79gVSvyqdbkvagisQev4itZUJx-XDWLuRZQJVP-QTUes1d_nKAHteomebnru9JafDVQX6Q8CDe1X9_HVdvnFvq7yqY-ILgnmDtRVE7doZchiy9rWewqFC0XahNBtBXy0myZMNB_oPU2dCUj-03LWTAXp2Alcc2qpXn4-3bCnHg9q1e0IErBhoZ_9uEg',
         document: props.pdfFile,
         container: '.doc-container',
         initialViewState,

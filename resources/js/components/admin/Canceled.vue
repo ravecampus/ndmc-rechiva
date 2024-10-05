@@ -20,7 +20,7 @@
 
     const formatDate = (dateString)=>{
 		const date = dayjs(dateString)
-		return date.format('MMMM d, YYYY | hh:mm a')
+		return date.format('MMMM D, YYYY | hh:mm a')
 	}
     
     const getData = ()=>{

@@ -89,24 +89,18 @@
 
 </script>
 <template>
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="col-md-12 ">
-                <div class="card doc-card">
-                   
-                    <div class="card-body p-2">
-                        <h4 class="text-start m-0">
-                            <span class="bi bi-file-earmark-richtext"></span>
-                            Document
-                        </h4>
-                    </div>
-                </div>
+    <div class="container mt-3 mb-5">
+        <div class="row bg-white p-2 m-1 rounded">
+            <div class="col-md-12">
+                <h4 class="text-start m-0 mb-3">
+                    <span class="bi bi-file-earmark-richtext"></span>
+                    Document
+                </h4>
             </div>
-
-        </div>
-        <div class="row">
+            <hr>
             <div class="col-md-3 col-lg-3">
-                <div class="card doc-card">
+               
+                <div class="card doc-card custom-border">
                  <div class="side-badge w-auto">
                      <genstatus :uploadDataView="docData"></genstatus>
                  </div>
@@ -197,9 +191,12 @@
         background-color: #fff;
         border: 1px solid transparent;
         border-radius: 4px;
-         border:#dfdfdf6b solid 1px;
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        //  border:#dfdfdf6b solid 1px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+    }
+    .custom-border{
+        border:#dfdfdf6b solid 1px;
     }
     .img-pdf{
         // width: 100%;

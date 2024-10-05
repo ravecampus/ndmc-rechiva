@@ -42,18 +42,18 @@ class AdminDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'message' => 'required|string'
-        ]);
+        // $request->validate([
+        //     'message' => 'required|string'
+        // ]);
 
         $doc = Document::find($request->document_id);
         $doc->status = $request->prove;
-        Feedback::create([
-            'message'=>$request->message,
-            'document_id'=>$request->document_id,
-            'sender_id'=>Auth::id(),
-            // 'receiver_id'=>$doc->user_id,
-        ]);
+        // Feedback::create([
+        //     'message'=>$request->message,
+        //     'document_id'=>$request->document_id,
+        //     'sender_id'=>Auth::id(),
+        //     // 'receiver_id'=>$doc->user_id,
+        // ]);
 
         $note = Notification::create([
             'sender_id' => 0,
@@ -105,7 +105,13 @@ class AdminDocumentController extends Controller
     public function publishDoc(Request $request){
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
+        }
+        if($request->filterDept != 0){
+            $docs = $docs->where('department_id', $request->filterDept);
+        }
+        if($request->filterType != 0){
+            $docs = $docs->where('type_of_paper_id', $request->filterType);
         }
         $docs = $docs->with('document_file','department', 'userdoc')
         ->where('status', 1)
@@ -118,10 +124,15 @@ class AdminDocumentController extends Controller
     public function archiveDoc(Request $request){
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
         }
-        $docs = $docs->with('document_file','department', 'userdoc')
-        >where('status', 1)
+        // if($request->filterDept != 0){
+        //     $docs = $docs->where('department_id', $request->filterDept);
+        // }
+        if($request->filterType != 0){
+            $docs = $docs->where('type_of_paper_id', $request->filterType);
+        }
+        $docs = $docs->with('document_file','department', 'userdoc')->where('status', 1)
         ->where('upload_type', 1)
         ->latest()->paginate(5);
 
@@ -131,7 +142,7 @@ class AdminDocumentController extends Controller
     public function cancelDoc(Request $request){
         $docs = Document::query();
         if($request->search != ''){
-            $docs = document::where('title','like','%'.$request->search.'%');
+            $docs = $docs->where('title','like','%'.$request->search.'%');
         }
         if($request->filter != ''){
             $docs->where('upload_type', $request->filter);
@@ -144,17 +155,17 @@ class AdminDocumentController extends Controller
     }
 
     public function disapprove(Request $request){
-        $request->validate([
-            'message' => 'required|string'
-        ]);
+        // $request->validate([
+        //     'message' => 'required|string'
+        // ]);
 
         $doc = Document::find($request->document_id);
         $doc->status = 2;
-        Feedback::create([
-            'message'=>$request->message,
-            'document_id'=>$request->document_id,
-            'sender_id'=>Auth::id(),
-        ]);
+        // Feedback::create([
+        //     'message'=>$request->message,
+        //     'document_id'=>$request->document_id,
+        //     'sender_id'=>Auth::id(),
+        // ]);
         $note = Notification::create([
             'sender_id' => 0,
             'receiver_id'=> $doc->user_id,

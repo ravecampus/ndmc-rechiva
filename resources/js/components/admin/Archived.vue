@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, onMounted, watch} from "vue"
+    import { ref, onMounted, watch, reactive} from "vue"
     import dayjs from 'dayjs'
     import genstatus from "../GenStatus.vue"
 
@@ -9,7 +9,12 @@
 
     const typeofpapers = ref([])
 
-   
+    const searchfor = reactive({
+        search:"",
+        filterType:0,
+        filterDept:0
+
+   })
 
     onMounted(()=>{
         getData()
@@ -19,11 +24,11 @@
 
     const formatDate = (dateString)=>{
 		const date = dayjs(dateString)
-		return date.format('MMMM d, YYYY | hh:mm a')
+		return date.format('MMMM D, YYYY | hh:mm a')
 	}
 
     const getData = ()=>{
-        axios.get('/api/admin-document-archived?search='+searchData.value).then((res)=>{
+        axios.get('/api/admin-document-archived?',{params:searchfor}).then((res)=>{
             listData.value = res.data.data
             links.value = res.data.links
         })
@@ -88,6 +93,9 @@
         }
        
     }
+    const actionFilter = ()=>{
+        getData();
+    }
 
 </script>
 
@@ -105,12 +113,29 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Documents</h5>
                 </div>
-                <div class="input-group input-group-sm p-2">
-                    <input type="text" class="form-control" placeholder="Search..." aria-label="Example text with button addon" v-model="searchData" aria-describedby="button-addon1">
-                    <button class="btn btn-primary" type="button" id="button-addon1">
-                        <i class="fa fa-search"></i>
-                    </button>
-				</div>
+                <div class="d-flex">
+                    <div class="input-group input-group-sm p-2">
+                        <input type="text" class="form-control" placeholder="Search..." aria-label="Example text with button addon" v-model="searchfor.searchData" aria-describedby="button-addon1">
+                        <button class="btn btn-primary" type="button" id="button-addon1">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                     <!-- <div class="input-group input-group-sm p-2">
+                        <select class="form-select" id="inputGroupSelect02" v-model="searchfor.filterDept" @change="actionFilter">
+                            <option :value="''">Choose...</option>
+                            <option v-for="(list, index) in departments" :key="index" :value="list.id">{{ list.description }}</option>
+                        </select>
+                        <label class="input-group-text bg-select"  for="inputGroupSelect02">Department</label>
+                    </div> -->
+                    <div class="input-group input-group-sm p-2">
+                        <select class="form-select" v-model="searchfor.filterType" @change="actionFilter">
+                            <option :value="''">Choose...</option>
+                            <option v-for="(list, index) in typeofpapers" :key="index" :value="list.id">{{ list.description }}</option>
+                        </select>
+                        <label class="input-group-text bg-select">Type of Papers</label>
+                    </div>
+                </div>
+               
                 <div class="table-responsive">
                     
                     <table class="table mb-0">

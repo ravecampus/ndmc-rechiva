@@ -67,6 +67,7 @@ Route::get('/statistic', [StatisticController::class,'statistic']);
 Route::get('/department-stat', [StatisticController::class,'departmentstat']);
 Route::resource('/users', UserController::class);
 Route::put('/users-password/{id}', [UserController::class,'changePassword']);
+Route::put('/change-password/{id}', [UserController::class,'userChangePassword']);
 
 Route::get('/users-faculty/{id}', [UserController::class,'getFaculty']);
 
@@ -77,6 +78,6 @@ Route::resource('/admin-contact', AdminContactController::class);
 Route::get('/faculty-recent', [DocumentController::class, 'recentfaculty']);
 Route::get('/search-list', [DocumentController::class, 'searchList']);
 
-
+Route::post('/upload-profile', [UserController::class, 'uploadProfile']);
 
 

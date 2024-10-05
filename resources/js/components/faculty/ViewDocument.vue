@@ -127,22 +127,15 @@
 
 </script>
 <template>
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="col-md-12 ">
-                <div class="card doc-card">
-                   
-                    <div class="card-body p-2">
-                        <h4 class="text-start m-0">
-                            <span class="bi bi-file-earmark-richtext"></span>
-                            Document
-                        </h4>
-                    </div>
-                </div>
+    <div class="container mt-3 ">
+        <div class="row bg-white p-2 m-1 rounded">
+            <div class="col-md-12">
+                <h4 class="text-start m-0 mb-3">
+                    <span class="bi bi-file-earmark-richtext"></span>
+                    Document
+                </h4>
             </div>
-
-        </div>
-        <div class="row">
+            <hr>
             <div class="col-md-3 col-lg-3">
                 <div class="card doc-card">
                  <div class="side-badge w-auto">
@@ -224,7 +217,11 @@
                     </div>
                 </div>
  
-                <div class="card doc-card mt-5" v-if="docData.status == 1 || docData.status == 2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"> 
+                <div class="card doc-card mt-3" v-if="docData.status == 1 || docData.status == 2">
                     <div class="card-body text-start" v-for="(list, index) in docData.feedback" :key="index">
                         <div class="d-flex flex-start align-items-center">
                             <img class="rounded-circle shadow-1-strong me-3"
@@ -262,7 +259,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

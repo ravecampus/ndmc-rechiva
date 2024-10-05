@@ -34,6 +34,9 @@
     const inform = ref(null)
     let modalinfo = null;
 
+    const resetPass = ref(null)
+    let modalresetpass = null;
+
     onMounted(()=>{
         getData()
         getTypeOfPapers()
@@ -41,6 +44,7 @@
         admicontact();
         thisModalObj = new Modal(modalEle.value);
         modalinfo = new Modal(inform.value);
+        modalresetpass = new Modal(resetPass.value);
     })
 
     const formatDate = (dateString)=>{
@@ -204,6 +208,34 @@
         modalinfo.show();
     }
 
+    const resetPassword = (data)=>{
+        form.first_name = data.first_name
+        form.middle_initial = data.middle_initial
+        form.last_name = data.last_name
+        form.id = data.id
+        modalresetpass.show();
+    }
+
+    const changePassword = ()=>{
+        btnpass.value = "Saving..."
+        axios.put('/api/change-password/'+form.id, form).then((res)=>{
+            toast.fire({
+				icon:'success',
+				title:"User's password has been changed!"
+            })
+            btnpass.value = "Save Changes"
+            modalresetpass.hide()
+            errors.value = []
+            resetform()
+            getData()
+        }).catch((err)=>{
+            btnpass.value = "Save Changes"
+            errors.value = err.response.data.errors
+        })
+    }
+
+    const btnpass = ref("Save Changes")
+
 </script>
 
 
@@ -259,14 +291,14 @@
                         </select>
                         <label class="input-group-text bg-select"  for="inputGroupSelect02">Department</label>
                     </div>
-                    <div class="input-group input-group-sm p-2">
+                    <!-- <div class="input-group input-group-sm p-2">
                         <select class="form-select" id="inputGroupSelect02" v-model="filterData" @change="actionFilter">
                             <option :value="''">Choose...</option>
                             <option :value="2">Admin</option>
                             <option :value="1">Faculty</option>
                         </select>
                         <label class="input-group-text bg-select"  for="inputGroupSelect02">Role</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="table-responsive">
                     
@@ -276,7 +308,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Department</th>
-                                <th>Role</th>
+                                <!-- <th>Role</th> -->
                                 <th>Status</th>
                                 <!-- <th>Date</th> -->
                                 <th class="text-end">Action</th>
@@ -297,7 +329,7 @@
                                 </td>
                                 <td>{{ list.email }}</td>
                                 <td>{{ extractDep(list.department) }}</td>
-                                <td>{{ list.role == 1 ? 'Faculty' :'Admin'}}</td>
+                                <!-- <td>{{ list.role == 1 ? 'Faculty' :'Admin'}}</td> -->
                                 <td>{{ list.activate == 0 ? 'inactive' : 'activated' }}</td>
                               
                                 <!-- <td>{{ formatDate(list.created_at) }}</td> -->
@@ -310,7 +342,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end dd-bg" >
                                             <a href="#" class="dropdown-item dd-item" @click="activateUser(list)">{{ list.activate == 0 && list.role == 1 ?'Activate':'Deactivate' }}</a>
-                                            <!-- <a href="#!" @click="deleteDocs(list)" class="dropdown-item dd-item">Delete </a> -->
+                                            <a href="#" class="dropdown-item dd-item" @click="resetPassword(list)">Reset Password</a>
                                         </div>
                                     </div>
                                 </td>
@@ -367,7 +399,7 @@
                     <input type="text" ref="input" v-model="form.last_name" class="form-control form-control form-control-sm" placeholder="Enter Last name">
                     <span class="text-danger" v-if="errors.last_name">{{errors.last_name[0]}}</span>
                 </div>
-                 <div class="form-group col-6">
+                 <!-- <div class="form-group col-6">
                     <label>Role</label>
                     <select class="form-select form-select-sm" v-model="form.role" @change="adminSelect(form.role)">
                         <option :value="''">Choose...</option>
@@ -375,7 +407,7 @@
                         <option :value="1">Faculty</option>
                     </select>
                     <span class="text-danger" v-if="errors.role">{{errors.role[0]}}</span>
-                </div>
+                </div> -->
                 <div class="form-group col-6" v-if="depview">
                     <label>Department</label>
                     <select class="form-select form-select-sm" v-model="form.department">
@@ -398,7 +430,7 @@
                 </div>
                 <div class="form-group col-6">
                     <label>Password Confirmation</label>
-                    <input type="Pssword" ref="input" v-model="form.password_confirmation" class="form-control form-control form-control-sm" placeholder="Enter Password Confirmation">
+                    <input type="password" ref="input" v-model="form.password_confirmation" class="form-control form-control form-control-sm" placeholder="Enter Password Confirmation">
                     <span class="text-danger" v-if="errors.password_confirmation">{{errors.password_confirmation[0]}}</span>
                 </div>
             </div>
@@ -432,6 +464,35 @@
             </div>
             <div class="modal-footer">
                 <button type="button" @click.prevent="admicontactsave()" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="info" ref="resetPass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start mb-3 row">
+                <div class="fs-5">Please enter new Password</div>
+                <div class="fw-bold"> {{ form.first_name }} {{ form.middle_initial}} {{ form.last_name }}</div>
+                <div class="form-group col-12 mb-2">
+                    <label>Password</label>
+                    <input type="password" ref="input" v-model="form.password" class="form-control form-control form-control-sm" placeholder="Enter Password">
+                    <span class="text-danger" v-if="errors.password">{{errors.password[0]}}</span>
+                </div>
+                <div class="form-group col-12">
+                    <label>Password Confirmation</label>
+                    <input type="password" ref="input" v-model="form.password_confirmation" class="form-control form-control form-control-sm" placeholder="Enter Password Confirmation">
+                    <span class="text-danger" v-if="errors.password_confirmation">{{errors.password_confirmation[0]}}</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" @click.prevent="changePassword()" class="btn btn-primary">{{ btnpass }}</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
             </div>

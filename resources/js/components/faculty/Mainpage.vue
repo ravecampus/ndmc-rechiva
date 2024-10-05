@@ -202,7 +202,7 @@ const showNotification = (data)=>{
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button">
-                            <img class="img-user" :src="'/img/user.png'" alt="">
+                            <img class="img-user rounded-circle" :src="user.image == ''? '/img/user.png' : 'data:'+user.extension+';base64,'+user.image" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end user-menu">
                             <li class="dropdown-item user-li">

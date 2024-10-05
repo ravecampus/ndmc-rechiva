@@ -34,12 +34,12 @@
             file.value = docData.value.document_file
             typeofpaper.value = res.data.typeofpaper
             docFile(file.value)
-            chk(res.data.feedback)
+            chk(res.data)
         })
     }
 
     const chk = (data)=>{
-        return data.length > 0 ? checkFeed.value = true : checkFeed.value = false
+        return data.status == 1 ? checkFeed.value = true : checkFeed.value = false
     }
 
     const formatDate = (dateString)=>{
@@ -165,24 +165,16 @@
 </script>
 <template>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 ">
-                <div class="card doc-card">
-                   
-                    <div class="card-body p-2">
-                        <h4 class="text-start m-0">
-                            <span class="bi bi-file-earmark-richtext"></span>
-                            Document
-                        </h4>
-                        
-                    </div>
-                </div>
+        <div class="row bg-white p-2 m-1 rounded">
+            <div class="col-md-12">
+                <h4 class="text-start m-0 mb-3">
+                    <span class="bi bi-file-earmark-richtext"></span>
+                    Document
+                </h4>
             </div>
-
-        </div>
-        <div class="row">
+             <hr>
             <div class="col-md-3 col-lg-3">
-                <div class="card doc-card">
+                <div class="card doc-card custom-border">
                  <div class="side-badge w-auto">
                      <genstatus :uploadDataView="docData"></genstatus>
                  </div>
@@ -230,7 +222,17 @@
                             <pdfViewer :pdfFile="pdffile" @loaded="handleLoaded"></pdfViewer>
                         </div>
                         <div class="info-doc" v-show="!viewpdf">
+                            <div class="d-flex justify-content-between">
                             <h5 class="head-title text-start">{{ docData.title }}</h5>
+                            <div class="btn-group mt-3" v-if="!checkFeed">
+                                <button type="button" @click.prevent="sendApproval()" class="btn btn-primary btn-sm">
+                                    Approve
+                                </button>
+                                <button type="button" @click.prevent="sendDisApprove()" class="btn btn-warning btn-sm">
+                                    Disapprove
+                                </button>
+                            </div>
+                            </div>
                             <div class="abstract">
                                 <div class="blockquote " :class="trun ? 'text-truncate-message':''" style="max-width: 100em;" v-if="docData.upload_type == 0">
                                 <small class="text-primary">Abstract: </small> 
@@ -269,7 +271,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="card doc-card mt-5">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card doc-card mt-3">
                     <div class="card-body text-start" v-for="(list, index) in docData.feedback" :key="index">
                         <div class="d-flex flex-start align-items-center">
                             <img class="rounded-circle shadow-1-strong me-3"
@@ -310,16 +317,9 @@
                             <textarea v-model="form.message" class="form-control w-75" placeholder="Enter Message"></textarea>
                             <span class="text-danger" v-if="errors.message">{{errors.message[0]}}</span>
                         </div>
-                        <div class="btn-group mt-3" v-if="!checkFeed">
-                            <button type="button" @click.prevent="sendApproval()" class="btn btn-primary">
-                                Approve
-                            </button>
-                            <button type="button" @click.prevent="sendDisApprove()" class="btn btn-warning">
-                                Disapprove
-                            </button>
-                        </div>
+                   
 
-                        <div class="btn-group mt-3" v-if="checkFeed">
+                        <div class="btn-group mt-3">
                             <button type="button" @click.prevent="sendMessage()" class="btn btn-primary">
                               <i class="bi bi-send"></i>  {{btnSend}}
                             </button>
@@ -327,7 +327,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -338,9 +337,13 @@
         background-color: #fff;
         border: 1px solid transparent;
         border-radius: 4px;
-         border:#dfdfdf6b solid 1px;
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        //  border:#dfdfdf6b solid 1px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+    }
+
+    .custom-border{
+        border:#dfdfdf6b solid 1px;
     }
     .img-pdf{
         // width: 100%;
