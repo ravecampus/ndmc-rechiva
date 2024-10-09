@@ -49,24 +49,43 @@ class DocumentController extends Controller
         $user = Auth::user();
 
         if(json_decode($request->upload_type)){
-            $request->validate([
-                'title'=>'required',
-                // 'college_department'=>'required',
-                'type_of_paper'=>'required',
-                'issue_numbers'=>'required',
-                'doi'=>'required',
-                'publisher'=>'required',
-                'publication_date'=>'required',
-                'authors'=>'required|array',
-                'authors.*' =>'required|string',
-                'abstract'=>'required',
-                'keywords'=>'required|array',
-                'keywords.*'=>'required|string',
-            ]);
+      
+
+            if($user->role == 2){
+                $request->validate([
+                    'title'=>'required',
+                    'college_department'=>'required',
+                    'type_of_paper'=>'required',
+                    'issue_numbers'=>'required',
+                    'doi'=>'required',
+                    'publisher'=>'required',
+                    'publication_date'=>'required',
+                    'authors'=>'required|array',
+                    'authors.*' =>'required|string',
+                    'abstract'=>'required',
+                    'keywords'=>'required|array',
+                    'keywords.*'=>'required|string',
+                ]);
+            }else{
+                $request->validate([
+                    'title'=>'required',
+                    // 'college_department'=>'required',
+                    'type_of_paper'=>'required',
+                    'issue_numbers'=>'required',
+                    'doi'=>'required',
+                    'publisher'=>'required',
+                    'publication_date'=>'required',
+                    'authors'=>'required|array',
+                    'authors.*' =>'required|string',
+                    'abstract'=>'required',
+                    'keywords'=>'required|array',
+                    'keywords.*'=>'required|string',
+                ]);
+            }
          
             $doc = Document::create([
                 'title' => $request->title,
-                'department_id' => $user->department_id,
+                'department_id' => $user->role == 2 ?$request->college_department : $user->department_id,
                 'upload_type' => 0,
                 'type_of_paper_id' => $request->type_of_paper,
                 'issue_numbers' => $request->issue_numbers,
@@ -76,6 +95,7 @@ class DocumentController extends Controller
                 'user_id' => $user->id,
                 'publisher' => $request->publisher,
             ]);
+
     
                 foreach (json_decode($request->keywords[0]) as $word) {
                     $kyw = Keyword::create([

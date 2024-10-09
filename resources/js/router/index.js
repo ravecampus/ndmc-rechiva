@@ -29,6 +29,7 @@ import Account from '../components/admin/Account.vue'
 import RequestDoc from '../components/admin/ViewRequestDoc.vue'
 import Users from '../components/admin/User.vue'
 import Newly from '../components/admin/Newly.vue'
+import AdminUpload from '../components/admin/UploadAdmin.vue'
 
 import InputTag from '../components/AuthorFilter.vue'
 
@@ -42,6 +43,7 @@ import FacultyArchived from '../components/faculty/Archived.vue'
 import FacultyCanceled from '../components/faculty/Canceled.vue'
 import FacultyDashboard from '../components/faculty/Dashboard.vue'
 import MyAccount from '../components/faculty/Myaccount.vue'
+import EditUpload from '../components/faculty/EditUpload.vue'
 
 const routes = [
     {
@@ -170,8 +172,17 @@ const routes = [
                 path:'user/:id',
                 name:'admin.user',
                 component: Newly,
+            },
+            {
+                path:'upload-document',
+                name:'admin.upload_p',
+                component: AdminUpload,
+            },
+            {
+                path:'upload-document-archive',
+                name:'admin.upload_a',
+                component: AdminUpload,
             }
-            
 
         ]
     },
@@ -195,6 +206,12 @@ const routes = [
                 name:'faculty.upload_a',
                 component: Upload,
             },
+            {
+                path:'upload-edit-publish/:id',
+                name:'faculty.editupload_p',
+                component: EditUpload,
+            },
+          
             {
                 path:'documents',
                 name:'faculty.documents',
@@ -282,7 +299,9 @@ const adminRoutes = [
     'admin.canceled',
     'notfound',
     'admin.users',
-    'admin.user'
+    'admin.user',
+    'admin.upload_p',
+    'admin.upload_a',
     
 ];
 
@@ -305,7 +324,8 @@ const facultyRoutes = [
     'faculty.canceled',
     'faculty.archived',
     'faculty.myaccount',
-    'faculty.dashboard'
+    'faculty.dashboard',
+    'faculty.editupload_p'
     
 ];
 

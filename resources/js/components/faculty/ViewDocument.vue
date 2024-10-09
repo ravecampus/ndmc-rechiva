@@ -38,7 +38,7 @@
 
     const formatDate = (dateString)=>{
 		const date = dayjs(dateString)
-		return date.format('MMMM d, YYYY')
+		return date.format('MMMM D, YYYY')
     }
     
     const downloadFile = (data)=>{
@@ -127,7 +127,7 @@
 
 </script>
 <template>
-    <div class="container mt-3 ">
+    <div class="container mt-3 mb-5">
         <div class="row bg-white p-2 m-1 rounded">
             <div class="col-md-12">
                 <h4 class="text-start m-0 mb-3">
@@ -136,8 +136,8 @@
                 </h4>
             </div>
             <hr>
-            <div class="col-md-3 col-lg-3">
-                <div class="card doc-card">
+            <div class="col-md-4 col-lg-4">
+                <div class="card doc-card custom-border">
                  <div class="side-badge w-auto">
                      <genstatus :uploadDataView="docData"></genstatus>
                  </div>
@@ -152,6 +152,19 @@
                             <strong>{{ typeofpaper.description }}</strong>
                             <genstatus :statusData="docData.status"></genstatus>
                         </div>
+                        <hr class="p-0" v-if="docData.upload_type == 0">
+                        <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold "> DOI:</span> {{ docData.doi}}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
+                        <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold"> Volume/Issue no.:</span> {{ docData.doi}}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
+                         <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold"> Publication:</span> {{ docData.publisher }}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
                     </div>
                     <div class="card-footer bg-white p-0">
                         <a href="#" class="link-download" @click="downloadFile(file)">
@@ -176,7 +189,7 @@
                 </div>
                 
             </div>
-            <div class="col-md-9 col-lg-9">
+            <div class="col-md-8 col-lg-8">
                 
                 <div class="card doc-card">
                     <div class="card-body">
@@ -191,12 +204,12 @@
                                 <small class="text-primary">Abstract: </small> 
                                     {{ docData.abstract }}
                                 </blockquote>
-                                <div class="link-doi mt-3" v-if="docData.upload_type == 0">
+                                <!-- <div class="link-doi mt-3" v-if="docData.upload_type == 0">
                                     <button type="button" class="btn btn-success" @click="showLink(docData.doi)">
                                         <i class="bi bi-link-45deg"></i>
                                         Visit >>
                                     </button>
-                                </div>
+                                </div> -->
                                <hr>
                                 <div class="d-flex flex-wrap pub-date" v-if="docData.upload_type == 0">
                                     <span class="label">
@@ -221,11 +234,12 @@
         </div>
         <div class="row">
             <div class="col-md-12"> 
-                <div class="card doc-card mt-3" v-if="docData.status == 1 || docData.status == 2">
+                <div class="card doc-card mt-3">
                     <div class="card-body text-start" v-for="(list, index) in docData.feedback" :key="index">
                         <div class="d-flex flex-start align-items-center">
                             <img class="rounded-circle shadow-1-strong me-3"
-                                :src="'/img/user.png'" alt="avatar" width="60"
+                                  :src="list.sender.image == null ? '/img/user.png' : 'data:'+list.sender.extension+';base64,'+list.sender.image"
+                                alt="avatar" width="60"
                                 height="60" />
                             <div>
                                 <h6 class="fw-bold text-primary mb-1">
@@ -264,14 +278,20 @@
     </div>
 </template>
 <style lang="scss" scoped>
+    .txt-grey{
+        color: #868686;
+    }
     .doc-card{
         margin-bottom: 20px;
         background-color: #fff;
         border: 1px solid transparent;
         border-radius: 4px;
-         border:#dfdfdf6b solid 1px;
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        //  border:#dfdfdf6b solid 1px;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+    }
+    .custom-border{
+        border:#dfdfdf6b solid 1px;
     }
     .img-pdf{
         // width: 100%;

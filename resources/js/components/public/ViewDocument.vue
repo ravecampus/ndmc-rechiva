@@ -31,7 +31,7 @@
 
     const formatDate = (dateString)=>{
 		const date = dayjs(dateString)
-		return date.format('MMMM d, YYYY')
+		return date.format('MMMM D, YYYY')
     }
     
     const downloadFile = (data)=>{
@@ -98,7 +98,7 @@
                 </h4>
             </div>
             <hr>
-            <div class="col-md-3 col-lg-3">
+            <div class="col-md-4 col-lg-4">
                
                 <div class="card doc-card custom-border">
                  <div class="side-badge w-auto">
@@ -115,6 +115,19 @@
                             <strong>{{ typeofpaper.description }}</strong>
                             <!-- <genstatus :statusData="docData.status"></genstatus> -->
                         </div>
+                        <hr class="p-0" v-if="docData.upload_type == 0">
+                        <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold"> DOI:</span> {{ docData.doi}}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
+                        <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold"> Volume/Issue no.:</span> {{ docData.doi}}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
+                         <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold"> Publication:</span> {{ docData.publisher }}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
                     </div>
                     <div class="card-footer bg-white p-0">
                         <a href="#" class="link-download" @click="downloadFile(file)">
@@ -139,7 +152,7 @@
                 </div>
                 
             </div>
-            <div class="col-md-9 col-lg-9">
+            <div class="col-md-8 col-lg-8">
                 
                 <div class="card doc-card">
                     <div class="card-body">
@@ -155,10 +168,10 @@
                                     {{ docData.abstract }}
                                 </blockquote>
                                 <div class="link-doi mt-3" v-if="docData.upload_type == 0">
-                                    <button type="button" class="btn btn-success" @click="showLink(docData.doi)">
+                                    <!-- <button type="button" class="btn btn-success" @click="showLink(docData.doi)">
                                         <i class="bi bi-link-45deg"></i>
                                         Visit >>
-                                    </button>
+                                    </button> -->
                                 </div>
                                <hr>
                                 <div class="d-flex flex-wrap pub-date" v-if="docData.upload_type == 0">
@@ -228,7 +241,9 @@
             
         }
     }
-
+    .txt-grey{
+        color: #868686;
+    }
     .side-badge{
         padding: 4px 15px;
         text-align: start;

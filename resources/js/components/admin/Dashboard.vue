@@ -47,12 +47,13 @@ const getAuthUser = ()=>{
 const getNotification = ()=>{
     axios.get('/api/notification').then((res)=>{
         notifications.value = res.data
+        console.log(res.data)
     })
 }
 
 const extractSender = (data)=>{
     if(data != undefined){
-        return data.first_name+" "+data.last_name
+        return data.first_name+" "+(data.last_name != null ? data.last_name : "")
     }
 }
 
@@ -106,6 +107,16 @@ const showNotification = (data)=>{
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                    <li class="nav-item nav-cus mb-nav">
+                        <router-link class="nav-link" :to="{name:'admin.upload_p'}">
+                                <span class="bi bi-plus-circle"></span> Publish
+                        </router-link>
+                    </li>
+                     <li class="nav-item nav-cus mb-nav">
+                        <router-link class="nav-link" :to="{name:'admin.upload_a'}">
+                                <span class="bi bi-plus-circle"></span> Archive
+                        </router-link>
+                    </li>
                      <li class="nav-item nav-cus cus-pad dropdown">
                         <a class="nav-link" href="#">
                             <i class="bi bi-bell-fill position-relative notify"> 
@@ -128,7 +139,9 @@ const showNotification = (data)=>{
                                     <div class="notification">
                                         <div class="d-flex flex-start align-items-center">
                                             <img class="rounded-circle shadow-1-strong me-3"
-                                                :src="'/img/user.png'" alt="avatar" width="40"
+                                       
+                                                :src="list.sender.image == null ? '/img/user.png' : 'data:'+list.sender.extension+';base64,'+list.sender.image"
+                                                alt="avatar" width="40"
                                                 height="40" />
                                             <div class="arrow text-success w-100 position-absolute text-end">
                                                 <i class="bi bi-arrow-right-circle icon-mar"></i>

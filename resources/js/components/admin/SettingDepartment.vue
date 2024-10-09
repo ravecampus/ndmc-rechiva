@@ -96,6 +96,7 @@
 		editMode.value = true
 		axios.get(`/api/setting-department/${data.id}`).then((res)=>{
 			form.description = res.data.description
+			form.abbreviation = res.data.abbreviation
 			form.id = res.data.id
 
 		})

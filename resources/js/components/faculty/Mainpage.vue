@@ -49,7 +49,7 @@ const getNotification = ()=>{
 
 const extractSender = (data)=>{
     if(data != undefined){
-        return data.first_name+" "+data.last_name
+        return data.first_name+" "+(data.last_name != null ? data.last_name : "")
     }
 }
 

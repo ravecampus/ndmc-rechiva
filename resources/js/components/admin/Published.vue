@@ -90,7 +90,7 @@
     }
     const userExtract = (data)=>{
         if(data != undefined){
-             return data.first_name+ " "+ data.last_name
+           return data.first_name+ " "+ (data.last_name==null? "" : data.last_name)
         }
     }
 
@@ -159,7 +159,7 @@
                                        <strong class="text-primary"> {{ list.title }} </strong>
                                     </div>
                                 </td>
-                                <td>{{ list.department.description}}</td>
+                                <td>{{ list.department != null ? list.department.description :'' }}</td>
                                 <td>{{ userExtract(list.userdoc) }}</td>
                                 <td>{{ extractTOP(list) }}</td>
                                 <td>{{ formatDate(list.created_at) }}</td>
