@@ -215,7 +215,7 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end dd-bg" style="">
                                             <router-link :to="{name:'faculty.document', params:{'id':list.id}}" class="dropdown-item dd-item">View Data </router-link>
-                                            <!-- <router-link :to="{name:'faculty.editupload_p', params:{'id':list.id}}" class="dropdown-item dd-item">Edit </router-link> -->
+                                            <router-link :to="{name:'faculty.editupload_p', params:{'id':list.id}}" class="dropdown-item dd-item">Edit </router-link>
                                             <!-- <a href="#" @click="downLoadDoc(list.document_file)" class="dropdown-item dd-item">Download files</a> -->
                                             <a href="#!" @click="deleteDocs(list)" class="dropdown-item dd-item">Delete </a>
                                         </div>

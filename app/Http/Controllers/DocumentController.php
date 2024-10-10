@@ -99,7 +99,7 @@ class DocumentController extends Controller
     
                 foreach (json_decode($request->keywords[0]) as $word) {
                     $kyw = Keyword::create([
-                        'description'=>$word->name,
+                        'description'=>$word->description,
                         'document_id'=>$doc->id,
     
                     ]);

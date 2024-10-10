@@ -213,6 +213,10 @@
                            <span class="fw-bold"> Publication:</span> {{ docData.publisher }}
                         </div>
                         <hr class="mt-0 p-0" v-if="docData.upload_type == 0"> 
+                        <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                           <span class="fw-bold"> Department:</span> {{ docData.department != null ? docData.department.description : ""}}
+                        </div>
+                        <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
                     </div>
                     <div class="card-footer bg-white p-0">
                         <a href="#" class="link-download" @click="downloadFile(file)">
@@ -279,7 +283,7 @@
                                     </span>
                                     <div class="content"> {{ formatDate(docData.publication_date) }}</div>
                                     <div class="d-flex position-absolute custom-w justify-content-end">
-                                      
+                                       <span class="key-title">Keywords:</span>
                                         <span class="badge bg-success me-1" 
                                         v-for="(list, index) in docData.keywords" :key="index" >{{ list.description }}</span>
                                         
@@ -423,6 +427,11 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+     .key-title{
+        font-size: 12px;
+        font-style: italic;
+        margin-right: .5rem;
     }
     
 </style>

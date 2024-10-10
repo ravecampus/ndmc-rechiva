@@ -5,28 +5,16 @@
     import dayjs from "dayjs"
 
     import textkeyword from "../InputTag.vue"
-    import author from "../AuthorFilter.vue"
+    import author from "../AuthorEdit.vue"
     import pdfViewer from "../PDFViewer.vue"
 
     // import { useBase64 } from '@vueuse/core'
 
     // const listInput = ref([])
 
-    const format = (d) => {
-        const day =("0" + d.getDate()).slice(-2);
-        const month = ("0"+(d.getMonth()+1)).slice(-2);
-        const year =  d.getFullYear();
-
-        return  month+ "/" + day  + "/" + year;
-    }
-
-    onMounted(()=>{
-        ListTypeofPapers()
-        ListofDepartment()
-        setheader()
-    })
     const filename = ref(null)
     const authors = ref([])
+    const authors_ = ref([])
     const keywords = ref([])
  
     const pdfFile = ref({})
@@ -41,6 +29,23 @@
 
     const viewpdf = ref(false)
 
+    const format = (d) => {
+        const day =("0" + d.getDate()).slice(-2);
+        const month = ("0"+(d.getMonth()+1)).slice(-2);
+        const year =  d.getFullYear();
+
+        return  month+ "/" + day  + "/" + year;
+    }
+
+    onMounted(()=>{
+        const id = route.params.id
+        getDocs(id)
+        ListTypeofPapers()
+        ListofDepartment()
+        setheader()
+    })
+
+   
     watch(route, ()=>{
         setheader()
     })
@@ -75,14 +80,31 @@
         abstract:"",
         doi:"",
         publisher:"",
+        keywords:[],
+        authors:[],
         })
 	const form = reactive(fdata())
     const resetform = () => Object.assign(form, fdata())
     
-    const btnsave = ref("submit")
+    const btnsave = ref("save changes")
     const btnenable = ref(false)
     const setPdf = ref("")
-    
+
+     const getDocs = (id)=>{
+        axios.get('/api/document/'+id).then((res)=>{
+            let data = res.data
+            authors_.value = data.authors
+            keywords.value = data.keywords
+            form.id = data.id
+            form.title = data.title
+            form.type_of_paper = data.type_of_paper_id
+            form.publication_date = data.publication_date
+            form.abstract = data.abstract
+            form.doi = data.doi
+            form.issue_numbers = data.issue_numbers
+            form.publisher = data.publisher
+        })
+    }
 
     const openFile = (e)=>{
         let data = e.dataTransfer.files;
@@ -91,19 +113,17 @@
     }
 
     const clickFile = ()=>{
-        
         let data = document.querySelector('.fileupload').files
         filterData(data)
         loadPdf(data)
     }
     const filterData = (data)=>{
-            if(['application/pdf'].includes(data[0].type)){
-                 pdfFile.value = data[0]
-              
-                 errs.value = false;
-            }else{
-                errs.value = true;
-            }
+        if(['application/pdf'].includes(data[0].type)){
+                pdfFile.value = data[0]
+                errs.value = false;
+        }else{
+            errs.value = true;
+        }
         enableButton()
     }
 
@@ -127,51 +147,58 @@
     }
 
     const keyInput = (data)=>{
-        formData.delete("keywords[]")
-        keywords.value = data
+        form.keywords = data
+        // formData.delete("keywords[]")
+        // keywords.value = data
     }
     const loadAuthor = (data)=>{
-       formData.delete("authors[]")
-       authors.value = data
+        form.authors = data
+    //    formData.delete("authors[]")
+    //    authors.value = data
+
     }
 
-    const submitData = ()=>{
-        btnsave.value = "processing..."
-        formData.append('upload_type',uploadtype.value)
-        formData.append('file',pdfFile.value)
-        formData.append('authors[]', authors.value.length > 0 ? JSON.stringify(authors.value) : [])
-        formData.append('keywords[]', keywords.value.length > 0 ? JSON.stringify(keywords.value): [])
-        formData.append('title',form.title)
-        formData.append('college_department',form.college_department)
-        formData.append('type_of_paper',form.type_of_paper)
-        formData.append('abstract',form.abstract)
-        formData.append('issue_numbers',form.issue_numbers)
-        formData.append('publication_date',form.publication_date =="" ? "" :  format(form.publication_date))
-        formData.append('doi',form.doi)
-        formData.append('publisher',form.publisher)
-        axios.post('/api/document', formData,
-                {
-                     headers: {
-                        'Content-Type': 'multipart/form-data'
-                    },
-                }).then((res)=>{
-                    btnsave.value = "submit"
-                    // filesList.value = []
-                    resetform()
-                    formData.delete("authors[]")
-                    formData.delete("keywords[]")
-                    toast.fire({
-                        icon:'success',
-                        title:'File Documents Uploaded Successfully!'
-                    })
-                    router.push('/faculty/documents')
-			        errors.value = []
-                }).catch((err)=>{
-                    errors.value = err.response.data.errors
-                    // console.log(errors.value)
-			        btnsave.value = "submit"
-                })
+    const saveChanges = ()=>{
+        console.log(form)
     }
+
+    // const submitData = ()=>{
+    //     btnsave.value = "processing..."
+    //     formData.append('upload_type',uploadtype.value)
+    //     formData.append('file',pdfFile.value)
+    //     formData.append('authors[]', authors.value.length > 0 ? JSON.stringify(authors.value) : [])
+    //     formData.append('keywords[]', keywords.value.length > 0 ? JSON.stringify(keywords.value): [])
+    //     formData.append('title',form.title)
+    //     formData.append('college_department',form.college_department)
+    //     formData.append('type_of_paper',form.type_of_paper)
+    //     formData.append('abstract',form.abstract)
+    //     formData.append('issue_numbers',form.issue_numbers)
+    //     formData.append('publication_date',form.publication_date =="" ? "" :  format(form.publication_date))
+    //     formData.append('doi',form.doi)
+    //     formData.append('publisher',form.publisher)
+    //     axios.post('/api/document', formData,
+    //             {
+    //                  headers: {
+    //                     'Content-Type': 'multipart/form-data'
+    //                 },
+    //             }).then((res)=>{
+    //                 btnsave.value = "save changes"
+    //                 // filesList.value = []
+    //                 resetform()
+    //                 formData.delete("authors[]")
+    //                 formData.delete("keywords[]")
+    //                 toast.fire({
+    //                     icon:'success',
+    //                     title:'File Documents Uploaded Successfully!'
+    //                 })
+    //                 router.push('/faculty/documents')
+	// 		        errors.value = []
+    //             }).catch((err)=>{
+    //                 errors.value = err.response.data.errors
+    //                 // console.log(errors.value)
+	// 		        btnsave.value = "save changes"
+    //             })
+    // }
 
     const preventUpload = ()=>{
         errs.value = false
@@ -192,13 +219,15 @@
     }
 
     const loadPdf = (data)=>{
-      
       setPdf.value = window.URL.createObjectURL(data[0])
     }
 
     const viewReport = ()=>{
         viewpdf.value = !viewpdf.value
     }
+
+   
+
 </script>
 
 <template>
@@ -216,7 +245,7 @@
                 <DropZone @drop="openFile" :filePdf="pdfFile" @dragenter.prevent="preventUpload"  :class="{'is_error':errs}" @removeFile="removeFile"  @change="clickFile"></DropZone>
             </div>
             <div class="col-md-9">
-                <div class="card text-start" >
+                <div class="card text-start" v-if="form.id != undefined">
                         <div class="card-header bg-primary d-flex">
                          <strong> Form</strong>
                          <button type="button" v-if="setPdf != ''" @click="viewReport" class="btn btn-outline-success ms-auto">
@@ -246,7 +275,7 @@
                             
                             <div class="form-group mb-3 col-6">
                                 <label>Authors</label>
-                                <author :urlString="'/api/setting-author'" @loadFilter="loadAuthor"></author>
+                                <author  :urlString="'/api/setting-author'" :authors="authors_" @loadFilter="loadAuthor"></author>
                                 <!-- <input type="text" v-model="form.authors" class="form-control form-control-sm" placeholder="Enter Title"> -->
                                 <span class="text-danger" v-if="errors['authors.0']">{{errors["authors.0"][0].replace(".0", "")}}</span>
                             </div>
@@ -272,7 +301,7 @@
                             </div>
                             <div class="form-group mb-3 col-6" v-if="uploadtype">
                                 <label>Keywords:  ...use Comma Sign to seperate words </label>
-                                <textkeyword @showData="keyInput"></textkeyword>
+                                <textkeyword @showData="keyInput" :keywords="keywords"></textkeyword>
                                 <!-- <input type="text" v-model="form.authors" class="form-control form-control-sm" placeholder="Enter Title"> -->
                                 <span class="text-danger" v-if="errors['keywords.0']">{{errors["keywords.0"][0].replace(".0", "")}}</span>
                                
@@ -284,7 +313,7 @@
                             </div>
             
                             <div class="btn-group btn-sm mt-3">
-                                <button type="button" v-if="btnenable" @click.prevent="submitData" class="btn btn-primary">{{ btnsave}}</button>
+                                <button type="button" @click.prevent="saveChanges()" class="btn btn-primary">{{ btnsave}}</button>
         
                             </div>
                         </div>

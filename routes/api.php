@@ -15,6 +15,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminContactController;
+use App\Http\Controllers\DocumentAuthorController;
 
 
 /*
@@ -79,5 +80,7 @@ Route::get('/faculty-recent', [DocumentController::class, 'recentfaculty']);
 Route::get('/search-list', [DocumentController::class, 'searchList']);
 
 Route::post('/upload-profile', [UserController::class, 'uploadProfile']);
+Route::resource('/doc-author', DocumentAuthorController::class);
+Route::delete('/doc-keyword/{id}', [DocumentAuthorController::class,'keyword']);
 
 

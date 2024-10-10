@@ -86,7 +86,7 @@ class PublicDocumentController extends Controller
      */
     public function show(string $id)
     {
-        $doc = Document::with('document_file', 'keywords', 'authors', 'typeofpaper')->where('status', 1)->where('upload_type', 0)->find($id);
+        $doc = Document::with('document_file', 'keywords', 'authors', 'typeofpaper', 'department')->where('status', 1)->where('upload_type', 0)->find($id);
         return response()->json($doc, 200);
     }
 
