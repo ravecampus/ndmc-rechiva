@@ -1,7 +1,7 @@
 <script setup>
     import { ref, reactive, watch, onMounted } from "vue"
     import { useRouter, useRoute, viewDepthKey } from "vue-router"
-    import DropZone from "./SingleDrop.vue"
+    import DropZone from "./EditDrop.vue"
     import dayjs from "dayjs"
 
     import textkeyword from "../InputTag.vue"
@@ -82,6 +82,8 @@
         publisher:"",
         keywords:[],
         authors:[],
+        upload_type:"",
+        document_file:{},
         })
 	const form = reactive(fdata())
     const resetform = () => Object.assign(form, fdata())
@@ -103,6 +105,10 @@
             form.doi = data.doi
             form.issue_numbers = data.issue_numbers
             form.publisher = data.publisher
+            form.keywords = data.keywords
+            form.authors = data.authors
+            form.upload_type = data.upload_type
+            form.document_file = data.document_file
         })
     }
 
@@ -148,57 +154,51 @@
 
     const keyInput = (data)=>{
         form.keywords = data
-        // formData.delete("keywords[]")
-        // keywords.value = data
     }
     const loadAuthor = (data)=>{
         form.authors = data
-    //    formData.delete("authors[]")
-    //    authors.value = data
-
     }
 
     const saveChanges = ()=>{
-        console.log(form)
+        btnsave.value = "processing..."
+        axios.put('/api/document/'+form.id, form).then((res)=>{
+            toast.fire({
+                icon:'success',
+                title:'Document modefied Successfully!'
+            })
+            // router.push('/faculty/documents')
+            router.push('/faculty/documents')
+            errors.value = []
+        }).catch((err)=>{
+            errors.value = err.response.data.errors
+			btnsave.value = "save changes"
+        })
     }
 
-    // const submitData = ()=>{
-    //     btnsave.value = "processing..."
-    //     formData.append('upload_type',uploadtype.value)
-    //     formData.append('file',pdfFile.value)
-    //     formData.append('authors[]', authors.value.length > 0 ? JSON.stringify(authors.value) : [])
-    //     formData.append('keywords[]', keywords.value.length > 0 ? JSON.stringify(keywords.value): [])
-    //     formData.append('title',form.title)
-    //     formData.append('college_department',form.college_department)
-    //     formData.append('type_of_paper',form.type_of_paper)
-    //     formData.append('abstract',form.abstract)
-    //     formData.append('issue_numbers',form.issue_numbers)
-    //     formData.append('publication_date',form.publication_date =="" ? "" :  format(form.publication_date))
-    //     formData.append('doi',form.doi)
-    //     formData.append('publisher',form.publisher)
-    //     axios.post('/api/document', formData,
-    //             {
-    //                  headers: {
-    //                     'Content-Type': 'multipart/form-data'
-    //                 },
-    //             }).then((res)=>{
-    //                 btnsave.value = "save changes"
-    //                 // filesList.value = []
-    //                 resetform()
-    //                 formData.delete("authors[]")
-    //                 formData.delete("keywords[]")
-    //                 toast.fire({
-    //                     icon:'success',
-    //                     title:'File Documents Uploaded Successfully!'
-    //                 })
-    //                 router.push('/faculty/documents')
-	// 		        errors.value = []
-    //             }).catch((err)=>{
-    //                 errors.value = err.response.data.errors
-    //                 // console.log(errors.value)
-	// 		        btnsave.value = "save changes"
-    //             })
-    // }
+    const submitData = ()=>{
+        console.log("hello")
+        // btnsave.value = "processing..."
+        formData.append('file',pdfFile.value)
+        formData.append('id',form.id)
+        axios.post('/api/document-upload', formData,
+                {
+                     headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                }).then((res)=>{
+                    const id = route.params.id
+                    getDocs(id)
+                    toast.fire({
+                        icon:'success',
+                        title:'File Documents Uploaded Successfully!'
+                    })
+                    // router.push('/faculty/documents')
+			        // errors.value = []
+                }).catch((err)=>{
+                    // errors.value = err.response.data.errors
+			       
+                })
+    }
 
     const preventUpload = ()=>{
         errs.value = false
@@ -242,7 +242,8 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-3">
                 
-                <DropZone @drop="openFile" :filePdf="pdfFile" @dragenter.prevent="preventUpload"  :class="{'is_error':errs}" @removeFile="removeFile"  @change="clickFile"></DropZone>
+                <DropZone @drop="openFile" @saveUpload="submitData" :dbpdf="form.document_file" :filePdf="pdfFile" @dragenter.prevent="preventUpload"  :class="{'is_error':errs}" @removeFile="removeFile"  @change="clickFile"></DropZone>
+               
             </div>
             <div class="col-md-9">
                 <div class="card text-start" v-if="form.id != undefined">
@@ -303,7 +304,7 @@
                                 <label>Keywords:  ...use Comma Sign to seperate words </label>
                                 <textkeyword @showData="keyInput" :keywords="keywords"></textkeyword>
                                 <!-- <input type="text" v-model="form.authors" class="form-control form-control-sm" placeholder="Enter Title"> -->
-                                <span class="text-danger" v-if="errors['keywords.0']">{{errors["keywords.0"][0].replace(".0", "")}}</span>
+                                <span class="text-danger" v-if="errors.keywords">{{errors.keywords[0]}}</span>
                                
                             </div>
                               <div class="form-group mb-3 col-12" v-if="uploadtype">

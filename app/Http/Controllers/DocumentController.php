@@ -8,6 +8,7 @@ use App\Models\DocumentFile;
 use App\Models\DocumentAuthor;
 use App\Models\Notification;
 use App\Models\Keyword;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,7 +111,7 @@ class DocumentController extends Controller
                         'first_name'=>$author->first_name,
                         'middle_name'=>$author->middle_name,
                         'last_name'=>$author->last_name,
-                        'author_id'=>$author->id,
+                        'author_id'=>$author->author_id,
                         'document_id'=>$doc->id
                     ]);
                 }
@@ -160,7 +161,7 @@ class DocumentController extends Controller
                         'first_name'=>$author->first_name,
                         'middle_name'=>$author->middle_name,
                         'last_name'=>$author->last_name,
-                        'author_id'=>$author->id,
+                        'author_id'=>$author->author_id,
                         'document_id'=>$doc->id
                     ]);
                 }
@@ -215,11 +216,72 @@ class DocumentController extends Controller
      */
     public function update(Request $request, string $id)
     {
+      
+        $user = Auth::user();
+        if($user->role == 2){
+            $request->validate([
+                'title'=>'required',
+                'college_department'=>'required',
+                'type_of_paper'=>'required',
+                'issue_numbers'=>'required',
+                'doi'=>'required',
+                'publisher'=>'required',
+                'publication_date'=>'required',
+                'authors'=>'required|array',
+                'authors.*' =>'required',
+                'abstract'=>'required',
+                'keywords'=>'required|array',
+                'keywords.*'=>'required',
+            ]);
+        }else{
+            $request->validate([
+                'title'=>'required',
+                // 'college_department'=>'required',
+                'type_of_paper'=>'required',
+                'issue_numbers'=>'required',
+                'doi'=>'required',
+                'publisher'=>'required',
+                'publication_date'=>'required',
+                'authors'=>'required|array',
+                'authors.*' =>'required',
+                'abstract'=>'required',
+                'keywords'=>'required|array',
+                'keywords.*'=>'required',
+            ]);
+        }
+     
         $doc = Document::find($id);
         $doc->title = $request->title;
-        $doc->description = $request->description;
-
+        $doc->abstract = $request->abstract;
+        $doc->type_of_paper_id = $request->type_of_paper;
+        $doc->issue_numbers = $request->type_of_paper;
+        $doc->doi = $request->doi;
+        $doc->publisher = $request->publisher;
+        $doc->publication_date = new Carbon($request->publication_date);
         $doc->save();
+        
+        foreach ($request->keywords as $word) {
+            if(!isset($word['id'])){
+                $kyw = Keyword::create([
+                    'description'=>$word['description'],
+                    'document_id'=>$doc->id,
+                ]);
+            }
+        }
+
+        foreach ($request->authors as $author) {
+            if(!isset($author['id'])){
+                // dd($author['first_name']);
+                $kyw = DocumentAuthor::create([
+                    'first_name'=> $author['first_name'],
+                    'middle_name'=>$author['middle_name'],
+                    'last_name'=>$author['last_name'],
+                    'author_id'=>$author['author_id'],
+                    'document_id'=>$doc->id
+                ]);
+            }
+        }
+
         return response()->json($doc, 200);
 
     }

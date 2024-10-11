@@ -38,7 +38,7 @@
                     emit('showData', tags.value)
                      Swal.fire({
                         title: "Deleted!",
-                        text: "Author has been deleted.",
+                        text: "Keyword has been deleted.",
                         icon: "success",
                         confirmButtonColor: "#26884b",
                         

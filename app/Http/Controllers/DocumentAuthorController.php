@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DocumentAuthor;
 use App\Models\Keyword;
+use App\Models\DocumentFile;
 
 class DocumentAuthorController extends Controller
 {
@@ -73,5 +74,23 @@ class DocumentAuthorController extends Controller
         $data->delete();
 
         return response()->json($data, 200);
+    }
+
+    public function docUpload(Request $request){
+        $file = $request->file('file');
+        $image = base64_encode(file_get_contents($file));
+        $mimeType = $file->getClientMimeType();
+        $size = $file->getSize();
+        $name = $file->getClientOriginalName();
+
+        $docf = DocumentFile::find($request->id);
+        $docf->base64 = $image;
+        $docf->mime_type = $mimeType;
+        $docf->size = $size;
+        $docf->original_name = $name;
+        $docf->save();
+
+        return response()->json($docf, 200);
+
     }
 }
