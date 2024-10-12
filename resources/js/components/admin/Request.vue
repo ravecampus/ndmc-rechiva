@@ -178,6 +178,8 @@
                                 </a>
                                         <div class="dropdown-menu dropdown-menu-end dd-bg" style="">
                                             <router-link :to="{name:'admin.requestdoc', params:{'id':list.id}}"  class="dropdown-item dd-item">View</router-link>
+                                            <router-link v-if="list.upload_type === 0 && list.userdoc.role == 2" :to="{name:'admin.editupload_p', params:{'id':list.id}}" class="dropdown-item dd-item">Edit </router-link>
+                                            <router-link v-if="list.upload_type === 1 && list.userdoc.role == 2" :to="{name:'admin.editupload_a', params:{'id':list.id}}" class="dropdown-item dd-item">Edit </router-link>
                                             <!-- <a href="#!" @click="deleteDocs(list)" class="dropdown-item dd-item">Delete </a> -->
                                         </div>
                                     </div>

@@ -138,6 +138,34 @@
         return data == undefined ? " " :data.original_name;
     }
 
+    const moveArchived = (data)=>{
+         Swal.fire({
+            title: "Are you sure? ",
+            text: "You want to move to archived!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#26884b",
+            cancelButtonColor: "#ffc107",
+            confirmButtonText: "Yes!",
+            cancelButtonText: "No"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/api/document-to-archived/${data.id}`).then((res)=>{
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Your document has been moved",
+                        icon: "success",
+                        confirmButtonColor: "#26884b",
+                        
+                    });
+
+                    getData();
+                })
+                
+            }
+        });
+    }
+
 </script>
 
 <template>
@@ -208,6 +236,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dd-bg" style="">
                                     <router-link :to="{name:'faculty.document', params:{'id':list.id}}" class="dropdown-item dd-item">View Data </router-link>
+                                    <a href="#" @click="moveArchived(list)" class="dropdown-item dd-item">Move to Archived </a>
                                     <!-- <a href="#!" @click="deleteDocs(list)" class="dropdown-item dd-item">Delete </a> -->
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DocumentAuthor;
 use App\Models\Keyword;
 use App\Models\DocumentFile;
+use App\Models\Document;
 
 class DocumentAuthorController extends Controller
 {
@@ -83,7 +84,7 @@ class DocumentAuthorController extends Controller
         $size = $file->getSize();
         $name = $file->getClientOriginalName();
 
-        $docf = DocumentFile::find($request->id);
+        $docf = DocumentFile::where('document_id',$request->id)->first();
         $docf->base64 = $image;
         $docf->mime_type = $mimeType;
         $docf->size = $size;
@@ -92,5 +93,13 @@ class DocumentAuthorController extends Controller
 
         return response()->json($docf, 200);
 
+    }
+
+    public function archived(string $id){
+        $doc = Document::find($id);
+        $doc->upload_type = 1;
+        $doc->save();
+        
+        return response()->json($doc, 200);
     }
 }

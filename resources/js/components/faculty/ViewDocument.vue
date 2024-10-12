@@ -129,11 +129,15 @@
 <template>
     <div class="container mt-3 mb-5">
         <div class="row bg-white p-2 m-1 rounded">
-            <div class="col-md-12">
+            <div class="col-md-12 d-flex justify-content-between">
                 <h4 class="text-start m-0 mb-3">
                     <span class="bi bi-file-earmark-richtext"></span>
                     Document
                 </h4>
+                <div class="btn-grou">
+                    <router-link :to="{name:'faculty.editupload_p', params:{'id':doc_id}}" v-if="docData.status == 0 && docData.upload_type == 0" class="btn btn-outline-success btn-sm">Edit</router-link>
+                    <router-link :to="{name:'faculty.editupload_a', params:{'id':doc_id}}" v-if="docData.status == 0 && docData.upload_type == 1" class="btn btn-outline-success btn-sm">Edit</router-link>
+                </div>
             </div>
             <hr>
             <div class="col-md-4 col-lg-4">

@@ -83,5 +83,6 @@ Route::post('/upload-profile', [UserController::class, 'uploadProfile']);
 Route::resource('/doc-author', DocumentAuthorController::class);
 Route::delete('/doc-keyword/{id}', [DocumentAuthorController::class,'keyword']);
 Route::post('/document-upload', [DocumentAuthorController::class,'docUpload']);
+Route::delete('/document-to-archived/{id}', [DocumentAuthorController::class,'archived']);
 
 

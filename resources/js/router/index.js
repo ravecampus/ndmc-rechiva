@@ -30,6 +30,7 @@ import RequestDoc from '../components/admin/ViewRequestDoc.vue'
 import Users from '../components/admin/User.vue'
 import Newly from '../components/admin/Newly.vue'
 import AdminUpload from '../components/admin/UploadAdmin.vue'
+import AdminEditUpload from '../components/admin/EditUpload.vue'
 
 import InputTag from '../components/AuthorFilter.vue'
 
@@ -182,7 +183,18 @@ const routes = [
                 path:'upload-document-archive',
                 name:'admin.upload_a',
                 component: AdminUpload,
-            }
+            },
+            {
+                path:'upload-edit-publish/:id',
+                name:'admin.editupload_p',
+                component: AdminEditUpload,
+            },
+
+            {
+                path:'upload-edit-archive/:id',
+                name:'admin.editupload_a',
+                component: AdminEditUpload,
+            },
 
         ]
     },
@@ -209,6 +221,12 @@ const routes = [
             {
                 path:'upload-edit-publish/:id',
                 name:'faculty.editupload_p',
+                component: EditUpload,
+            },
+
+            {
+                path:'upload-edit-archive/:id',
+                name:'faculty.editupload_a',
                 component: EditUpload,
             },
           
@@ -302,6 +320,8 @@ const adminRoutes = [
     'admin.user',
     'admin.upload_p',
     'admin.upload_a',
+    'admin.editupload_p',
+    'admin.editupload_a',
     
 ];
 
@@ -325,7 +345,8 @@ const facultyRoutes = [
     'faculty.archived',
     'faculty.myaccount',
     'faculty.dashboard',
-    'faculty.editupload_p'
+    'faculty.editupload_p',
+    'faculty.editupload_a'
     
 ];
 

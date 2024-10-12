@@ -44,7 +44,7 @@
     }
 
     const chk = (data)=>{
-        return data.status == 1 ? checkFeed.value = true : checkFeed.value = false
+        return data.status == 1 || data.status == 2 ? checkFeed.value = true : checkFeed.value = false
     }
 
     const formatDate = (dateString)=>{
@@ -116,17 +116,32 @@
     })
 
     const sendApproval = ()=>{
-        form.prove = 1
-        axios.post('/api/admin-document', form).then((res)=>{
-            getDocInformation(doc_id)
-            toast.fire({
-				icon:'success',
-				title:'Documents has been Approved!'
-            })
-            form.message = ""
-        }).catch((err)=>{
-            errors.value = err.response.data.errors
-        })
+         Swal.fire({
+            title: "Approval Document",
+            text: "Do you want to approved?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#26884b",
+            cancelButtonColor: "#ffc107",
+            confirmButtonText: "Yes!",
+            cancelButtonText: "No"
+            }).then((result) => {
+            if (result.isConfirmed) {
+             
+                form.prove = 1
+                axios.post('/api/admin-document', form).then((res)=>{
+                    getDocInformation(doc_id)
+                    toast.fire({
+                        icon:'success',
+                        title:'Documents has been Approved!'
+                    })
+                    form.message = ""
+                }).catch((err)=>{
+                    errors.value = err.response.data.errors
+                })
+            }
+        });
+     
     }
 
     const checkFeed = ref(true)
@@ -148,16 +163,32 @@
     }
 
     const sendDisApprove = ()=>{
-        axios.post('/api/admin-disapprove',form ).then((res)=>{
-            getDocInformation(doc_id)
-            toast.fire({
-				icon:'success',
-				title:'Documents has been Disapproved!'
-            })
-            form.message = ""
-        }).catch((err)=>{
-            errors.value = err.response.data.errors
-        })
+
+         Swal.fire({
+            title: "Approval Document",
+            text: "Do you want to disapproved?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#26884b",
+            cancelButtonColor: "#ffc107",
+            confirmButtonText: "Yes!",
+            cancelButtonText: "No"
+            }).then((result) => {
+            if (result.isConfirmed) {
+             
+                axios.post('/api/admin-disapprove',form ).then((res)=>{
+                    getDocInformation(doc_id)
+                    toast.fire({
+                        icon:'success',
+                        title:'Documents has been Disapproved!'
+                    })
+                    form.message = ""
+                }).catch((err)=>{
+                    errors.value = err.response.data.errors
+                })
+            }
+        });
+     
     }
 
     const userExtract = (data)=>{

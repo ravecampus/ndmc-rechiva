@@ -86,7 +86,7 @@ class DocumentController extends Controller
          
             $doc = Document::create([
                 'title' => $request->title,
-                'department_id' => $user->role == 2 ?$request->college_department : $user->department_id,
+                'department_id' => $user->role == 2 ? $request->college_department : $user->department_id,
                 'upload_type' => 0,
                 'type_of_paper_id' => $request->type_of_paper,
                 'issue_numbers' => $request->issue_numbers,
@@ -111,7 +111,7 @@ class DocumentController extends Controller
                         'first_name'=>$author->first_name,
                         'middle_name'=>$author->middle_name,
                         'last_name'=>$author->last_name,
-                        'author_id'=>$author->author_id,
+                        'author_id'=>$author->id,
                         'document_id'=>$doc->id
                     ]);
                 }
@@ -161,7 +161,7 @@ class DocumentController extends Controller
                         'first_name'=>$author->first_name,
                         'middle_name'=>$author->middle_name,
                         'last_name'=>$author->last_name,
-                        'author_id'=>$author->author_id,
+                        'author_id'=>$author->id,
                         'document_id'=>$doc->id
                     ]);
                 }
@@ -216,8 +216,12 @@ class DocumentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-      
+
+
+        
         $user = Auth::user();
+        
+        if(json_decode($request->upload_type)==0){
         if($user->role == 2){
             $request->validate([
                 'title'=>'required',
@@ -254,7 +258,7 @@ class DocumentController extends Controller
         $doc->title = $request->title;
         $doc->abstract = $request->abstract;
         $doc->type_of_paper_id = $request->type_of_paper;
-        $doc->issue_numbers = $request->type_of_paper;
+        $doc->issue_numbers = $request->issue_numbers;
         $doc->doi = $request->doi;
         $doc->publisher = $request->publisher;
         $doc->publication_date = new Carbon($request->publication_date);
@@ -281,6 +285,37 @@ class DocumentController extends Controller
                 ]);
             }
         }
+    }else{
+
+        $request->validate([
+            'title'=>'required',
+            'type_of_paper'=>'required',
+            'authors'=>'required|array',
+            'authors.*' =>'required',
+        ]);
+
+
+        
+        $doc = Document::find($id);
+        $doc->title = $request->title;
+        $doc->type_of_paper_id = $request->type_of_paper;
+        $doc->save();
+
+        foreach ($request->authors as $author) {
+            if(!isset($author['id'])){
+                // dd($author['first_name']);
+                $kyw = DocumentAuthor::create([
+                    'first_name'=> $author['first_name'],
+                    'middle_name'=>$author['middle_name'],
+                    'last_name'=>$author['last_name'],
+                    'author_id'=>$author['author_id'],
+                    'document_id'=>$doc->id
+                ]);
+            }
+        }
+
+    }
+
 
         return response()->json($doc, 200);
 

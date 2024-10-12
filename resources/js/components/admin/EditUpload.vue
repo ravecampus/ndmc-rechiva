@@ -1,7 +1,7 @@
 <script setup>
     import { ref, reactive, watch, onMounted } from "vue"
     import { useRouter, useRoute, viewDepthKey } from "vue-router"
-    import DropZone from "./EditDrop.vue"
+    import DropZone from "../faculty/EditDrop.vue"
     import dayjs from "dayjs"
 
     import textkeyword from "../InputTag.vue"
@@ -51,7 +51,7 @@
     })
 
     const setheader = ()=>{
-        if(route.name === 'faculty.editupload_p'){
+        if(route.name === 'admin.editupload_p'){
             uploadtype.value = true
             headtitle.value = "PUBLISH"
             resetform()
@@ -80,6 +80,7 @@
         authors:[],
         upload_type:"",
         document_file:{},
+        college_department:"",
         })
 	const form = reactive(fdata())
     const resetform = () => Object.assign(form, fdata())
@@ -105,6 +106,7 @@
             form.authors = data.authors
             form.upload_type = data.upload_type
             form.document_file = data.document_file
+            form.college_department = data.department_id
         })
     }
 
@@ -163,7 +165,7 @@
                 title:'Document modefied Successfully!'
             })
             // router.push('/faculty/documents')
-            router.push('/faculty/documents')
+            router.push('/admin/request')
             errors.value = []
         }).catch((err)=>{
             errors.value = err.response.data.errors
@@ -308,6 +310,13 @@
                                 <label>Publisher</label>
                                 <input type="text" v-model="form.publisher" class="form-control form-control-sm" placeholder="Enter Publisher">
                                 <span class="text-danger" v-if="errors.publisher">{{errors.publisher[0]}}</span>
+                            </div>
+                             <div class="form-group input-group-sm col-6">
+                                <label >College Department</label>
+                                <select class="form-select" v-model="form.college_department">
+                                    <option v-for="(list, index) in departments" :key="index" :value="list.id">{{ list.description }}</option>
+                                </select>
+                                    <span class="text-danger" v-if="errors.college_department">{{errors.college_department[0]}}</span>
                             </div>
             
                             <div class="btn-group btn-sm mt-3">

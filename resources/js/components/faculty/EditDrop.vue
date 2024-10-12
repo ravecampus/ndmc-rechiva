@@ -54,7 +54,7 @@
             @drop.prevent= "toggleActive"
             :class="{'is_active':active}"
             >
-            <span class="fw-bold">{{ props.dbpdf.original_name }}</span>
+            <span class="fw-bold fs-5 text-danger">{{ props.dbpdf.original_name }}</span>
             <!-- <div class="card-body"> -->
                 <label class="btn btn-primary mb-2" for="filename">Click here to select files</label>
                 <h3>Drag or Drop files here!</h3>
