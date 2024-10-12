@@ -77,7 +77,7 @@ const showNotification = (data)=>{
 
 <template>
 <div>	
-    <nav class="navbar navbar-expand-lg bg-light mb-0 bg-header custom-nav">
+    <nav class="navbar navbar-expand-lg bg-light mb-0 bg-header custom-nav d-print-none">
         <div class="container-fluid">
             
              <button type="button" class="btn text-white sidebarCollapse d-inline-block d-lg-none">
@@ -115,6 +115,11 @@ const showNotification = (data)=>{
                      <li class="nav-item nav-cus mb-nav">
                         <router-link class="nav-link" :to="{name:'admin.upload_a'}">
                                 <span class="bi bi-plus-circle"></span> Archive
+                        </router-link>
+                    </li>
+                    <li class="nav-item nav-cus mb-nav">
+                        <router-link class="nav-link" :to="{name:'admin.report'}">
+                                <span class="bi bi-file-earmark-bar-graph"></span> Report
                         </router-link>
                     </li>
                      <li class="nav-item nav-cus cus-pad dropdown">
@@ -202,7 +207,7 @@ const showNotification = (data)=>{
         
 		<div class="wrapper d-flex align-items-stretch">
             
-            <nav id="sidebar" class="active">
+            <nav id="sidebar" class="active d-print-none">
            
             <ul class="list-unstyled components mb-5">
                 <li class="ms-auto"> 

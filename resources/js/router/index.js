@@ -31,6 +31,7 @@ import Users from '../components/admin/User.vue'
 import Newly from '../components/admin/Newly.vue'
 import AdminUpload from '../components/admin/UploadAdmin.vue'
 import AdminEditUpload from '../components/admin/EditUpload.vue'
+import Report from '../components/admin/Report.vue'
 
 import InputTag from '../components/AuthorFilter.vue'
 
@@ -195,6 +196,12 @@ const routes = [
                 name:'admin.editupload_a',
                 component: AdminEditUpload,
             },
+            {
+                path:'report',
+                name:'admin.report',
+                component: Report,
+            },
+
 
         ]
     },
@@ -322,6 +329,7 @@ const adminRoutes = [
     'admin.upload_a',
     'admin.editupload_p',
     'admin.editupload_a',
+    'admin.report',
     
 ];
 
