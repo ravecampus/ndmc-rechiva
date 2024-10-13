@@ -283,13 +283,15 @@
                         <div class="info-doc" v-show="!viewpdf">
                             <div class="d-flex justify-content-between">
                             <h5 class="head-title text-start">{{ docData.title }}</h5>
-                            <div class="btn-group mt-3" v-if="!checkFeed">
-                                <button type="button" @click.prevent="sendApproval()" class="btn btn-primary btn-sm">
-                                    Approve
-                                </button>
-                                <button type="button" v-if="hideComment(docData.userdoc)" @click.prevent="sendDisApprove()" class="btn btn-warning btn-sm">
-                                    Disapprove
-                                </button>
+                            <div>
+                                <div class="btn-group mt-3" v-if="!checkFeed">
+                                    <button type="button" @click.prevent="sendApproval()" class="btn btn-primary btn-sm">
+                                        Approve
+                                    </button>
+                                    <button type="button" v-if="hideComment(docData.userdoc)" @click.prevent="sendDisApprove()" class="btn btn-warning btn-sm">
+                                        Disapprove
+                                    </button>
+                                </div>
                             </div>
                             </div>
                             <div class="abstract">
@@ -309,16 +311,19 @@
                                 </div> -->
                                <hr v-if="docData.upload_type == 0">
                                 <div class="d-flex flex-wrap pub-date" v-if="docData.upload_type == 0">
-                                    <span class="label">
-                                        Publication date :
-                                    </span>
-                                    <div class="content"> {{ formatDate(docData.publication_date) }}</div>
-                                    <div class="d-flex position-absolute custom-w justify-content-end">
+                                   
+                                    <div class="d-flex custom-w justify-content-start mb-3">
                                        <span class="key-title">Keywords:</span>
                                         <span class="badge bg-success me-1" 
                                         v-for="(list, index) in docData.keywords" :key="index" >{{ list.description }}</span>
                                         
                                     </div>
+                                    <span class="label">
+                                        Publication date :
+                                    </span>
+                                    <div class="content"> {{ formatDate(docData.publication_date) }}</div>
+                                   
+                                
                                     
                                 </div>
                                 <div class="d-flex mt-2  pub-date">
@@ -407,7 +412,7 @@
         font-size: 20px;
         color: #535353;
         .pub-date{
-            display: block;
+            // display: block;
             // margin-top: 25px;
             font-weight: bold;
             color: #868686;
@@ -463,6 +468,10 @@
         font-size: 12px;
         font-style: italic;
         margin-right: .5rem;
+    }
+
+    .badge{
+        font-size: 12px;
     }
     
 </style>

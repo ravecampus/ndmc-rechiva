@@ -18,6 +18,7 @@
         getStatistic();
         getDeptStat()
         getRecentSub()
+        mostdownload()
     })
 
 
@@ -30,6 +31,7 @@ const deps = ref([])
 let dataset = {}
 let label = []
 let datastat = []
+const downloads = ref([])
 const getDeptStat = ()=>{
      axios.get('/api/department-stat').then((res)=>{
          deps.value = res.data
@@ -46,6 +48,12 @@ const recents = ref([])
 const getRecentSub = ()=>{
     axios.get('/api/recent-submission').then((res)=>{
         recents.value = res.data;
+    });
+}
+
+const mostdownload = ()=>{
+    axios.get('/api/most-download').then((res)=>{
+        downloads.value = res.data
     });
 }
 </script>
@@ -92,6 +100,25 @@ const getRecentSub = ()=>{
                             data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook Page NDMC RDC">
                                 <img class="img-link" :src="'/img/school.png'"/>
                             </a>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="most-download text-start mt-4 bg-white p-2">
+                            <h4 class="text-uppercase">Top most download documents</h4>
+                            <ul class="most-list">
+                                <li class="d-flex justify-content-between" v-for="(list,index) in downloads" :key="index">
+                                   <router-link :to="{name:'main.document', params:{id:list.document_id }}">
+                                       <!-- <i class="bi bi-cloud-arrow-down"></i> -->
+                                     
+                                      <span class="most-title text-truncate-message">  <span class="square"></span> {{ list.title}}</span>
+                                    </router-link> 
+                                    <span class="most-count">
+                                       
+                                        {{ parseFloat(list.download).toFixed(2) }}
+                                         <i class="bi bi-cloud-arrow-down"></i>
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                      <div class="col-md-12 mt-5 d-flex justify-content-around mb-5">
@@ -185,7 +212,7 @@ const getRecentSub = ()=>{
     }
     .rs-content{
         background-color: #63a369;
-        min-height: 60rem;
+        min-height: 80rem;
         position: relative;
         padding: 1rem;
         padding-top: 2rem;
@@ -237,5 +264,41 @@ const getRecentSub = ()=>{
         border: #fff solid 3px;
         border-radius: 10px;
         width: 40rem;
+    }
+
+    .most-list{
+        list-style-type: none;
+        color: #056836;
+    }
+    .bi{
+        font-size: 2rem;
+    }
+
+    .most-count{
+        font-size: 1.2rem;
+        margin-right: 5rem;
+        font-weight: 600;
+    }
+
+    .most-title{
+        margin-left: 3px;
+        font-size: 1.1rem;
+        margin-top: 20px !important;
+        font-weight: 600;
+    }
+
+    .text-truncate-message{
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        width: 25rem;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .square{
+        padding: 4px;
+        width: 2px;
+        height: 2px;
+        background-color: #056836;
+        margin-right: 10px;
     }
 </style>

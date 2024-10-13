@@ -58,7 +58,7 @@
             <!-- <div class="card-body"> -->
                 <label class="btn btn-primary mb-2" for="filename">Click here to select files</label>
                 <h3>Drag or Drop files here!</h3>
-                <p class="text-muted">PDF files is accepted to upload!</p>
+                <p class="text-muted">Only pdf files are accepted to upload!</p>
                 <input type="file" class="hidden fileupload" accept=".pdf" id="filename"/>
                 <div class="row">
                     <div class="col-md-12 d-flex flex-wrap justify-content-around mt-2 mb-0">

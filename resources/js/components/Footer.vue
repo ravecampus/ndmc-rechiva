@@ -24,34 +24,83 @@
              Quezon Avenue, Midsayap, Cotabato 9410
          </div>
         <div class="col-md-6 p-0 text-end">
-            <div class="btn-group dropup" v-if="!auth">
-            <!-- <button type="button" class="btn btn-sm btn-outline-light"></button> -->
-            <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <!-- <span class="sr-only">Toggle Dropdown</span> -->
-                Join us &nbsp;
-            </button>
-                <ul class="dropdown-menu">
-                                    
-                    <li>
-                        <router-link  class="dropdown-item" :to="{name:'signin'}">
-                            <i class="bi bi-box-arrow-in-right"></i>
-                            Sign In
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link  class="dropdown-item" :to="{name:'signup'}">
-                            <i class="bi bi-box-arrow-in-left"></i>
-                            Sign Up
-                        </router-link>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                </ul>
+           
+            <section class="mb-4 text-white">
+            <!-- Facebook -->
+            <a
+                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="bi bi-facebook"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="bi bi-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="bi bi-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="bi bi-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
+                href="#!"
+                role="button"
+                data-mdb-ripple-color="dark"
+                ><i class="bi bi-linkedin"></i
+            ></a>
+            
+            </section>
+             <div class="btn-group dropup" v-if="!auth">
+                <!-- <button type="button" class="btn btn-sm btn-outline-light"></button> -->
+                <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                
+                    Join us &nbsp;
+                </button>
+                    <ul class="dropdown-menu">
+                                        
+                        <li>
+                            <router-link  class="dropdown-item" :to="{name:'signin'}">
+                                <i class="bi bi-box-arrow-in-right"></i>
+                                Sign In
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link  class="dropdown-item" :to="{name:'signup'}">
+                                <i class="bi bi-box-arrow-in-left"></i>
+                                Sign Up
+                            </router-link>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                    </ul>
             </div>
+
          </div>
      </div>
-     <div class="buttom-footer">
+     <!-- <div class="buttom-footer">
 
-     </div>
+     </div> -->
     </div>
 </template>
 <style lang="scss" scoped>

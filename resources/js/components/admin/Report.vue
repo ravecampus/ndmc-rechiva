@@ -1,10 +1,19 @@
 <script setup>
     import { ref, reactive } from "vue"
+    import dayjs from "dayjs"
 
     const fdata = () => ({
             date_from:"",
             date_to:""
         })
+    const formatDate = (dateString)=>{
+		const date = dayjs(dateString)
+		return date.format('MMMM D, YYYY')
+	}
+    const report = ref([])
+    const members = ref([])
+    const submission = ref([])
+    const btngenerate = ref("generate")
 	const form = reactive(fdata())
     const resetform = () => Object.assign(form, fdata())
     
@@ -19,6 +28,53 @@
         window.print()
     }
 
+    const generate = ()=>{
+        btngenerate.value = "generating..."
+        axios.get('/api/report',{params:form}).then((res)=>{
+            btngenerate.value = "generate"
+            report.value = res.data
+            submission.value = res.data.upload
+            members.value = res.data.members
+        })
+    }
+
+    const extractMember = (data)=>{
+        let ret = 0; 
+        members.value.forEach(val => {
+            if(data.department_id == val.department_id){
+                ret = val.number_of_member
+            }
+        });
+
+        return ret
+        
+    }
+
+
+    const totalMem = ()=>{
+        let ret = 0
+        members.value.forEach(val => {
+            
+            ret += val.number_of_member
+            
+        });
+
+        return ret
+    }
+
+    const totalSub = ()=>{
+        let ret = 0
+        submission.value.forEach(val=>{
+            ret += val.number_of_submission
+        })
+
+        return ret;
+    }
+
+    const clear = ()=>{
+        form.date_to = ""
+    }
+
 </script>
 
 
@@ -28,21 +84,27 @@
            <h4  class="text-start mt-3">Summary Report</h4>
            <div class="col-md-3">
                <div class="card border">
+                   <div class="card-header text-start">Date Range</div>
                    <div class="card-body text-start">
                         <div class="form-group mb-3">
                             <label>From :</label>
-                            <VueDatePicker v-model="form.date_from" :format="format" placeholder="Enter Date From"></VueDatePicker>
+                            <VueDatePicker v-model="form.date_from"
+                            @update:model-value="clear()"
+                            :format="format" placeholder="Enter Date From"></VueDatePicker>
             
                         </div>
+                         <!-- @update:model-value="generate()" -->
                          <div class="form-group mb-3">
                             <label>To :</label>
-                            <VueDatePicker v-model="form.date_to" :format="format" placeholder="Enter Date To"></VueDatePicker>
+                            <VueDatePicker v-model="form.date_to"
+                           
+                             :format="format" placeholder="Enter Date To"></VueDatePicker>
             
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm">
+                            <button type="button" @click="generate()" class="btn btn-success btn-sm">
                                 <i class="bi bi-bullseye"></i>
-                                Generate
+                                {{ btngenerate }}
                             </button>
                             <button type="button" @click="print()" class="btn btn-warning btn-sm">
                                 <i class="bi bi-printer"></i>
@@ -54,28 +116,28 @@
                </div>
            </div>
            <div class="col-md-9 text-start">
+                   <div class="fw-bold">
+                       Date:
+                       <span class="text-danger" v-if="form.date_to != '' && form.date_from"> {{ formatDate(form.date_from) }} - {{ formatDate(form.date_to) }} </span>
+                   </div>
                    <table class="table table-bordered">
                        <thead>
                            <tr>
                                <th>College Department</th>
-                               <th>Number of Submission</th>
-                               <th>Number of Downloads</th>
+                               <th>Number of Submissions</th>
                                <th>Number of Members</th>
                            </tr>
                        </thead>
                        <tbody>
-                           <tr>
-                               <td>222</td>
-                               <td>333</td>
-                               <td>333</td>
-                               <td>3333</td>
+                           <tr v-for="(list, index) in report.upload" :key="index">
+                               <td>{{ list.description }}</td>
+                               <td>{{ parseFloat(list.number_of_submission).toFixed(2) }}</td>
+                               <td>{{ parseFloat(extractMember(list)).toFixed(2) }}</td>
                            </tr>
-                           <tr>
-                              
+                           <tr class="fw-bold">
                                <td class="text-start fw-bold">TOTAL</td>
-                               <td>3333</td>
-                               <td>3333</td>
-                               <td>3333</td>
+                               <td>{{ parseFloat(totalSub()).toFixed(2) }}</td>
+                               <td>{{ parseFloat(totalMem()).toFixed(2) }}</td>
                            </tr>
                        </tbody>
 
@@ -98,30 +160,31 @@
             </div>
             <div class="col-md-12">
                 <div class="report-card p-3">
-                   <div class="fs-6 fw-bold">System Report</div>
-                   <div>Date: Feb 1, 2024 - Dec 9, 2024</div>
-                   <table class="table table-bordered">
+                   <div class="fs-6 fw-bold">System Summary Report</div>
+                    <div class="fw-bold">
+                       Date:
+                       <span class="text-danger" v-if="form.date_to != ''"> {{ formatDate(form.date_from) }} - {{ formatDate(form.date_to) }} </span>
+                   </div>
+                   <table class="table table-bordered text-start">
                        <thead>
                            <tr>
                                <th>College Department</th>
-                               <th>Number of Submission</th>
-                               <th>Number of Downloads</th>
+                               <th>Number of Submissions</th>
+                               <!-- <th>Number of Downloads</th> -->
                                <th>Number of Members</th>
                            </tr>
                        </thead>
                        <tbody>
-                           <tr>
-                               <td>222</td>
-                               <td>333</td>
-                               <td>333</td>
-                               <td>3333</td>
+                          <tr v-for="(list, index) in report.upload" :key="index">
+                               <td>{{ list.description }}</td>
+                               <td>{{ parseFloat(list.number_of_submission).toFixed(2) }}</td>
+                               <td>{{ parseFloat(extractMember(list)).toFixed(2) }}</td>
                            </tr>
-                           <tr>
+                           <tr class="fw-bold">
                               
                                <td class="text-start fw-bold">TOTAL</td>
-                               <td>3333</td>
-                               <td>3333</td>
-                               <td>3333</td>
+                               <td>{{ parseFloat(totalSub()).toFixed(2) }}</td>
+                               <td>{{ parseFloat(totalMem()).toFixed(2) }}</td>
                            </tr>
                        </tbody>
 

@@ -47,7 +47,6 @@ const getAuthUser = ()=>{
 const getNotification = ()=>{
     axios.get('/api/notification').then((res)=>{
         notifications.value = res.data
-        console.log(res.data)
     })
 }
 
@@ -258,7 +257,7 @@ const showNotification = (data)=>{
 
       </div>
 	</div>
-    <div class="footer">
+    <div class="footer d-print-none">
         <ul class="nav justify-content-center border-bottom bg-footer">
         <li class="nav-item"><a href="#" class="nav-link px-2 text-white"></a></li>
         <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"></a></li>

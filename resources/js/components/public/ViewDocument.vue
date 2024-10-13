@@ -42,7 +42,7 @@
             link.download = data.original_name
             link.click()
             URL.revokeObjectURL(link.href)
-            axios.post('/api/download',{id:data.id}).then((res)=>{})
+            axios.post('/api/download',{id:data.document_id}).then((res)=>{})
     }
 
     
@@ -128,7 +128,7 @@
                            <span class="fw-bold"> Publication:</span> {{ docData.publisher }}
                         </div>
                         <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
-                            <div class="text-start txt-grey" v-if="docData.upload_type == 0">
+                        <div class="text-start txt-grey" v-if="docData.upload_type == 0">
                            <span class="fw-bold"> Department:</span> {{ docData.department != null ? docData.department.description : ""}}
                         </div>
                         <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
@@ -179,16 +179,17 @@
                                 </div>
                                <hr>
                                 <div class="d-flex flex-wrap pub-date" v-if="docData.upload_type == 0">
-                                    <span class="label">
-                                        Publication date :
-                                    </span>
-                                    <div class="content"> {{ formatDate(docData.publication_date) }}</div>
-                                    <div class="d-flex position-absolute custom-w justify-content-end">
+                                    <div class="d-flex custom-w justify-content-start mb-3">
                                         <span class="key-title">Keywords:</span>
                                         <span class="badge bg-success me-1" 
                                         v-for="(list, index) in docData.keywords" :key="index" >{{ list.description }}</span>
                                         
                                     </div>
+                                    <span class="label">
+                                        Publication date :
+                                    </span>
+                                    <div class="content"> {{ formatDate(docData.publication_date) }}</div>
+                                  
                                     
                                 </div>
                                  
@@ -281,6 +282,10 @@
         font-size: 12px;
         font-style: italic;
         margin-right: .5rem;
+    }
+
+    .badge{
+        font-size: 12px;
     }
     
 </style>

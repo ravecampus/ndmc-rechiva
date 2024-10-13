@@ -22,6 +22,7 @@ class Document extends Model
         'user_id',
         'upload_type',
         'publisher',
+        'created_at',
     ];
 
     public function document_file(){

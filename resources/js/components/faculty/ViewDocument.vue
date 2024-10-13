@@ -134,9 +134,11 @@
                     <span class="bi bi-file-earmark-richtext"></span>
                     Document
                 </h4>
-                <div class="btn-grou">
+                <div>
+                <div class="btn-group">
                     <router-link :to="{name:'faculty.editupload_p', params:{'id':doc_id}}" v-if="docData.status == 0 && docData.upload_type == 0" class="btn btn-outline-success btn-sm">Edit</router-link>
                     <router-link :to="{name:'faculty.editupload_a', params:{'id':doc_id}}" v-if="docData.status == 0 && docData.upload_type == 1" class="btn btn-outline-success btn-sm">Edit</router-link>
+                </div>
                 </div>
             </div>
             <hr>
@@ -220,16 +222,16 @@
                                 </div> -->
                                <hr>
                                 <div class="d-flex flex-wrap pub-date" v-if="docData.upload_type == 0">
+                                     <div class="d-flex custom-w justify-content-start mb-3">
+                                       <span class="key-title position-relative">Keywords:</span>
+                                        <span class="badge bg-success me-1 position-relative" 
+                                        v-for="(list, index) in docData.keywords" :key="index" >{{ list.description }}</span>
+                                    </div>
                                     <span class="label">
                                         Publication date :
                                     </span>
                                     <div class="content"> {{ formatDate(docData.publication_date) }}</div>
-                                    <div class="d-flex position-absolute custom-w justify-content-end">
-                                       <span class="key-title">Keywords:</span>
-                                        <span class="badge bg-success me-1" 
-                                        v-for="(list, index) in docData.keywords" :key="index" >{{ list.description }}</span>
-                                        
-                                    </div>
+                                  
                                     
                                 </div>
                                  
@@ -365,5 +367,11 @@
         font-style: italic;
         margin-right: .5rem;
     }
-    
+
+    .custom-w{
+        width:50%;
+    }
+    .badge{
+        font-size: 12px;
+    }
 </style>
