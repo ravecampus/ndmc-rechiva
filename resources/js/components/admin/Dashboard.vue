@@ -177,16 +177,17 @@ const showNotification = (data)=>{
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                        <div class="d-flex">
                             <div class="admin-info d-none d-lg-block d-xl-block">
-                             {{ user.first_name }}
+                             {{ user.first_name }}   {{ user.middle_initial }} {{ user.last_name }}
                                 <!-- <div class="description">Admin</div> -->
                             </div>
-                            <img class="img-user" :src="'/img/user.png'" alt="">
+                            <!-- <img class="img-user" :src="'/img/user.png'" alt=""> -->
+                            <img class="img-user rounded-circle" :src="user.image == ''? '/img/user.png' : 'data:'+user.extension+';base64,'+user.image" alt="">
                        </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end user-menu">
                         <li class="dropdown-item user-li d-inline-block d-lg-none">
                             <div class="info-user">
-                                {{ user.first_name }}
+                               {{ user.first_name }}   {{ user.middle_initial }} {{ user.last_name }}
                                 <!-- <div class="description">Admin</div> -->
                             </div>
                         </li>

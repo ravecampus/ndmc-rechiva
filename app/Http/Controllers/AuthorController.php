@@ -40,6 +40,14 @@ class AuthorController extends Controller
             'middle_name'=>'required|string',
             'last_name'=>'required|string',
         ]);
+
+        $author = Author::where('first_name', $request->first_name)
+                    ->where('middle_name', $request->middle_name)
+                    ->where('last_name', $request->last_name)->count();
+        if($author > 0){
+            $errors = ['errors'=>['first_name' => ['Duplicate entry!']]];
+            return response()->json($errors,401);
+        }
         $data = Author::create([
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,

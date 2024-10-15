@@ -1,10 +1,16 @@
 <script setup>
     import { ref, onMounted, reactive  } from "vue"
     import { useRouter  } from "vue-router"
+    import { Modal } from "bootstrap";
 
+    const profilepic = ref(null)
+    let modalprofile = null;
     onMounted(()=>{
         getAuthUser()
+         modalprofile = new Modal(profilepic.value);
     })
+
+    const formData = new FormData();
 
     const router = useRouter();
 
@@ -62,6 +68,47 @@
             errors.value = err.response.data.errors
         })
     }
+
+    const picProf = ref('')
+    const editprofile = ()=>{
+        modalprofile.show();
+    }
+
+    const uploadPic = (e)=>{
+        document.querySelector('.fileupload').click()
+        
+    }
+
+    const changepic = (e)=>{
+        const files = e.target.files || e.dataTransfer.files;
+        picProf.value = files[0]
+        createImage(files[0])
+    }
+
+    let profpic = ref("")
+    const createImage = (file)=> {
+         profpic.value  = file
+        if (file) {
+            const reader = new FileReader
+            reader.onload = e => {
+             profpic.value = e.target.result
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
+    const saveprofile = ()=>{
+        formData.append('file', picProf.value)
+        axios.post('/api/upload-profile', formData,{
+            headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+        }).then((res)=>{
+            modalprofile.hide()
+            getAuthUser()
+        })
+    }
+    
 </script>
 
 
@@ -70,11 +117,12 @@
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5" width="150px" :src="'/img/user.png'">
+                <img class="rounded-circle mt-5" width="150px" :src="user.image == null || user.image == '' ? '/img/user.png' : 'data:'+user.extension+';base64,'+user.image">
+                <a href="#" @click="editprofile()">edit</a>
                 <span class="font-weight-bold">
                     {{ user.first_name }}
-                    <!-- {{ user.middle_initial }}.
-                    {{ user.last_name }} -->
+                    {{ user.middle_initial }}.
+                    {{ user.last_name }}
                 </span>
                 <span class="text-black-50">{{ user.email }}</span>
                 <span> </span></div>
@@ -84,7 +132,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <!-- <div class="row mt-2">
+                <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="labels">First name</label>
                         <input type="text" v-model="form.first_name" class="form-control" placeholder="Enter First name" value="">
@@ -100,7 +148,7 @@
                         <input type="text" v-model="form.last_name" class="form-control" value="" placeholder="Enter Last name">
                         <span class="text-danger" v-if="errors.last_name">{{errors.last_name[0]}}</span>                    
                     </div>
-                </div> -->
+                </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels">Email</label>
@@ -138,8 +186,36 @@
                 </div>
             </div>
         </div>
+
+    <div class="modal fade" ref="profilepic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Profile Picture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-start mb-3 row">
+                <img :src="profpic == '' ? '/img/user.png' : profpic" class="rounded mx-auto d-block img-profile"  for="filename">
+                <a href="#"  @click="uploadPic()">change profile picture</a>
+                <input type="file" class="hidden fileupload" @change="changepic" accept=".jpeg, .png,.jpg, .ping" id="filename"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @click="saveprofile()">Upload profile</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
     </div>
 </div>
 
 </template>
+
+<style lang="scss" scoped>
+    .img-profile{
+        width: 20rem;
+        height: 20rem;
+    }
+</style>
+
 

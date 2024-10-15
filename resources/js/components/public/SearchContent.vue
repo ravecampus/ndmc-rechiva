@@ -188,7 +188,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" v-model="author[list.id]"  @change="checkAuthor(author, list)" type="checkbox" :value="list.id" :id="list.id">
                                     <label class="form-check-label" :for="list.id">
-                                        {{ list.fist_name }}
+                                        {{ list.first_name }}
                                         {{ list.middle_name }}
                                         {{ list.last_name }}
                                     </label>

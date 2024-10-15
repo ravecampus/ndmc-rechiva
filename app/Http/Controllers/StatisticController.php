@@ -32,7 +32,7 @@ class StatisticController extends Controller
         $dl = Download::count();
         $visit = Visitor::count();
         $collect = Document::where('status', 1)->where('upload_type', 0)->count();
-        $mem = User::where('role', 1)->where('activate', 0)->count();
+        $mem = User::where('role', 1)->where('activate', 1)->count();
 
         $data = [
             'downloads'=> $dl,

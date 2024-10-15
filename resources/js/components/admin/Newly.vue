@@ -85,13 +85,38 @@
                 <span class="text-black-50">{{ user.email }}</span>
                 <span> </span></div>
         </div>
-        <div class="col-md-5 border-right text-start">
+        <div class="col-md-9 border-right text-start">
+          
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
                     <h4 class="text-right">User Activation</h4>
                 </div>
-                <div class="badge bg-success fs-3 p-2">
+            
+                <div class="badge bg-success fs-6 p-2">
                     {{ user.activate == 0 ? " Deactivated" : 'Activated'}}
+                </div>
+                <hr>
+                <div class="user-info row fs-6">
+                     <div class="col-md-4">
+                        <label>First name: </label>
+                        <strong class="fw-bold ms-1">{{ user.first_name }}</strong>
+                     </div>
+                    <div class="col-md-4">
+                        <label>Middle Initial: </label>
+                        <strong class="fw-bold ms-1">{{ user.middle_initial }}</strong>
+                     </div>
+                    <div class="col-md-4">
+                        <label>Last name: </label>
+                        <strong class="fw-bold ms-1">{{ user.last_name }}</strong>
+                     </div>
+                     <div class="col-md-12">
+                        <label>Email: </label>
+                        <strong class="fw-bold ms-1">{{ user.email }}</strong>
+                     </div>
+                     <div class="col-md-12">
+                        <label>Department: </label>
+                        <strong class="fw-bold ms-1">{{ user.department != null ? user.department.description : "" }}</strong>
+                     </div>
                 </div>
                 <div class="mt-5">
                     <button class="btn btn-outline-success" @click.prevent="changeAccess(user)" type="button">{{ user.activate == 0 ? " Activate?" : 'Deactivate?' }}</button>

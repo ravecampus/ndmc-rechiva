@@ -291,14 +291,14 @@
                         </select>
                         <label class="input-group-text bg-select"  for="inputGroupSelect02">Department</label>
                     </div>
-                    <!-- <div class="input-group input-group-sm p-2">
+                    <div class="input-group input-group-sm p-2">
                         <select class="form-select" id="inputGroupSelect02" v-model="filterData" @change="actionFilter">
                             <option :value="''">Choose...</option>
                             <option :value="2">Admin</option>
                             <option :value="1">Faculty</option>
                         </select>
                         <label class="input-group-text bg-select"  for="inputGroupSelect02">Role</label>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="table-responsive">
                     
@@ -308,7 +308,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Department</th>
-                                <!-- <th>Role</th> -->
+                                <th>Role</th>
                                 <th>Status</th>
                                 <!-- <th>Date</th> -->
                                 <th class="text-end">Action</th>
@@ -329,7 +329,7 @@
                                 </td>
                                 <td>{{ list.email }}</td>
                                 <td>{{ extractDep(list.department) }}</td>
-                                <!-- <td>{{ list.role == 1 ? 'Faculty' :'Admin'}}</td> -->
+                                <td>{{ list.role == 1 ? 'Faculty' :'Admin'}}</td>
                                 <td>{{ list.activate == 0 ? 'inactive' : 'activated' }}</td>
                               
                                 <!-- <td>{{ formatDate(list.created_at) }}</td> -->
@@ -399,7 +399,7 @@
                     <input type="text" ref="input" v-model="form.last_name" class="form-control form-control form-control-sm" placeholder="Enter Last name">
                     <span class="text-danger" v-if="errors.last_name">{{errors.last_name[0]}}</span>
                 </div>
-                 <!-- <div class="form-group col-6">
+                 <div class="form-group col-6">
                     <label>Role</label>
                     <select class="form-select form-select-sm" v-model="form.role" @change="adminSelect(form.role)">
                         <option :value="''">Choose...</option>
@@ -407,7 +407,7 @@
                         <option :value="1">Faculty</option>
                     </select>
                     <span class="text-danger" v-if="errors.role">{{errors.role[0]}}</span>
-                </div> -->
+                </div>
                 <div class="form-group col-6" v-if="depview">
                     <label>Department</label>
                     <select class="form-select form-select-sm" v-model="form.department">

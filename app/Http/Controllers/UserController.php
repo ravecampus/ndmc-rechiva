@@ -21,14 +21,14 @@ class UserController extends Controller
             $data = $data->where('first_name','like','%'.$request->search.'%')
             ->orWhere('last_name','like','%'.$request->search.'%');
         }
-        // if($request->filter != ''){
-        //    $data = $data->where('role', $request->filter);
-        // }
+        if($request->filter != ''){
+           $data = $data->where('role', $request->filter);
+        }
 
         if($request->dept != ''){
             $data = $data->where('department_id', $request->dept);
          }
-       $data = $data->where('role', 1)->with('department')->latest()->paginate(5);
+       $data = $data->with('department')->latest()->paginate(5);
         
         return response()->json($data, 200);
     }
@@ -46,17 +46,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // if($request->role == 2){
-        //     $request->validate([
-        //         'first_name'  => 'required|string',
-        //         'middle_initial'  => 'required|string',
-        //         'last_name'  => 'required|string',
-        //         'role'  => 'required',
-        //         'email' => 'required|email',
-        //         'password' => 'required|string|min:6|confirmed',
-        //     ]);
+        if($request->role == 2){
+            $request->validate([
+                'first_name'  => 'required|string',
+                'middle_initial'  => 'required|string',
+                'last_name'  => 'required|string',
+                'role'  => 'required',
+                'email' => 'required|email',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
     
-        // }else{
+        }else{
         $request->validate([
             'first_name'  => 'required|string',
             'middle_initial'  => 'required|string',
@@ -66,7 +66,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6|confirmed',
             ]);
-        // }
+        }
        
 
         $data = User::create([
@@ -167,7 +167,7 @@ class UserController extends Controller
     }
 
     public function getFaculty($id){
-        $data = User::find($id);
+        $data = User::with('department')->find($id);
         return response()->json($data, 200);
     }
 

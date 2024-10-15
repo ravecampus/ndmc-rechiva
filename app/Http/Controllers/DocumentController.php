@@ -8,6 +8,7 @@ use App\Models\DocumentFile;
 use App\Models\DocumentAuthor;
 use App\Models\Notification;
 use App\Models\Keyword;
+use App\Models\Download;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -329,11 +330,34 @@ class DocumentController extends Controller
         $doc = Document::find($id);
 
         $docfile = DocumentFile::where('document_id', $id)->get();
-
+        $doca = DocumentAuthor::where('document_id', $id)->get();
+        $note = Notification::where('document_id',$id)->get();
+        $key = Keyword::where('document_id', $id)->get();
+        $dwn = Download::where('document_id', $id)->get();
         foreach($docfile as $docf){
            $dc =  DocumentFile::find($docf->id);
            $dc->delete();
         }
+
+        foreach($doca as $val){
+            $dc = DocumentAuthor::find($val->id);
+            $dc->delete();
+         }
+
+         foreach($note as $val){
+            $dc = Notification::find($val->id);
+            $dc->delete();
+         }
+         foreach($key as $val){
+            $dc = Keyword::find($val->id);
+            $dc->delete();
+         }
+
+         foreach($dwn as $val){
+            $dc = Download::find($val->id);
+            $dc->delete();
+         }
+
         $doc->delete();
         return response()->json($doc, 200);
     }
@@ -384,7 +408,7 @@ class DocumentController extends Controller
     }
 
     public function recentfaculty(){
-        $data = Document::where('user_id', Auth::id())->latest()->limit(5)->get();
+        $data = Document::where('user_id', Auth::id())->latest()->limit(4)->get();
 
         return response()->json($data, 200);
     }

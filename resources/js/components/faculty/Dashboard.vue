@@ -71,7 +71,7 @@
                 <div class="my-recent text-start" v-if="activated(user)">
                     <p class="">MY RECENT UPLOAD</p>
 
-                         
+                    <div class="table-responsive">  
                     <table class="table mb-0">
                         <tbody>
                             <tr class="align-middle" v-for="(list,index) in recents" :key="index">
@@ -97,6 +97,7 @@
                             
                         </tbody>
                     </table>
+                </div> 
                 </div>
             </div>
         </div>

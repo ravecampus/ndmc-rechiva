@@ -103,6 +103,33 @@
     //     return dateTime;
     // }
 
+    const deleteDocs = (data)=>{
+           Swal.fire({
+            title: "Are you sure? "+data.title,
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#26884b",
+            cancelButtonColor: "#ffc107",
+            confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/api/document/${data.id}`).then((res)=>{
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                        confirmButtonColor: "#26884b",
+                        
+                    });
+
+                    getData();
+                })
+                
+            }
+        });
+    }
+
 </script>
 
 
@@ -181,6 +208,7 @@
                                             <router-link v-if="list.upload_type === 0 && list.userdoc.role == 2" :to="{name:'admin.editupload_p', params:{'id':list.id}}" class="dropdown-item dd-item">Edit </router-link>
                                             <router-link v-if="list.upload_type === 1 && list.userdoc.role == 2" :to="{name:'admin.editupload_a', params:{'id':list.id}}" class="dropdown-item dd-item">Edit </router-link>
                                             <!-- <a href="#!" @click="deleteDocs(list)" class="dropdown-item dd-item">Delete </a> -->
+                                            <a href="#!" v-if="list.userdoc.role == 2" @click="deleteDocs(list)" class="dropdown-item dd-item">Delete </a>
                                         </div>
                                     </div>
                                 </td>
