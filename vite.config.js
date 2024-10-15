@@ -18,7 +18,7 @@ export default defineConfig({
             targets: [
               {
                 src: "node_modules/pspdfkit/dist/pspdfkit-lib",
-                dest: "node_modules/.vite/deps",
+                dest: "public/build/assets",
               },
             ],
             hook: "buildStart",
