@@ -308,6 +308,9 @@ const openRoutes = [
 ];
 
 const adminRoutes = [
+    'about',
+    'search',
+    'main.document',
     'rechiva',
     'publicpage',
     'admin',

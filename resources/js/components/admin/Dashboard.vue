@@ -107,6 +107,11 @@ const showNotification = (data)=>{
                 
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                     <li class="nav-item nav-cus mb-nav">
+                        <router-link class="btn btn-outline-success" :to="{name:'publicpage'}">
+                                <span class="bi bi-globe"></span> Website
+                        </router-link>
+                    </li>
+                    <li class="nav-item nav-cus mb-nav">
                         <router-link class="nav-link" :to="{name:'admin.upload_p'}">
                                 <span class="bi bi-plus-circle"></span> Publish
                         </router-link>

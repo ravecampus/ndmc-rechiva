@@ -12,7 +12,12 @@ const getUserAuth = ()=>{
 }
 
 const dashboard = ()=>{
-      router.push("/faculty")
+    if(user.value.role === 2){
+         router.push("/admin")
+    }else{
+          router.push("/faculty")
+    }
+    
 }
     
 const router = useRouter()
@@ -31,7 +36,7 @@ onMounted(()=>{
     //     router.push("/faculty")
     // }
     if(window.winsdev.isLoggedin && user.role === 2){
-        router.push("/admin")
+        // router.push("/admin")
     }
  })
 

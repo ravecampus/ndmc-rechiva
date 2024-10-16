@@ -13,7 +13,6 @@
     onMounted(()=>{
         getStatistic();
         getDeptStat()
-        console.log(dataset)
     })
 
 

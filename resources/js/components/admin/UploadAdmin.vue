@@ -297,7 +297,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <router-link :to="{name:'faculty.documents'}" >
+                            <router-link :to="{name:'admin.request'}" >
                                 <i class="bi bi-eye"></i>
                                 View uploaded documents
                             </router-link> 

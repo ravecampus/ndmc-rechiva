@@ -312,9 +312,9 @@
                                <hr v-if="docData.upload_type == 0">
                                 <div class="d-flex flex-wrap pub-date" v-if="docData.upload_type == 0">
                                    
-                                    <div class="d-flex custom-w justify-content-start mb-3">
+                                    <div class="d-flex custom-w flex-wrap justify-content-start mb-3">
                                        <span class="key-title">Keywords:</span>
-                                        <span class="badge bg-success me-1" 
+                                        <span class="badge bg-success me-1 mb-1" 
                                         v-for="(list, index) in docData.keywords" :key="index" >{{ list.description }}</span>
                                         
                                     </div>
