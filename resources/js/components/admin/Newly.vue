@@ -79,7 +79,7 @@
                 <img class="rounded-circle" width="150px" :src="user.image == null ? '/img/user.png' : 'data:'+user.extension+';base64,'+user.image">
                 <span class="font-weight-bold fw-bold">
                     {{ user.first_name }}
-                    {{ user.middle_initial }}.
+                    {{ user.middle_initial }}
                     {{ user.last_name }}
                 </span>
                 <span class="text-black-50">{{ user.email }}</span>

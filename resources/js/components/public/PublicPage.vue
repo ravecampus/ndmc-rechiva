@@ -114,7 +114,7 @@ const mostdownload = ()=>{
                                     </router-link> 
                                     <span class="most-count">
                                        
-                                        {{ parseFloat(list.download).toFixed(2) }}
+                                        {{ list.download }}
                                          <i class="bi bi-cloud-arrow-down"></i>
                                     </span>
                                 </li>

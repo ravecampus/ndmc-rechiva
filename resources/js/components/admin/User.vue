@@ -197,7 +197,7 @@
         axios.post('/api/admin-contact',info).then((res)=>{
              toast.fire({
 				icon:'success',
-				title:'User added Successfully!'
+				title:'Admin contact information has been modified!'
             })
             modalinfo.hide()
             admicontact()

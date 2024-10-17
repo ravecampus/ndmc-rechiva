@@ -164,7 +164,7 @@
                         </div>
                         <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
                         <div class="text-start txt-grey" v-if="docData.upload_type == 0">
-                           <span class="fw-bold"> Volume/Issue no.:</span> {{ docData.doi}}
+                           <span class="fw-bold"> Volume/Issue no.:</span> {{ docData.issue_numbers}}
                         </div>
                         <hr class="mt-0 p-0" v-if="docData.upload_type == 0">
                          <div class="text-start txt-grey" v-if="docData.upload_type == 0">

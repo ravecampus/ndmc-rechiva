@@ -222,7 +222,7 @@
                             
                         </tbody>
                     </table>
-                    <nav class="mt-2 d-flex justify-content-end me-2" aria-label="..." v-if="noData(listData)">
+                    <nav class="mt-2 d-flex justify-content-start ms-1" aria-label="..." v-if="noData(listData)">
                         <ul class="pagination pagination-sm custom-page">
                             <li class="page-item" aria-current="page" v-for="(link, index) in links" :key="index">
                                 <a class="page-link"

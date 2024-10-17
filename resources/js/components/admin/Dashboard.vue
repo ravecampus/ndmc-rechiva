@@ -108,7 +108,7 @@ const showNotification = (data)=>{
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                     <li class="nav-item nav-cus mb-nav">
                         <router-link class="btn btn-outline-success" :to="{name:'publicpage'}">
-                                <span class="bi bi-globe"></span> Website
+                                <span class="bi bi-globe"></span> Home
                         </router-link>
                     </li>
                     <li class="nav-item nav-cus mb-nav">
