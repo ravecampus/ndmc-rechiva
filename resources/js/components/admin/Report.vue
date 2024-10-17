@@ -324,7 +324,7 @@
                                 :'' }}</td>
                         </tr>
                         <tr>
-                            <td colspan="6" class="text-start">{{ list_published.length }} item/s</td>
+                            <td colspan="6" class="text-start">{{ list_published != undefined ? list_published.length : 0}} item/s</td>
                         </tr>
                     </tbody>
                 </table>
@@ -359,7 +359,7 @@
                                 :'' }}</td>
                         </tr>
                          <tr>
-                            <td colspan="6" class="text-start">{{ list_archived.length }} item/s</td>
+                           <td colspan="6" class="text-start">{{ list_archived != undefined ? list_archived.length : 0}} item/s</td>  <td colspan="6" class="text-start">{{ list_archived.length }} item/s</td>
                         </tr>
                     </tbody>
                 </table>
@@ -384,7 +384,7 @@
                             <td>{{ list.department != null ? list.department.description : '' }}</td>
                         </tr>
                          <tr>
-                            <td colspan="6" class="text-start">{{ users.length }} item/s</td>
+                            <td colspan="6" class="text-start">{{ users != undefined ? users.length : 0}} item/s</td>
                         </tr>
                     </tbody>
                 </table>
@@ -471,7 +471,7 @@
                                 :'' }}</td>
                         </tr>
                         <tr>
-                            <td colspan="6" class="text-start">{{ list_published.length }} item/s</td>
+                             <td colspan="6" class="text-start">{{ list_published != undefined ? list_published.length : 0}} item/s</td>
                         </tr>
                     </tbody>
                 </table>
@@ -506,7 +506,7 @@
                                 :'' }}</td>
                         </tr>
                          <tr>
-                            <td colspan="6" class="text-start">{{ list_archived.length }} item/s</td>
+                            <td colspan="6" class="text-start">{{ list_archived != undefined ? list_archived.length : 0}} item/s</td>
                         </tr>
                     </tbody>
                 </table>
@@ -531,7 +531,7 @@
                             <td>{{ list.department != null ? list.department.description : '' }}</td>
                         </tr>
                          <tr>
-                            <td colspan="6" class="text-start">{{ users.length }} item/s</td>
+                        <td colspan="6" class="text-start">{{ users != undefined ? users.length : 0}} item/s</td>
                         </tr>
                     </tbody>
                 </table>
@@ -561,4 +561,9 @@
             font-weight:normal; 
         }
     }
+@media print {
+    body{
+      align-content: flex-start;         
+    }
+}
 </style>
