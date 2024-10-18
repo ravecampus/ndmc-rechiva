@@ -74,7 +74,7 @@ const mostdownload = ()=>{
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mt-2 recent-submission ps-5">
+            <div class="col-md-6 mtop recent-submission ps-5">
                 <div class="container rs-content">
                     <div class="rs-content-head">
                         Recent Submissions
@@ -305,5 +305,8 @@ const mostdownload = ()=>{
         height: 2px;
         background-color: #056836;
         margin-right: 10px;
+    }
+    .mtop{
+        margin-top: .8rem;
     }
 </style>
