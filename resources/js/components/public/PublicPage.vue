@@ -235,7 +235,12 @@ const mostdownload = ()=>{
             .title{
                 font-size: 1.5rem;
                 font-weight: 600 !important;
+               margin: 0;
                 .link{
+                    padding:0 !important;
+                    line-height: 1.2 !important;
+                    display:block;
+                    margin: 0;
                     color: #fff;
                     &:hover{
                         text-decoration: underline !important;
@@ -251,7 +256,7 @@ const mostdownload = ()=>{
     }
 
     .rs-truncate{
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 4;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;

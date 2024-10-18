@@ -378,6 +378,8 @@
             font-weight: 700;
             padding: 0;
             margin: 0;
+            line-height: 1.2 !important;
+            display:block;
             &:hover{
                 text-decoration: underline !important;
             }
