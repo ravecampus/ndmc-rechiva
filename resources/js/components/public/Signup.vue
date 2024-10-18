@@ -159,6 +159,7 @@ onMounted(()=>{
 </template>
 <style lang="scss">
     .login{
+        margin-top: 4rem;
         margin-bottom: 20px;
         background-color: #fff;
         border: 1px solid transparent;

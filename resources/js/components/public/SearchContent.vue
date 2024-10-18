@@ -308,7 +308,7 @@
 <style lang="scss" scoped>
     .card-search{
         margin-bottom: 20px;
-        background-color: #fdfdfde3;
+        background-color: #fafafa;
         border: 1px solid transparent;
         border-radius: 2px;
          border:#dfdfdf6b solid 1px;

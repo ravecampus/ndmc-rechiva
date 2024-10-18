@@ -49,7 +49,7 @@ onMounted(()=>{
 
 <template>
     <div class="bg-header-main">
-     <nav class="navbar navbar-expand-lg bg-light mb-0 custom-nav main-nav">
+     <nav class="navbar navbar-expand-lg bg-light mb-0 custom-nav main-nav fixed-top">
         <div class="container-fluid">
             <div class="main-brand">
                 <router-link :to="{name:'publicpage'}" class="d-inline-flex p-0" >
@@ -117,7 +117,7 @@ onMounted(()=>{
             </div>
         </div>
     </nav>
-    <div class="content">
+    <div class="content-body">
         <router-view>
         </router-view>
     </div>
@@ -125,7 +125,11 @@ onMounted(()=>{
     <Footer></Footer>
     </div>
 </template>
-<style lang="scss">
+<style lang="scss" scope>
+    .content-body{
+        margin-top: 4.6rem;
+       
+    }
     .bg-header-main{
         background-image: url('/img/background2.png'); 
         // background-attachment: fixed;
@@ -136,11 +140,12 @@ onMounted(()=>{
     }
 
     .main-nav{
-        background-color: #133921d0 !important;
-        
+        background-color: #133921 !important;
+        z-index: 99999;
         .nav-link{
 		   color: #fff !important;
-	    }
+        }
+        
     }
     .bg-footer{
         background-color: #133921 !important;

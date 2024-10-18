@@ -89,7 +89,7 @@
     .bg-container{
         background-color: #fff;
         // min-height: 40rem;
-
+        // margin-top: 5rem !important;
         margin-bottom: 10rem !important
     }
     .content-about{

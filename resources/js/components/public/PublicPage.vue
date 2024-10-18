@@ -263,12 +263,12 @@ const mostdownload = ()=>{
     }
 
     .link-fb{
-        margin-top: 2.5rem;
+        margin-top: .5rem;
     }
     .img-link{
         border: #fff solid 3px;
         border-radius: 10px;
-        width: 40rem;
+        width: 38rem;
     }
 
     .most-list{

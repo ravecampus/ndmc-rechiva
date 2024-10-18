@@ -52,7 +52,7 @@
 <div class="container mt-5 text-start min-h">
     <div class="rowc d-flex justify-content-center">
     <div class="col-4">
-     <div class="card login">
+     <div class="card login mt-5">
          <div class="card-header header-login d-flex justify-content-center p-0">
              <img class="img-login" :src="'/img/rechiva.png'">
          </div>
@@ -106,9 +106,10 @@
     </div>
 </div>
 </template>
-<style lang="scss">
+<style lang="scss" scope>
     .login{
         margin-bottom: 20px;
+        margin-top: 4rem;
         background-color: #fff;
         border: 1px solid transparent;
         border-radius: 4px;
