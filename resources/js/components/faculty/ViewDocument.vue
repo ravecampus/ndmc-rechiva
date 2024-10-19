@@ -3,7 +3,7 @@
     import { useRoute, useRouter } from "vue-router"
     import dayjs from "dayjs"
     import genstatus from "../GenStatus.vue"
-    import pdfViewer from "../PDFViewer.vue"
+    import pdfViewer from "../PDFViewer2.vue"
 
     const route = useRoute();
     const router = useRouter();
@@ -40,6 +40,11 @@
 		const date = dayjs(dateString)
 		return date.format('MMMM D, YYYY')
     }
+
+    const formatDateM = (dateString)=>{
+		const date = dayjs(dateString)
+		return date.format('MMMM, YYYY')
+    }
     
     const downloadFile = (data)=>{
         const blob = b64toBlob(data.base64, data.mime_type);
@@ -74,8 +79,8 @@
     const docFile = (data)=>{
         const blob = b64toBlob(data.base64, data.mime_type);
  
-        pdffile.value =  URL.createObjectURL(blob);
-        // pdffile.value = "data:application/pdf;base64,"+data.base64;
+        // pdffile.value =  blob;
+        pdffile.value = "data:application/pdf;base64,"+data.base64;
         // window.URL.revokeObjectURL(blob);
     
     }
@@ -204,8 +209,8 @@
                 <div class="card doc-card">
                     <div class="card-body">
                         <div v-show="viewpdf" class="content-doc text-primary border border-success border-2 pt-2">
-                            Infomation
-                            <pdfViewer :pdfFile="pdffile" @loaded="handleLoaded"></pdfViewer>
+                            <!-- Infomation -->
+                            <pdfViewer :pdfFile="pdffile"></pdfViewer>
                         </div>
                         <div class="info-doc" v-show="!viewpdf">
                             <h5 class="head-title text-start">{{ docData.title }}</h5>
@@ -230,7 +235,7 @@
                                     <span class="label">
                                         Publication date :
                                     </span>
-                                    <div class="content"> {{ formatDate(docData.publication_date) }}</div>
+                                    <div class="content"> {{ formatDateM(docData.publication_date) }}</div>
                                   
                                     
                                 </div>

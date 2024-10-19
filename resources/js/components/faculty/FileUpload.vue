@@ -4,20 +4,20 @@
     import DropZone from "./SingleDrop.vue"
     import dayjs from "dayjs"
 
+
     import textkeyword from "../InputTag.vue"
     import author from "../AuthorFilter.vue"
-    import pdfViewer from "../PDFViewer.vue"
+    import pdfViewer from "../PDFViewer2.vue"
 
-    // import { useBase64 } from '@vueuse/core'
 
     // const listInput = ref([])
 
     const format = (d) => {
-        const day =("0" + d.getDate()).slice(-2);
+        // const day =("0" + d.getDate()).slice(-2);
         const month = ("0"+(d.getMonth()+1)).slice(-2);
         const year =  d.getFullYear();
 
-        return  month+ "/" + day  + "/" + year;
+        return  month+ "/" + year;
     }
 
     onMounted(()=>{
@@ -146,7 +146,7 @@
         formData.append('type_of_paper',form.type_of_paper)
         formData.append('abstract',form.abstract)
         formData.append('issue_numbers',form.issue_numbers)
-        formData.append('publication_date',form.publication_date =="" ? "" :  format(form.publication_date))
+        formData.append('publication_date',form.publication_date =="" ? "" :  form.publication_date)
         formData.append('doi',form.doi)
         formData.append('publisher',form.publisher)
         axios.post('/api/document', formData,
@@ -193,7 +193,7 @@
 
     const loadPdf = (data)=>{
       
-      setPdf.value = window.URL.createObjectURL(data[0])
+      setPdf.value = URL.createObjectURL(data[0])
     }
 
     const viewReport = ()=>{
@@ -225,6 +225,7 @@
                         </div>
                         <div class="card-body" v-show="setPdf != '' && viewpdf" >
                             <pdfViewer v-if="setPdf != ''" :pdfFile="setPdf"></pdfViewer>
+                            
                         </div>
                         <div class="card-body row" v-show="!viewpdf">
                             <div class="form-group mb-3 col-6">
@@ -252,7 +253,7 @@
                             </div>
                              <div class="form-group mb-3 col-6" v-if="uploadtype">
                                 <label>Publication Date</label>
-                                <VueDatePicker v-model="form.publication_date" :format="format" placeholder="Enter Publication date"></VueDatePicker>
+                                <VueDatePicker v-model="form.publication_date" :format="format"  month-picker placeholder="Enter Publication date"></VueDatePicker>
                                 <span class="text-danger" v-if="errors.publication_date">{{errors.publication_date[0]}}</span>
                             </div>
                              <div class="form-group mb-3 col-6" v-if="uploadtype">

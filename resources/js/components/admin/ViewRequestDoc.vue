@@ -3,7 +3,7 @@
     import { useRoute, useRouter } from "vue-router"
     import dayjs from "dayjs"
     import genstatus from "../GenStatus.vue"
-    import pdfViewer from "../PDFViewer.vue"
+    import pdfViewer from "../PDFViewer2.vue"
 
     const route = useRoute();
     const router = useRouter();
@@ -277,8 +277,7 @@
                 <div class="card doc-card">
                     <div class="card-body">
                         <div v-show="viewpdf" class="content-doc text-primary border border-success border-2 pt-2">
-                            Infomation
-                            <pdfViewer :pdfFile="pdffile" @loaded="handleLoaded"></pdfViewer>
+                              <pdfViewer :pdfFile="pdffile"></pdfViewer>
                         </div>
                         <div class="info-doc" v-show="!viewpdf">
                             <div class="d-flex justify-content-between">

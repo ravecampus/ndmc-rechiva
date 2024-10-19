@@ -6,7 +6,7 @@
 
     import textkeyword from "../InputTag.vue"
     import author from "../AuthorEdit.vue"
-    import pdfViewer from "../PDFViewer.vue"
+    import pdfViewer from "../PDFViewer2.vue"
 
     // import { useBase64 } from '@vueuse/core'
 
@@ -30,11 +30,11 @@
     const viewpdf = ref(false)
 
     const format = (d) => {
-        const day =("0" + d.getDate()).slice(-2);
+        // const day =("0" + d.getDate()).slice(-2);
         const month = ("0"+(d.getMonth()+1)).slice(-2);
         const year =  d.getFullYear();
 
-        return  month+ "/" + day  + "/" + year;
+        return  month+ "/" + year;
     }
 
     onMounted(()=>{
@@ -279,7 +279,7 @@
                             </div>
                              <div class="form-group mb-3 col-6" v-if="uploadtype">
                                 <label>Publication Date</label>
-                                <VueDatePicker v-model="form.publication_date" :format="format" placeholder="Enter Publication date"></VueDatePicker>
+                                <VueDatePicker v-model="form.publication_date" :format="format" month-picker placeholder="Enter Publication date"></VueDatePicker>
                                 <span class="text-danger" v-if="errors.publication_date">{{errors.publication_date[0]}}</span>
                             </div>
                              <div class="form-group mb-3 col-6" v-if="uploadtype">

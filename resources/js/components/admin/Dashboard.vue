@@ -2,6 +2,8 @@
 import {ref, onMounted, watch } from "vue"
 import { useRouter } from "vue-router"
 
+import Footer from "../Footer.vue"
+
 const user = ref({})
 const notifications = ref([])
 const router = useRouter()
@@ -263,13 +265,7 @@ const showNotification = (data)=>{
 
       </div>
 	</div>
-    <div class="footer d-print-none">
-        <ul class="nav justify-content-center border-bottom bg-footer">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-white"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"></a></li>
-        </ul>
-        <!-- <p class="text-center text-body-secondary">© 2024 Company, Inc</p> -->
-    </div>
+       <Footer></Footer>
 </div>
 </template>
 <script>

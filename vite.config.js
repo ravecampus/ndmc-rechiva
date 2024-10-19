@@ -35,4 +35,16 @@ export default defineConfig({
             }
         }
     }
+    // optimizeDeps: {
+    //     esbuildOptions: {
+    //       supported: {
+    //         'top-level-await': true,
+    //       },
+    //     },
+    //   },
+    //   esbuild: {
+    //     supported: {
+    //       'top-level-await': true,
+    //     },
+    //   }
 });
