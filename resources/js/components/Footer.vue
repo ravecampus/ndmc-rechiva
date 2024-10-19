@@ -14,7 +14,7 @@
 
 </script>
 <template>
-    <div class="footer d-prnt-none">
+    <div class="footer d-print-none">
      <div class="row">
          
          <div class="col-md-6 text-start">
