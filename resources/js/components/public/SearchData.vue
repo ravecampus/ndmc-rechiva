@@ -174,7 +174,7 @@
 <template>
     <div class="container-fluid mb-5">
         <div class="d-flex justify-content-center">
-            <div class="search w-50 mt-3 position-absolute">
+            <div class="search w-50 mt-4 position-absolute">
             <div class="input-group input-group-lg  border-white">
                 <input type="text" class="form-control " v-model="form.search" 
                 @keyup.prevent="seachList" 

@@ -51,8 +51,6 @@ class DocumentController extends Controller
         $user = Auth::user();
 
         if(json_decode($request->upload_type)){
-      
-
             if($user->role == 2){
                 $request->validate([
                     'title'=>'required',
@@ -84,6 +82,11 @@ class DocumentController extends Controller
                     'keywords.*'=>'required|string',
                 ]);
             }
+
+            // $dateMonthArray = explode('/',json_decode($request->publication_date));
+            $obj = json_decode($request->publication_date);
+            $month = $obj->month;
+            $year = $obj->year;
          
             $doc = Document::create([
                 'title' => $request->title,
@@ -91,7 +94,7 @@ class DocumentController extends Controller
                 'upload_type' => 0,
                 'type_of_paper_id' => $request->type_of_paper,
                 'issue_numbers' => $request->issue_numbers,
-                'publication_date' => new Carbon($request->publication_date),
+                'publication_date' => Carbon::createFromDate($year, $month+1,1),
                 'doi' => $request->doi,
                 'abstract' => $request->abstract,
                 'user_id' => $user->id,
@@ -255,6 +258,10 @@ class DocumentController extends Controller
             ]);
         }
      
+        $obj = json_decode($request->publication_date);
+        $month = $obj->month;
+        $year = $obj->year;
+
         $doc = Document::find($id);
         $doc->title = $request->title;
         $doc->abstract = $request->abstract;
@@ -262,7 +269,7 @@ class DocumentController extends Controller
         $doc->issue_numbers = $request->issue_numbers;
         $doc->doi = $request->doi;
         $doc->publisher = $request->publisher;
-        $doc->publication_date = new Carbon($request->publication_date);
+        $doc->publication_date = Carbon::createFromDate($year, $month+1,1);
         $doc->save();
         
         foreach ($request->keywords as $word) {

@@ -70,7 +70,10 @@
         title:"", 
         type_of_paper:"", 
         college_department:"",
-        publication_date: "",
+        publication_date: {
+            month: new Date().getMonth(),
+            year: new Date().getFullYear()
+        },
         issue_numbers:"",
         abstract:"",
         doi:"",
@@ -146,7 +149,7 @@
         formData.append('type_of_paper',form.type_of_paper)
         formData.append('abstract',form.abstract)
         formData.append('issue_numbers',form.issue_numbers)
-        formData.append('publication_date',form.publication_date =="" ? "" :  format(form.publication_date))
+        formData.append('publication_date',form.publication_date =="" ? "" : JSON.stringify(form.publication_date))
         formData.append('doi',form.doi)
         formData.append('publisher',form.publisher)
         axios.post('/api/document', formData,

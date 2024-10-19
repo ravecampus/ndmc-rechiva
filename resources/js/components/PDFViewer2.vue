@@ -20,7 +20,7 @@
     })
 </script>
 <template>
-        <VuePdfApp class="pdf-index" v-if="pdfFile != undefined"  :page-scale="page-actual" :config="config" style="height: 100vh;"  :pdf="pdfFile" ></VuePdfApp>
+        <VuePdfApp class="pdf-index" v-if="pdfFile != undefined"  :page-scale="page-fit" :config="config" style="height: 100vh;"  :pdf="pdfFile" ></VuePdfApp>
 </template>
 <style lang="scss" scoped>
     .pdf-app.dark {

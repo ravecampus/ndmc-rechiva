@@ -1,6 +1,7 @@
 <template>
-    <div class="container bg-container mt-5">
-        <div class="row">
+
+    <div class="container mt-5 pt-5">
+        <div class="row bg-container">
             <div class="col-md-12 mt-3 mb-5">
                 <div class="head-about">
                     About

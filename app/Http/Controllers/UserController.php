@@ -96,7 +96,7 @@ class UserController extends Controller
         $note = Notification::create([
             'sender_id' => 0,
             'receiver_id'=> $data->id,
-            'caption' =>$data->activate == 0 ? "Sorry, You are Deactivated!" :"Congratulations, You are Activated",
+            'caption' =>$data->activate == 0 ? "Sorry, You are Deactivated!" :"Your account has been activated",
             'role'=>2,
             'document_id' =>0 
         ]);

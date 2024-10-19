@@ -71,7 +71,7 @@
         title:"", 
         type_of_paper:"", 
         college_department:"",
-        publication_date: "",
+        publication_date:{},
         issue_numbers:"",
         abstract:"",
         doi:"",
@@ -97,7 +97,10 @@
             form.id = data.id
             form.title = data.title
             form.type_of_paper = data.type_of_paper_id
-            form.publication_date = data.publication_date
+            form.publication_date = {
+                    month: new Date(data.publication_date).getMonth(),
+                    year: new Date(data.publication_date).getFullYear()
+            }
             form.abstract = data.abstract
             form.doi = data.doi
             form.issue_numbers = data.issue_numbers
@@ -159,6 +162,7 @@
 
     const saveChanges = ()=>{
         btnsave.value = "processing..."
+        form.publication_date = JSON.stringify(form.publication_date)
         axios.put('/api/document/'+form.id, form).then((res)=>{
             toast.fire({
                 icon:'success',

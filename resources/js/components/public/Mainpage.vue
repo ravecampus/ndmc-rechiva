@@ -134,7 +134,7 @@ onMounted(()=>{
         background-image: url('/img/background2.png'); 
         // background-attachment: fixed;
         width:100% !important; 
-        height:15rem; 
+        height:9.45rem; 
         background-repeat: no-repeat; 
         background-size:cover;
     }
