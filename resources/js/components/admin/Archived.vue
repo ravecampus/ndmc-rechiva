@@ -34,7 +34,7 @@
         })
     }
 
-     watch(searchData, ()=>{
+     watch(searchfor, ()=>{
 		getData()
 	})
 
@@ -142,7 +142,7 @@
                 </div>
                 <div class="d-flex">
                     <div class="input-group input-group-sm p-2">
-                        <input type="text" class="form-control" placeholder="Search..." aria-label="Example text with button addon" v-model="searchfor.searchData" aria-describedby="button-addon1">
+                        <input type="text" class="form-control" placeholder="Search..." aria-label="Example text with button addon" v-model="searchfor.search" aria-describedby="button-addon1">
                         <button class="btn btn-primary" type="button" id="button-addon1">
                             <i class="fa fa-search"></i>
                         </button>

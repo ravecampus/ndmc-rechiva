@@ -149,7 +149,7 @@ const showNotification = (data)=>{
                                 <a href="#" class="notili" @click.prevent="showNotification(list)">
                                     <div class="notification">
                                         <div class="d-flex flex-start align-items-center">
-                                            <img class="rounded-circle shadow-1-strong me-3"
+                                            <img class="rounded-circle shadow-1-strong me-3" v-if="list.sender != undefined"
                                        
                                                 :src="list.sender != undefined ? (list.sender.image == null ? '/img/user.png' : 'data:'+list.sender.extension+';base64,'+list.sender.image) :  '/img/user.png'"
                                                 alt="avatar" width="40"

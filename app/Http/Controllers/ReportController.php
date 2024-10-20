@@ -99,7 +99,7 @@ class ReportController extends Controller
     public function mostDownload(){
         $doc = Document::join('downloads', 'downloads.document_id','=', 'documents.id')
             ->select('document_id', 'title', 'abstract', DB::raw('count(document_id) as download'))
-            ->groupBy('document_id')->orderBy('download', 'desc')->limit(10)
+            ->groupBy('document_id')->orderBy('download', 'desc')->limit(5)
             ->get();
         
         return response()->json($doc, 200);
