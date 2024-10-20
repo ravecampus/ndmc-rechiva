@@ -37,7 +37,7 @@ class AuthorController extends Controller
     {
         $request->validate([
             'first_name'=>'required|string',
-            'middle_name'=>'required|string',
+            // 'middle_name'=>'required|string',
             'last_name'=>'required|string',
         ]);
 
@@ -80,7 +80,7 @@ class AuthorController extends Controller
     {
         $request->validate([
             'first_name' => 'required',
-            'middle_name' => 'required',
+            // 'middle_name' => 'required',
             'last_name' => 'required'
         ]);
         $data = Author::find($id);

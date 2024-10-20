@@ -102,7 +102,7 @@
            Swal.fire({
             title: "Are you sure? "+data.title,
             text: "You won't be able to revert this!",
-            icon: "warning",
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#26884b",
             cancelButtonColor: "#ffc107",

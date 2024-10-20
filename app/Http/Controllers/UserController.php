@@ -49,7 +49,7 @@ class UserController extends Controller
         if($request->role == 2){
             $request->validate([
                 'first_name'  => 'required|string',
-                'middle_initial'  => 'required|string',
+                // 'middle_initial'  => 'required|string',
                 'last_name'  => 'required|string',
                 'role'  => 'required',
                 'email' => 'required|email',
@@ -59,7 +59,7 @@ class UserController extends Controller
         }else{
         $request->validate([
             'first_name'  => 'required|string',
-            'middle_initial'  => 'required|string',
+            // 'middle_initial'  => 'required|string',
             'last_name'  => 'required|string',
             'role'  => 'required',
             'department'  => 'required',
@@ -119,7 +119,7 @@ class UserController extends Controller
     {
         $request->validate([
             'first_name'  => 'required|string',
-            'middle_initial'  => 'required|string',
+            // 'middle_initial'  => 'required|string',
             'last_name'  => 'required|string',
             'email' => 'required|email',
         ]);
@@ -138,7 +138,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return response()->json($user, 200);
     }
 
     public function changePassword(Request $request, string $id){

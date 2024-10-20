@@ -236,6 +236,31 @@
 
     const btnpass = ref("Save Changes")
 
+    const deleteuser = (data)=>{
+        Swal.fire({
+            title: "Are you sure? "+ data.first_name+" "+data.last_name,
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#26884b",
+            cancelButtonColor: "#ffc107",
+            confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/api/users/${data.id}`).then((res)=>{
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "User has been deleted.",
+                        icon: "success",
+						confirmButtonColor: "#26884b",
+                    });
+                    getData();
+                })
+                
+            }
+        });
+    }
+
 </script>
 
 
@@ -343,6 +368,7 @@
                                         <div class="dropdown-menu dropdown-menu-end dd-bg" >
                                             <a href="#" class="dropdown-item dd-item" @click="activateUser(list)">{{ list.activate == 0 && list.role == 1 ?'Activate':'Deactivate' }}</a>
                                             <a href="#" class="dropdown-item dd-item" @click="resetPassword(list)">Reset Password</a>
+                                            <a href="#" class="dropdown-item dd-item" @click="deleteuser(list)">Remove User</a>
                                         </div>
                                     </div>
                                 </td>

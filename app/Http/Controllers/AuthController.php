@@ -18,7 +18,7 @@ class AuthController extends Controller
                 'password' => 'required|string|min:6|confirmed',
                 'first_name' => 'required|string',
                 'last_name' => 'required|string',
-                'middle_initial' => 'required|string',
+                // 'middle_initial' => 'required|string',
                 'college_department' => 'required',
             ]);
 

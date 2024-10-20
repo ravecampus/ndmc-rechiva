@@ -151,7 +151,7 @@ const showNotification = (data)=>{
                                         <div class="d-flex flex-start align-items-center">
                                             <img class="rounded-circle shadow-1-strong me-3"
                                        
-                                                :src="list.sender.image == null ? '/img/user.png' : 'data:'+list.sender.extension+';base64,'+list.sender.image"
+                                                :src="list.sender != undefined ? (list.sender.image == null ? '/img/user.png' : 'data:'+list.sender.extension+';base64,'+list.sender.image) :  '/img/user.png'"
                                                 alt="avatar" width="40"
                                                 height="40" />
                                             <div class="arrow text-success w-100 position-absolute text-end">

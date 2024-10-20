@@ -46,7 +46,7 @@
                     <h4 class="head-title">Contact Information:</h4>
                     <div class="contact-email">
                         <div class="title">
-                        RECHIVA Development Center (RDC):
+                        Research and Development Center (RDC):
                         </div>
                         <p>
                         Email address : rdc@ndmc.edu.ph
@@ -62,7 +62,7 @@
                         </p>
                          <div class="title">
                             Facebook: 
-                            <a  target="_blank" href="https://facebook.com/rechiva">https://facebook.com/rechiva</a>
+                            <a  target="_blank" href="https://www.facebook.com/NDMCResearchandDevelopmentCenter">https://www.facebook.com/NDMCResearchandDevelopmentCenter</a>
                         </div>
                     </div>
                 </div>
