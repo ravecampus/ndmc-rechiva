@@ -59,6 +59,7 @@ Route::resource('/public-document', PublicDocumentController::class);
 Route::get('/document-published', [DocumentController::class, 'publishedAuth']);
 Route::get('/document-archived', [DocumentController::class, 'archivedAuth']);
 Route::get('/document-canceled', [DocumentController::class, 'canceledAuth']);
+Route::post('/view-docs', [DocumentController::class, 'viewDocs']);
 Route::get('/list-topapers', [TypeOfPaperController::class,'listOfPaper']);
 Route::get('/list-departments', [DepartmentController::class,'listDepartment']);
 

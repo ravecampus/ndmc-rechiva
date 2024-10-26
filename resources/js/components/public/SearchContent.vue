@@ -1,6 +1,8 @@
 <script setup>
     import { ref, watch } from "vue"
+    import { useRouter } from "vue-router"
 
+    const router = useRouter();
     const author = ref([])
     const typeofpaper = ref([])
     const listData2 = ref([])
@@ -150,6 +152,12 @@
         resetFilter();
 
     }
+
+    const viewdocs = (data)=>{
+        axios.post('/api/view-docs', data).then((res)=>{
+            router.push({name:'main.document', params:{id:data.id}})
+        })
+    }
 </script>
 
 
@@ -263,9 +271,9 @@
                     </div>
                 </div>
                 <div class="content-message-group" v-for="(lst,idx) in props.filterResult" :key="idx">
-                    <router-link :to="{name:'main.document', params:{id:lst.id}}" class="title">
+                    <a href="#" @click="viewdocs(lst)" class="title">
                         {{ lst.title }}
-                   </router-link>
+                   </a>
                     <div class="message text-truncate-message" style="max-width: 100em;">
                        {{ lst.abstract }}
                     </div>

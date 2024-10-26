@@ -130,6 +130,10 @@
         }
     }
 
+     const countData = (data)=>{
+        return data != undefined ? data.length : 0;
+    }
+
 </script>
 <template>
     <div class="container mt-3 mb-5">
@@ -198,6 +202,19 @@
                                 </li>
                             
                             </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-pub">
+                        <div class="d-flex justify-content-around mt-4 mb-3">
+                            <div class="flex-fill">
+                                <span class="bi bi-eye-fill bi-f text-muted">
+                                <div class="badge bg-success wd ms-1">  {{ countData(docData.viewdoc)}} </div></span>
+
+                            </div>
+                            <div class="flex-fill">
+                                <span class="bi bi-download bi-f fw-bold text-muted">
+                                <div class="badge bg-success wd ms-1"> {{ countData(docData.download)}} </div></span>
+                            </div>
                         </div>
                     </div>
 
@@ -378,5 +395,14 @@
     }
     .badge{
         font-size: 12px;
+    }
+
+    .bi-f{
+        font-size: 16px;
+        font-weight: 800;
+    }
+    .wd{
+        width: 3rem;
+        margin-top: 2px;
     }
 </style>

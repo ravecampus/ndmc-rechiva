@@ -22,54 +22,33 @@
                  RECHIVA | NDMC Research and Department Center
              </div>
              Quezon Avenue, Midsayap, Cotabato 9410
+             <div class="fw-bold fs-6 mt-3">
+                 Capstone Project of College of Information Technology and Engineering (CITE)
+             </div>
          </div>
-        <div class="col-md-6 p-0 text-end">
+        <div class="col-md-6 p-0 text-start">
            
-            <section class="mb-4 text-white">
-            <!-- Facebook -->
-            <a
-                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-facebook"></i
-            ></a>
-
-            <!-- Twitter -->
-            <a
-                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-twitter"></i
-            ></a>
-
-            <!-- Google -->
-            <a
-                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-google"></i
-            ></a>
-
-            <!-- Instagram -->
-            <a
-                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-instagram"></i
-            ></a>
-
-            <!-- Linkedin -->
-            <a
-                data-mdb-ripple-init class="btn btn-link btn-floating btn-lg text-light m-1"
-                href="#!"
-                role="button"
-                data-mdb-ripple-color="dark"
-                ><i class="bi bi-linkedin"></i
-            ></a>
+            <section class="text-white">
+                <span>Follow us:</span>
+            <div>
+                <a data-mdb-ripple-init class="btn p-0 ps-3 btn-float btn-lg text-light"
+                    href="mailto:rdc@ndmc.edu.ph"
+                    target="_blank"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+                    ><i class="bi bi-envelope-at"></i> 
+                    <span class="s-name ms-2">rdc@ndmc.edu.ph</span>
+                    </a>
+            </div>
+            <div>
+                <a data-mdb-ripple-init class="btn p-0 ps-3 btn-float btn-lg text-light"
+                    target="_blank"
+                    href="https://www.facebook.com/NDMCResearchandDevelopmentCenter"
+                    role="button"
+                    data-mdb-ripple-color="dark"><i class="bi bi-facebook"></i>
+                     <span class="s-name ms-1"> Facebook</span>
+                     </a>
+            </div>
             
             </section>
              <div class="btn-group dropup" v-if="!auth">
@@ -123,6 +102,10 @@
         background: #01752e;
         position: absolute;
         padding:5px;
+    }
+
+    .s-name{
+        font-size: 16px;
     }
 </style>
 

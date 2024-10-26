@@ -49,6 +49,10 @@
         })
     }
 
+    const countData = (data)=>{
+        return data != undefined ? data.length : 0;
+    }
+
 </script>
 
 <template>
@@ -84,14 +88,25 @@
                                       <timeago :class="'sub-ago'" :datetime="list.created_at"/>
                                     </router-link>
                                 </td>
-                                <td class="text-abstract w-50 ">
+                                <td class="text-abstract">
                                     <span class="text-truncate-message">
                                     {{ list.abstract }}
                                     </span>
                                 </td>
                                 <td>
-                                 
+                                    <div class="d-flex  justify-content-around w-50">
+                                        <div class="flex-fill">
+                                            <span class="bi bi-eye-fill bi-f text-muted">
+                                            <div class="badge bg-success wd ms-1">  {{ countData(list.viewdoc)}} </div></span>
+
+                                        </div>
+                                        <div class="flex-fill">
+                                            <span class="bi bi-download bi-f fw-bold text-muted">
+                                            <div class="badge bg-success wd ms-1"> {{ countData(list.download)}} </div></span>
+                                        </div>
+                                    </div>
                                 </td>
+                                <td></td>
                                 
                             </tr>
                             
@@ -118,6 +133,16 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    .bi-f{
+      
+        font-size: 16px;
+        font-weight: 800;
+    }
+    .wd{
+        width: 3rem;
+        margin-top: 2px;
     }
 </style>
 

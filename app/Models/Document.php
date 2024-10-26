@@ -52,6 +52,14 @@ class Document extends Model
         return $this->hasOne(User::class,'id', 'user_id');
     }
 
+    public function download(){
+        return $this->hasMany(Download::class,'document_id', 'id');
+    }
+
+    public function viewdoc(){
+        return $this->hasMany(ViewDoc::class,'document_id', 'id');
+    }
+
 
 
 }

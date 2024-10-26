@@ -10,6 +10,7 @@ use App\Models\Notification;
 use App\Models\Keyword;
 use App\Models\Download;
 use App\Models\User;
+use App\Models\ViewDoc;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -203,7 +204,7 @@ class DocumentController extends Controller
      */
     public function show(string $id)
     {
-        $doc = Document::with('document_file', 'keywords', 'authors', 'typeofpaper', 'feedback', 'department','feedback', 'userdoc')->find($id);
+        $doc = Document::with('document_file', 'keywords', 'authors', 'typeofpaper', 'feedback', 'department','feedback', 'userdoc','download','viewdoc')->find($id);
         return response()->json($doc, 200);
     }
 
@@ -415,7 +416,7 @@ class DocumentController extends Controller
     }
 
     public function recentfaculty(){
-        $data = Document::where('user_id', Auth::id())->latest()->limit(4)->get();
+        $data = Document::with('download', 'viewdoc')->where('user_id', Auth::id())->latest()->limit(4)->get();
 
         return response()->json($data, 200);
     }
@@ -428,5 +429,13 @@ class DocumentController extends Controller
         }
 
         return response()->json($docs, 200);
+    }
+
+    public function viewDocs(Request $request){
+        $doc = ViewDoc::create([
+            'document_id' => $request->id
+        ]);
+
+        return response()->json($doc, 200);
     }
 }

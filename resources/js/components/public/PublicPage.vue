@@ -2,6 +2,11 @@
     import dayjs from 'dayjs'
     import { ref, onMounted, reactive } from "vue"
 
+    import { useRouter } from "vue-router"
+
+    
+    const router = useRouter();
+
     const statistic = ref({})
   
 
@@ -56,6 +61,12 @@ const mostdownload = ()=>{
         downloads.value = res.data
     });
 }
+
+const viewdocs = (data)=>{
+    axios.post('/api/view-docs', data).then((res)=>{
+        router.push({name:'main.document', params:{id:data.id}})
+    })
+}
 </script>
 
 <template>
@@ -81,9 +92,9 @@ const mostdownload = ()=>{
                     </div>
                     <div class="rs-content-body" v-for="(list, index) in recents" :key="index">
                         <div class="title">
-                            <router-link :to="{name:'main.document', params:{id:list.id}}" class="link">
+                            <a href="#" @click="viewdocs(list)" class="link">
                             {{ list.title }}
-                           </router-link>
+                           </a>
                         </div>
                         <div class="content rs-truncate">
                             {{ list.abstract }}
@@ -107,11 +118,11 @@ const mostdownload = ()=>{
                             <h4 class="text-uppercase">Top most download documents</h4>
                             <ul class="most-list">
                                 <li class="d-flex justify-content-between" v-for="(list,index) in downloads" :key="index">
-                                   <router-link :to="{name:'main.document', params:{id:list.document_id }}">
+                                   <a href="#" @click="viewdocs({'id':list.document_id})">
                                        <!-- <i class="bi bi-cloud-arrow-down"></i> -->
                                      
                                       <span class="most-title text-truncate-message">  <span class="square"></span> {{ list.title}}</span>
-                                    </router-link> 
+                                    </a> 
                                     <span class="most-count">
                                        
                                         {{ list.download }}

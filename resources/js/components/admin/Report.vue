@@ -16,10 +16,13 @@
     const btngenerate = ref("generate")
 	const form = reactive(fdata())
     const resetform = () => Object.assign(form, fdata())
+
+    const user =  ref({})
     
     onMounted(() => {
         ListofDepartment()
         ListTypeofPapers()
+        user.value = window.winsdev.user
     })
 
      const filter = reactive({
@@ -542,9 +545,13 @@
                     </tbody>
                 </table>
 
-
-                   <div class="text-start">
-                        Printed date: {{ format(new Date())}}
+                    <div class="text-start mt-4 fw-bold">
+                        Prepared by: <span class="f-sig text-uppercase">
+                            {{ user.first_name }} {{ user.middle_initial }} {{ user.last_name }}
+                        </span>
+                   </div>
+                   <div class="text-start mt-1 fw-bold">
+                        Printed date: <span class="fc">{{ format(new Date())}}</span>
                    </div>
                 </div>
             </div>
@@ -566,6 +573,19 @@
             font-size: 14px;
             font-weight:normal; 
         }
+    }
+
+    .text-start{
+        color:#000;
+    }
+
+    .fc{
+        font-style: italic;
+        font-weight: 500;
+    }
+    .f-sig{
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
     }
 @media print {
     body{

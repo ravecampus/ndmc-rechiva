@@ -7,7 +7,7 @@
                     About
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="content-about">
                     <div class="title">
                         RECHIVA
@@ -21,7 +21,7 @@
                 </div>
             </div>
               <div class="col-md-6 mt-3">
-                <div class="content-about">
+                <div class="content-about-2">
                     <div class="title">
                         Vision :
                     </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
               <div class="col-md-6 mt-3">
-                <div class="content-about">
+                <div class="content-about-2">
                     <div class="title">
                         Mission :
                     </div>
@@ -43,28 +43,17 @@
 
             <div class="col-md-12 mt-3">
                 <div class="contact text-start p-5">
-                    <h4 class="head-title">Contact Information:</h4>
-                    <div class="contact-email">
-                        <div class="title">
-                        Research and Development Center (RDC):
-                        </div>
-                        <p>
-                        Email address : rdc@ndmc.edu.ph
-                        </p>
+                    <div class="d-flex justify-content-evenly animate">
+                        <div><img class="img-prop" :src="'/img/admin/prop1.png'"/></div>
+                        <div><img class="img-prop" :src="'/img/admin/prop2.png'"/></div>
                     </div>
 
-                    <div class="contact-social mt-2">
-                        <div class="title">
-                       Follow Us:
-                        </div>
-                        <p>
-                        Stay connected and updated with our latest news and updates through our social media channels:
-                        </p>
-                         <div class="title">
-                            Facebook: 
-                            <a  target="_blank" href="https://www.facebook.com/NDMCResearchandDevelopmentCenter">https://www.facebook.com/NDMCResearchandDevelopmentCenter</a>
-                        </div>
+                    <div class="d-flex justify-content-evenly mt-5 animate2">
+                        <div><img class="img-prop" :src="'/img/admin/prop3.png'"/></div>
+                        <div><img class="img-prop" :src="'/img/admin/prop4.png'"/></div>
+                        <div><img class="img-prop" :src="'/img/admin/prop5.png'"/></div>
                     </div>
+                   
                 </div>
             </div>
         </div>
@@ -91,7 +80,7 @@
         background-color: #fff;
         // min-height: 40rem;
         // margin-top: 5rem !important;
-        margin-bottom: 10rem !important
+        margin-bottom: 5rem !important
     }
     .content-about{
         text-align: left !important;
@@ -115,6 +104,23 @@
              color: #414141;
         }
     }
+    .content-about-2{
+        text-align: center !important;
+        .title{
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding:0 10px;
+            border-radius: 4px;
+            color:#26884b;
+            margin-bottom: 10px;
+        }
+        .content{
+             font-size: 1.2rem;
+             padding-left: 1.5rem;
+             font-weight: 500;
+             color: #414141;
+        }
+    }
 
     .head-about{
         font-size: 1.5rem;
@@ -130,4 +136,68 @@
     .head-title{
         font-size: 1.8rem;
     }
+
+    .img-prop{
+        width: 220px;
+        &:hover{
+            -moz-transform: scale(130%);
+            -webkit-transform: scale(130%);
+            -o-transform: scale(130%);
+            -ms-transform: scale(130%);
+            -webkit-transform: scale(130%);
+            transform: scale(130%);
+            -webkit-transition: transform .6s ease-in-out;
+            -moz-transition:transform .6s ease-in-out;
+            -ms-transition:transform .6s ease-in-out;
+        }
+    }
+
+    .animate{
+        animation-duration: 5s;
+        animation-name: slide-in-p;
+        // animation: fade-in 4s ease-in forwards;
+    }
+
+    .animate2{
+       animation-duration: 5s;
+       animation-name: slide-in;
+    //    animation: fade-in 4s ease-in forwards;
+
+    }
+
+    @keyframes slide-in {
+        from {
+            translate: 150vw 0;
+            scale: 200% 1;
+        }
+
+        to {
+            translate: 0 0;
+            scale: 100% 1;
+        }
+    }
+
+    @keyframes slide-in-p{
+        from {
+            translate: -150vw 0;
+            scale: 200% 1;
+        }
+
+        to {
+            translate: 0 0;
+            scale: 100% 1;
+        }
+    }
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+            display: none;
+        }
+
+        100% {
+            opacity: 1;
+            display: block;
+        }
+    }
+
 </style>
