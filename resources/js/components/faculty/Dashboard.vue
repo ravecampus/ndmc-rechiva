@@ -94,7 +94,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <div class="d-flex  justify-content-around w-50">
+                                    <div class="d-flex  justify-content-around w-50" v-if="list.upload_type == 0">
                                         <div class="flex-fill">
                                             <span class="bi bi-eye-fill bi-f text-muted">
                                             <div class="badge bg-success wd ms-1">  {{ countData(list.viewdoc)}} </div></span>

@@ -204,7 +204,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card-footer bg-pub">
+                    <div class="card-footer bg-pub" v-if="docData.upload_type == 0">
                         <div class="d-flex justify-content-around mt-4 mb-3">
                             <div class="flex-fill">
                                 <span class="bi bi-eye-fill bi-f text-muted">

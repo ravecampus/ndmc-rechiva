@@ -19,15 +19,15 @@
          
          <div class="col-md-6 text-start">
              <div class="site-name">
-                 RECHIVA | NDMC Research and Department Center
+                 RECHIVA | NDMC Research and Development Center
              </div>
              Quezon Avenue, Midsayap, Cotabato 9410
              <div class="fw-bold fs-6 mt-3">
                  Capstone Project of College of Information Technology and Engineering (CITE)
              </div>
          </div>
-        <div class="col-md-6 p-0 text-start">
-           
+        <div class="col-md-4 p-0 text-start">
+       
             <section class="text-white">
                 <span>Follow us:</span>
             <div>
@@ -51,31 +51,31 @@
             </div>
             
             </section>
-             <div class="btn-group dropup" v-if="!auth">
-                <!-- <button type="button" class="btn btn-sm btn-outline-light"></button> -->
-                <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                
-                    Join us &nbsp;
-                </button>
-                    <ul class="dropdown-menu">
-                                        
-                        <li>
-                            <router-link  class="dropdown-item" :to="{name:'signin'}">
-                                <i class="bi bi-box-arrow-in-right"></i>
-                                Sign In
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link  class="dropdown-item" :to="{name:'signup'}">
-                                <i class="bi bi-box-arrow-in-left"></i>
-                                Sign Up
-                            </router-link>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                    </ul>
-            </div>
+           
 
          </div>
+        <div class="col-md-2 text-end ">
+                <div class="btn-group dropup" v-if="!auth">
+                    <button type="button" class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Join us &nbsp;
+                    </button>
+                        <ul class="dropdown-menu">      
+                            <li>
+                                <router-link  class="dropdown-item" :to="{name:'signin'}">
+                                    <i class="bi bi-box-arrow-in-right"></i>
+                                    Sign In
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link  class="dropdown-item" :to="{name:'signup'}">
+                                    <i class="bi bi-box-arrow-in-left"></i>
+                                    Sign Up
+                                </router-link>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                        </ul>
+                </div>
+            </div>
      </div>
      <!-- <div class="buttom-footer">
 

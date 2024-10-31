@@ -88,5 +88,6 @@ Route::post('/document-upload', [DocumentAuthorController::class,'docUpload']);
 Route::delete('/document-to-archived/{id}', [DocumentAuthorController::class,'archived']);
 Route::get('/report', [ReportController::class,'report']);
 Route::get('/most-download', [ReportController::class,'mostDownload']);
+Route::get('/statistic-report', [ReportController::class,'mostDownloadFilter']);
 
 

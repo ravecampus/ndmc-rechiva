@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Document;
+use App\Models\Download;
+use App\Models\Visitor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -103,5 +105,36 @@ class ReportController extends Controller
             ->get();
         
         return response()->json($doc, 200);
+    }
+
+    public function mostDownloadFilter(Request $request){
+        $from = Carbon::parse($request->date_from);
+        $to = Carbon::parse($request->date_to);
+        $to->addDays(1);
+        $doc = Document::join('downloads', 'downloads.document_id','=', 'documents.id')
+            ->select('document_id', 'title', 'abstract', DB::raw('count(document_id) as download'))
+            ->groupBy('document_id')->orderBy('download', 'desc')->limit(5)
+            ->whereBetween('downloads.created_at',[$from, $to])->get();
+
+
+        $dl = Download::whereBetween('created_at',[$from, $to])->count();
+        $visit = Visitor::whereBetween('created_at',[$from, $to])->count();
+        $collect = Document::where('status', 1)->where('upload_type', 0)->whereBetween('created_at',[$from, $to])->count();
+        $mem = User::where('role', 1)->where('activate', 1)->whereBetween('created_at',[$from, $to])->count();
+
+        $stats = [
+            'downloads'=> $dl,
+            'visitors'=> $visit,
+            'collections'=> $collect,
+            'members'=> $mem,
+        ];
+          
+
+        $data = [
+            'downloadstat' =>$doc,
+            'statistic'=>$stats
+        ];
+        
+        return response()->json($data, 200);
     }
 }

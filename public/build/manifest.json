@@ -41,8 +41,8 @@
     "file": "assets/bootstrap-icons-DrmbbJ7-.css",
     "src": "_bootstrap-icons-!~{00b}~.js"
   },
-  "_chart.js-BFjF2n9C.js": {
-    "file": "assets/chart.js-BFjF2n9C.js",
+  "_chart.js-CW98SEi5.js": {
+    "file": "assets/chart.js-CW98SEi5.js",
     "name": "chart.js",
     "imports": [
       "_@kurkle-BZxJdD1U.js"
@@ -82,11 +82,11 @@
       "_@vue-DzBqrbP6.js"
     ]
   },
-  "_vue-chartjs-li-Ob3no.js": {
-    "file": "assets/vue-chartjs-li-Ob3no.js",
+  "_vue-chartjs-CZpASP2I.js": {
+    "file": "assets/vue-chartjs-CZpASP2I.js",
     "name": "vue-chartjs",
     "imports": [
-      "_chart.js-BFjF2n9C.js",
+      "_chart.js-CW98SEi5.js",
       "_@vue-DzBqrbP6.js"
     ]
   },
@@ -161,7 +161,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-C7c9vlrS.js",
+    "file": "assets/app-BUqhzHT1.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -173,8 +173,8 @@
       "_dayjs-19KvoO9f.js",
       "_vue3-pdf-app-BdLgcDrN.js",
       "_jquery-TReGEqwj.js",
-      "_vue-chartjs-li-Ob3no.js",
-      "_chart.js-BFjF2n9C.js",
+      "_vue-chartjs-CZpASP2I.js",
+      "_chart.js-CW98SEi5.js",
       "_bootstrap-BeBKEeZt.js",
       "_pspdfkit-CckChD-A.js",
       "_vue-timeago3-DF_P-prz.js",
@@ -185,7 +185,7 @@
       "_@popperjs-WhmJkuoZ.js"
     ],
     "css": [
-      "assets/app-Cckehcsd.css",
+      "assets/app-C6f7bgZI.css",
       "assets/bootstrap-icons-DrmbbJ7-.css"
     ],
     "assets": [
