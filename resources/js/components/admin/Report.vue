@@ -380,33 +380,66 @@
                     <span class="text-danger" v-if="filter.date_to != '' && filter.date_from"> {{ formatDate(filter.date_from) }} - {{ formatDate(filter.date_to) }} </span>
                 </div>
                 <div class="row" v-if="showrep == 5">
-                    <div class="col-md-12 mt-2 text-center w-75 mb-4" v-if="pieset != null">
-                            <Doughnut
+                    <div class="col-md-12 mt-2 text-center mb-4" v-if="pieset != null">
+                        <div></div>
+                      <table class="table table-bordered">
+                          <thead>
+                              <tr>
+                                  <th>NUMBER OF VISITORS</th>
+                                  <th>NUMBER OF COLLECTIONS</th>
+                                  <th>NUMBER OF DOWNLOADS</th>
+                                  <th>NUMBER OF MEMBERS</th>
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                    <td>{{ data2.visitors }}</td>
+                                    <td>{{ data2.collections }}</td>
+                                    <td>{{ data2.downloads }}</td>
+                                    <td>{{ data2.members }}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+
+                            <!-- <Doughnut
                             :options="chartOptions"
-                            :data="pieset" ></Doughnut>
+                            :data="pieset" ></Doughnut> -->
                      
                     </div>
                       <!-- <div class=""> -->
 
-                        <table class="table table-bordered">
+                        <!-- <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td>Visitors : {{ data2.visitors }}</td>
-                                        <td>Collections : {{ data2.collections }}</td>
-                                        <td>Downloads : {{ data2.downloads }}</td>
-                                        <td>Members : {{ data2.members }}</td>
+                                    
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> -->
                             <!-- </div> -->
                      <hr>
-                    <div class="col-md-12 mt-3 h-25 w-75 text-center mb-5" v-if="mosdown.length > 0">
-                      
-                             <Bar  
+                    <div class="col-md-12 mt-1 h-25 text-center mb-5" v-if="mosdown.length > 0">
+                      <div>MOST DOWNLOAD DOCUMENTS</div>
+                      <table class="table table-bordered text-start">
+                          <thead>
+                              <tr>
+                                  <th>TITLE</th>
+                                  <th>NO. OF DOWNLOADS</th>
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr v-for="(list, index) in mosdown" :key="index">
+                                  <td>{{ list.title }}</td>
+                                  <td>{{ list.download }}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                             <!-- <Bar  
                                 :class="'col-md-12'"
                                 :options="chartOptions"
                                 :data="dataset"
-                                ></Bar>
+                                ></Bar> -->
                      
                     </div>
                    
