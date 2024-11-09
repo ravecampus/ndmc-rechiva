@@ -40,15 +40,15 @@
                     </p>
                 </div>
             </div>
-
-            <div class="col-md-12 mt-3">
+            <hr>
+            <div class="col-md-12 mt-3 mb-3 bg-img-rdc">
                 <div class="contact text-start p-5">
-                    <div class="d-flex justify-content-evenly animate">
+                    <div class="d-flex justify-content-evenly">
                         <div><img class="img-prop" :src="'/img/admin/prop1.png'"/></div>
                         <div><img class="img-prop" :src="'/img/admin/prop2.png'"/></div>
                     </div>
 
-                    <div class="d-flex justify-content-evenly mt-5 animate2">
+                    <div class="d-flex justify-content-evenly mt-5">
                         <div><img class="img-prop" :src="'/img/admin/prop3.png'"/></div>
                         <div><img class="img-prop" :src="'/img/admin/prop4.png'"/></div>
                         <div><img class="img-prop" :src="'/img/admin/prop5.png'"/></div>
@@ -56,10 +56,38 @@
                    
                 </div>
             </div>
+            <hr>
+            <div class="col-md-12 mt-3 mb-5">
+                <div class="adviser-caption d-flex justify-content-center">
+                    <h4 class="w-75">
+                        This is a capstone project of the IT students from the College of Information Technology and Engineering (CITE)
+                    </h4>
+                   
+                </div>
+                 <div class="d-flex justify-content-evenly w-100 mt-3 fs-6 fw-bold txt-color mb-5">
+                        <div>
+                            EJ Ryle C. Mosquera -  <small class="text-success">ADVISER</small>
+                        </div>
+                         <div>
+                           Ryan L. Nambong - <small class="text-success">SUBJECT TEACHER</small>
+                        </div>
+                        <div>
+                          Engr. Mark Bryan C. Tenebroso, PCpE, ME-CpE -  <small class="text-success">DEAN </small>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 </template>
 <style lang="scss" scoped>
+    .txt-color{
+        color:#6b6b6b;
+    }
+    .bg-img-rdc{
+        background: url('/img/research2.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
     .contact{
         .contact-email{
             font-size: 1rem;

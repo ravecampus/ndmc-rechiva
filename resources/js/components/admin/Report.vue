@@ -292,7 +292,7 @@
                     <img class="img-logo" :src="'/img/ndmc.png'"/>
                 </div>
                 <div class="text-head">
-                    RECHIVA | NDMC Research and Department Center
+                    RECHIVA | NDMC Research and Development Center
                     <p class="sub-text">Quezon Avenue, Midsayap, Cotabato 9410</p>
                 </div>
                 <div class="logo">
