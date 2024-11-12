@@ -318,6 +318,6 @@ const viewdocs = (data)=>{
         margin-right: 10px;
     }
     .mtop{
-        margin-top: .8rem;
+        margin-top: .82rem;
     }
 </style>

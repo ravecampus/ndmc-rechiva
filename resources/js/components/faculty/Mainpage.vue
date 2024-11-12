@@ -87,18 +87,18 @@ const showNotification = (data)=>{
      <nav class="navbar navbar-expand-lg bg-light mb-0 bg-header custom-nav">
         <div class="container-fluid">
             <div class="main-brand">
-                <router-link :to="{name:'faculty.dashboard'}" class="d-inline-flex p-0" >
+                <div class="d-inline-flex p-0" >
                     <div class="brand-name">
-                        <img :src="'/img/ndmc.png'" class="logo-main">
-                        <img :src="'/img/research.png'" class="sub-logo">
+                        <a target="_blank" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.ndmc.edu.ph/&ved=2ahUKEwj05eqIiteJAxV96DQHHZssFuEQFnoECBYQAQ&usg=AOvVaw0CqZ-W-pdSXm2OowlUl8HL"> <img :src="'/img/ndmc.png'" class="logo-main"></a>
+                        <a target="_blank" href="https://www.facebook.com/NDMCResearchandDevelopmentCenter" ><img :src="'/img/research.png'" class="sub-logo"></a>
                     </div>
 
                     <div class="d-md-inline-flex d-lg-inline-flex">
                         <div class="logo-text d-none d-lg-block d-xl-block d-md-block ">
                              RECHIVA</div>
-                        <img :src="'/img/rechiva.png'" class="logo-app"> 
+                       <router-link  :to="{name:'faculty.dashboard'}"> <img :src="'/img/rechiva.png'" class="logo-app"></router-link>
                     </div>
-                </router-link> 
+                </div> 
             </div>
             <button class="btn btn-outline-success d-inline-block d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>

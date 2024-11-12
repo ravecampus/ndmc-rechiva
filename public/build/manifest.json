@@ -161,7 +161,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CofkBPe0.js",
+    "file": "assets/app-q7FWa9jD.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -185,7 +185,7 @@
       "_@popperjs-WhmJkuoZ.js"
     ],
     "css": [
-      "assets/app-BeyZCtXE.css",
+      "assets/app-C0yQmRqu.css",
       "assets/bootstrap-icons-DrmbbJ7-.css"
     ],
     "assets": [
@@ -194,7 +194,7 @@
     ]
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-BY2YxOLO.css",
+    "file": "assets/app-BcD73B4X.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   }

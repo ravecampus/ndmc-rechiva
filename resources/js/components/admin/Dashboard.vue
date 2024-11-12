@@ -86,10 +86,10 @@ const showNotification = (data)=>{
               <span class="sr-only">Toggle Menu</span>
             </button>
             <div class="main-brand">
-                <router-link :to="{name:'dashboard'}" class="d-inline-flex p-0" >
+                <div class="d-inline-flex p-0" >
                     <div class="brand-name">
-                        <img :src="'/img/ndmc.png'" class="logo-main">
-                        <img :src="'/img/research.png'" class="sub-logo">
+                        <a target="_blank" href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.ndmc.edu.ph/&ved=2ahUKEwj05eqIiteJAxV96DQHHZssFuEQFnoECBYQAQ&usg=AOvVaw0CqZ-W-pdSXm2OowlUl8HL"><img :src="'/img/ndmc.png'" class="logo-main"></a>
+                        <a target="_blank" href="https://www.facebook.com/NDMCResearchandDevelopmentCenter" ><img :src="'/img/research.png'" class="sub-logo"></a>
                     </div>
 
                     <div class="d-md-inline-flex d-lg-inline-flex">
@@ -97,9 +97,9 @@ const showNotification = (data)=>{
                             <!-- <p class="school-name m-0 p-0">Notre Dame of Midsayap College</p> -->
                             RECHIVA
                             </div>
-                        <img :src="'/img/rechiva.png'" class="logo-app"> 
+                       <router-link :to="{name:'dashboard'}" > <img :src="'/img/rechiva.png'" class="logo-app"> </router-link>
                     </div>
-                </router-link>
+                </div>
             </div>
             <button class="btn btn-outline-success d-inline-block d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
